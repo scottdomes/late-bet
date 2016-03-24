@@ -26,9 +26,24 @@ nav {
 
 .goal-grid {
   text-align: center;
+  margin: 20px; 
+
   .goal {
     width: 80%;
     margin: 0 auto;
+  }
+}
+
+.bets-table {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+
+  th {
+    text-align: center;
+  }
+  td {
+    width: 50%;
   }
 }
 
