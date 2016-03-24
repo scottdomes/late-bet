@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <script src="../../public/stylesheets/jquery-1.12.2.min.js"></script>
+  <script src="../../public/javascript/bootstrap.min.js"></script>
+  <script src="/javascript/application.js"></script>
+
+
+  <link rel="stylesheet" href="../../public/stylesheets/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../../public/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/stylesheets/user-page.css">
+
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Motivation</a>
+        </div> <!-- navbar-header -->
+        <div class="navbar-right">
+          <img class="circular-img" src="../../public/img/me.jpg">
+          <div class="dropdown">
+            <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Scott Domes
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown-menu-1">
+              <li><a href="#">My profile</a></li>
+              <li><a href="#">New goal</a></li>
+              <li><a href="#">Sign out</a></li>
+            </ul>
+          </div> <!-- dropdown -->
+        </div> <!-- navbar-right -->
+      </div> <!-- container -->
+    </nav>
+
+  </header>
+  <div class="container">
+    <div class="row user-header">
+      <div class="col-md-6">
+        <img class="circular-img" src='../../public/img/me.jpg'>
+      </div> <!-- col-md-4 -->
+      <div class="user-info col-md-6">
+        <h1>Scott Domes</h1>
+        <h3>Joined: October 2015</h3>
+        <h3>Bets won: 12</h3>
+        <h3>Goals achieved: 1</h3>
+      </div> <!-- col-md-8 -->
+    </div> <!-- user-header -->
+
+    <div class="row heading goal-heading">
+      <h1>Scott's Goals</h1>
+    </div> <!-- goal-heading-->
+
+    <div class="row goal-grid">
+      <div class="col-md-4">
+        <div class="panel panel-default goal">
+          <div class="panel-body">
+            <h3>Scott wants to finish this project!</h3>
+            <h4>Deadline: Monday</h4>
+            <h3>Stakes: 1 beer</h3>
+            <button class="btn btn-success btn-lg disabled">Take Bet!</button>
+            <p>See who took bet</p>
+          </div> <!-- panel-body -->
+        </div> <!-- panel -->
+      </div> <!-- col-md-4 -->
+
+      <div class="col-md-4">
+        <div class="panel panel-default goal">
+          <div class="panel-body">
+            <h3>Scott wants to beat Paul in foosbal!</h3>
+            <h4>Deadline: Tuesday, April 24th, 2015</h4>
+            <h3>Stakes: 3 donuts</h3>
+            <button class="btn btn-success btn-lg disabled">Take Bet!</button>
+            <p>See who took bet</p>
+          </div> <!-- panel-body -->
+        </div> <!-- panel -->
+      </div> <!-- col-md-4 -->
+
+      <div class="col-md-4">
+        <div class="panel panel-default goal">
+          <div class="panel-body">
+            <h3>Scott wants be on time for class tomorrow!</h3>
+            <h4>Deadline: Tomorrow, 9AM</h4>
+            <h3>Stakes: 1 beer</h3>
+            <button class="btn btn-success btn-lg disabled">Take Bet!</button>
+            <p>See who took bet</p>
+          </div> <!-- panel-body -->
+        </div> <!-- panel -->
+      </div> <!-- col-md-4 -->
+    </div> <!-- goal-grid -->
+
+    <div class="row heading bets-heading">
+      <h1>Scott's Bets</h1>
+    </div> <!-- bets-heading -->
+
+    <div class="row bets-table-row">
+      <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table bets-table">
+              <thead>
+                <th>Bet</th>
+                <th>Result</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
+                  <td>Paul wins!</td>
+                </tr>
+                <tr>
+                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
+                  <td>Unresolved.</td>
+                </tr>
+                <tr>
+                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
+                  <td>Scott wins!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- panel-body -->
+      </div> <!-- panel -->
+    </div> <!-- bets-table-row -->
+  </div> <!-- container -->
+
+  <footer class="footer">
+    <div class="container">
+      <p>Copyright 2016.</p>
+    </div>
+  </footer>
+</body>
