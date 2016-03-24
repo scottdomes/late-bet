@@ -25,17 +25,32 @@ describe Goal do
       )
     end
 
-    it 'the goal title should not be valid if it is empty' do
-      @goal.title = ""
-      expect(@goal).to_not be_valid
-    end
-
     it 'the goal to be valid' do
       expect(@goal).to be_valid
     end
 
+    it 'the goal title to not be valid if it is empty' do
+      @goal.title = ""
+      expect(@goal).to_not be_valid
+    end
+
     it 'the stake_item to not be valid if it is empty' do
       @goal.stake_item = ""
+      expect(@goal).to_not be_valid
+    end
+
+    it 'the stake_qty to not be valid if it is 0' do
+      @goal.stake_qty = 0
+      expect(@goal).to_not be_valid
+    end
+
+    it 'the stake_qty to not be valid if it is not a number' do
+      @goal.stake_qty = "three"
+      expect(@goal).to_not be_valid
+    end
+
+    it 'the deadline to not be valid if it is before today' do
+      @goal.deadline = Time.now - 2.days
       expect(@goal).to_not be_valid
     end
 
