@@ -4,5 +4,6 @@ enable :sessions
 
 # Homepage (Root path)
 get '/' do
-  erb :index
+  # session[:user] = User.create(name: "Scott Domes")
+  erb :goals
 end
