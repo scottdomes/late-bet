@@ -47,10 +47,12 @@
             <div class="panel panel-default goal">
               <div class="panel-body">
                 <img class="circular-img" src="/img/me.jpg">
-                <h3>Your goal here!</h3>
-                <h4>By: </h4>
-                <h3>Stakes: </h3>
-                <button class="btn btn-success btn-lg disabled">Save goal.</button>
+                <form id="custom-goal">
+                  <h3><%= session[:user].name.split(" ")[0] %> wants to </h3><input id="input-title" name="title" value="Choose a goal!">
+                  <h4>By: </h4><input id="input-deadline" name="deadline" value="Deadline">
+                  <h3>Stakes: </h3><input id="quantity" type="number" value="1"><input id="item" name="stakes" value="Item">
+                  <button class="btn btn-success btn-lg disabled">Save goal.</button>
+                </form>
               </div> <!-- panel-body -->
             </div> <!-- panel -->
           </div> <!-- col-md-4 -->
