@@ -1,10 +1,10 @@
-class Goals < ActiveRecord::Base
+class Goal < ActiveRecord::Base
 
   has_many :bets
 
   belongs_to :user
 
-  validates :name, presence: true
+  validates :title, presence: true
 
   validates :deadline, presence: true
 
