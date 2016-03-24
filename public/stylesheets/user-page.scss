@@ -1,0 +1,122 @@
+body { padding-top: 70px; }
+
+
+nav {
+  img {
+    height: 40px;
+    margin: 5px 0;
+  }
+
+  .dropdown {
+    display: inline-block;
+  }
+  .dropdown a:hover {
+    cursor: pointer;
+  }
+}
+
+.user-header {
+  margin: 20px 0;
+  text-align: right;
+
+  img {
+    width: 225px;
+  }
+
+  .user-info {
+    text-align: left;
+  }
+}
+
+.heading {
+  text-align: center;
+}
+
+.goal-grid {
+  text-align: center;
+  margin: 20px; 
+
+  .goal {
+    width: 90%;
+    margin: 20px auto;
+    height: 300px;
+
+    h3:first-child, h3:nth-child(2) {
+      height: 80px;
+      margin: 0;
+    }
+
+    h4 {
+      height: 40px;
+    }
+
+    button {
+      margin-bottom: 10px;
+    }
+
+    img {
+      height: 100px;
+    }
+
+    a:hover {
+      cursor: pointer;
+    }
+
+  }
+}
+
+
+.bets-table {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+
+  th {
+    text-align: center;
+  }
+  td {
+    width: 50%;
+  }
+}
+
+footer {
+  background-color: #e6e6e6;
+  height: 30px;
+  p {
+    line-height: 30px;
+    margin: 0;
+  }
+}
+
+.circular-img {
+  border-radius: 150px;
+}
+
+/* Goals page styles */
+
+$GOALS_BOX_HEIGHT: 30px;
+
+#past-goals-box {
+  width: 80%;
+  background-color: #5cb85c;
+  margin: 10px auto;
+  text-align: center;
+  height: $GOALS_BOX_HEIGHT;
+  border-radius: 10px;
+
+  p {
+    display: inline-block;
+    color: white;
+    line-height: $GOALS_BOX_HEIGHT;
+  }
+}
+
+.main-page-grid {
+  .goal {
+    height: 400px;
+  }
+}
+
+.dropdown-menu-center {
+  left: 20%;
+}
