@@ -52,12 +52,8 @@
                   <form>
                     <h3><%= session[:user].name.split(" ")[0] %> wants to </h3><input id="input-title" name="title" placeholder="Choose a goal!">
                     <h4>By: </h4><!-- <input id="input-deadline" name="deadline" placeholder="Deadline"> -->
-                      <input type='text' id="datetimepicker"/>
-                     <script type="text/javascript">
-                          $(function () {
-                              $('#datetimepicker').datetimepicker();
-                          });
-                    </script>
+                      <input type='text' id="input-deadline" name="deadline" placeholder="Deadline"/>
+                     
                     <h3>Stakes: </h3><input id="quantity" type="number" min="1" max="9" value="1"><input id="item" name="stakes" placeholder="Item">
                     <button class="btn btn-success btn-lg disabled">Save goal.</button>
                   </form>
@@ -68,3 +64,9 @@
       </div> <!-- row -->
     </div> <!-- goal-grid -->
   </div> <!-- container -->
+
+<script type="text/javascript">
+  $(function () {
+      $('#input-deadline').datetimepicker();
+  });
+</script>
