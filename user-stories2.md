@@ -31,6 +31,7 @@ As a user, I want to be able to keep track of what debts I have received, becaus
 
 Opt. 1. User should be able to  delete a goal (but lose all bets)
 
+
 As a user, I want to be able to back out of a goal early, but still pay a penalty.
 
 Opt. 2. User should be able to see their stats and others' stats
