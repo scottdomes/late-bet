@@ -14,31 +14,46 @@
     
     <div class="goal-grid main-page-grid">
       <div class="row">
+
         <% Goal.all.each do |goal| %>
-        <div class="col-md-4">
-          <div class="panel panel-default goal">
-            <div class="panel-body">
-              <img class="circular-img" src="/img/me.jpg">
-              <h3><%= goal.title %></h3>
-              <h4>By: <%= goal.deadline %></h4>
-              <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
-              <button class="btn btn-success btn-lg disabled">Take Bet!</button>
-              
-              <div class="dropdown">
-                <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  See who took bet
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
-                  <li><a href="#">Osama Khan</a></li>
-                  <li><a href="#">Filip Juristovski</a></li>
-                  <li><a href="#">Julia Wei</a></li>
-                </ul>
-              </div> <!-- dropdown -->
-            </div> <!-- panel-body -->
-          </div> <!-- panel -->
-        </div> <!-- col-md-4 -->
+          <div class="col-md-4">
+            <div class="panel panel-default goal">
+              <div class="panel-body">
+                <img class="circular-img" src="/img/me.jpg">
+                <h3><%= goal.title %></h3>
+                <h4>By: <%= goal.deadline %></h4>
+                <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
+                <button class="btn btn-success btn-lg disabled">Take Bet!</button>
+                
+                <div class="dropdown">
+                  <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    See who took bet
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
+                    <li><a href="#">Osama Khan</a></li>
+                    <li><a href="#">Filip Juristovski</a></li>
+                    <li><a href="#">Julia Wei</a></li>
+                  </ul>
+                </div> <!-- dropdown -->
+              </div> <!-- panel-body -->
+            </div> <!-- panel -->
+          </div> <!-- col-md-4 -->
         <% end %>
+        </div> <!-- row -->
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default goal">
+              <div class="panel-body">
+                <img class="circular-img" src="/img/me.jpg">
+                <h3>Your goal here!</h3>
+                <h4>By: </h4>
+                <h3>Stakes: </h3>
+                <button class="btn btn-success btn-lg disabled">Save goal.</button>
+              </div> <!-- panel-body -->
+            </div> <!-- panel -->
+          </div> <!-- col-md-4 -->
       </div> <!-- row -->
     </div> <!-- goal-grid -->
   </div> <!-- container -->
