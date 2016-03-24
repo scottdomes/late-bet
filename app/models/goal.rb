@@ -6,6 +6,8 @@ class Goal < ActiveRecord::Base
 
   validates :title, presence: true
 
+  validates :stake_item, presence: true
+
   validates :deadline, presence: true
 
   #could also validate with JavaScript
