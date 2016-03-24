@@ -38,10 +38,10 @@ nav {
 
   .goal {
     width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
     height: 300px;
 
-    h3:first-child {
+    h3:first-child, h3:nth-child(2) {
       height: 80px;
       margin: 0;
     }
@@ -53,8 +53,13 @@ nav {
     button {
       margin-bottom: 10px;
     }
+
+    img {
+      height: 100px;
+    }
   }
 }
+
 
 .bets-table {
   width: 80%;
@@ -80,4 +85,29 @@ footer {
 
 .circular-img {
   border-radius: 150px;
+}
+
+/* Goals page styles */
+
+$GOALS_BOX_HEIGHT: 30px;
+
+#past-goals-box {
+  width: 80%;
+  background-color: #5cb85c;
+  margin: 10px auto;
+  text-align: center;
+  height: $GOALS_BOX_HEIGHT;
+  border-radius: 10px;
+
+  p {
+    display: inline-block;
+    color: white;
+    line-height: $GOALS_BOX_HEIGHT;
+  }
+}
+
+.main-page-grid {
+  .goal {
+    height: 400px;
+  }
 }
