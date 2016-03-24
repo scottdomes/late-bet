@@ -1,0 +1,85 @@
+  <div class="container">
+    <div class="row user-header">
+      <div class="col-md-6">
+        <img class="circular-img" src='/img/me.jpg'>
+      </div> <!-- col-md-4 -->
+      <div class="user-info col-md-6">
+        <h1><%= @user.name %></h1>
+        <h3>Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
+        <h3>Bets won: 12 <%= @user.id %></h3>
+        <h3>Goals achieved: 1</h3>
+      </div> <!-- col-md-8 -->
+    </div> <!-- user-header -->
+
+    <div class="row heading goal-heading">
+      <h1>Scott's Goals</h1>
+    </div> <!-- goal-heading-->
+
+    <div class="goal-grid main-page-grid">
+      <div class="row">
+
+
+      <% @user.goals.each do |goal| %>
+
+        <div class="col-md-4">
+          <div class="panel panel-default goal">
+            <div class="panel-body">
+              <h3><%= goal.title %></h3>
+              <h4>By: <%= goal.deadline %></h4>
+              <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
+              <button class="btn btn-success btn-lg disabled">Take Bet!</button>
+    
+              <% if goal.bets.empty? %>
+                <p>No takers yet!</p>
+              <% else %>
+                <div class="dropdown">
+                  <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    See who took bet
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
+                    <% goal.bets.each do |bet| %>
+                      <li><a href="users/<%= User.find(bet.user_id).username %>">
+                        <%= User.find(bet.user_id).username %>
+                      </a></li>
+                    <% end %>
+                  </ul>
+                </div> <!-- dropdown -->
+              <% end %>
+            </div> <!-- panel-body -->
+          </div> <!-- panel -->
+        </div> <!-- col-md-4 -->
+      <% end %>
+    </div> <!-- goal-grid -->
+
+    <div class="row heading bets-heading">
+      <h1>Scott's Bets</h1>
+    </div> <!-- bets-heading -->
+
+    <div class="row bets-table-row">
+      <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table bets-table">
+              <thead>
+                <th>Bet</th>
+                <th>Result</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
+                  <td>Paul wins!</td>
+                </tr>
+                <tr>
+                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
+                  <td>Unresolved.</td>
+                </tr>
+                <tr>
+                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
+                  <td>Scott wins!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- panel-body -->
+      </div> <!-- panel -->
+    </div> <!-- bets-table-row -->
+  </div> <!-- container -->
