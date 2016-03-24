@@ -2,8 +2,16 @@ require_relative 'goal-actions'
 
 enable :sessions
 
+before do
+  User.destroy_all
+  Goal.destroy_all
+  @scott = User.create(name: "Scott D-dog")
+  @scott.goals << Goal.create(title: "Scott wants to finish this project!", stake_qty: 2, stake_item: "beer", deadline: Date.tomorrow)
+  session[:user] = @scott # TEST
+end
+
+
 # Homepage (Root path)
 get '/' do
-  # session[:user] = User.create(name: "Scott Domes")
   erb :goals
 end
