@@ -17,26 +17,50 @@
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Motivation</a>
-        </div>
+        </div> <!-- navbar-header -->
         <div class="navbar-right">
-          <img src="../../public/img/me.jpg">
+          <img class="circular-img" src="../../public/img/me.jpg">
           <a href="#">Scott Domes</a>
-        </div>
-      </div>
+        </div> <!-- navbar-right -->
+      </div> <!-- container -->
     </nav>
 
   </header>
   <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <img src='../../public/img/me.jpg'>
-      </div>
-      <div class="col-md-8">
+    <div class="row user-header">
+      <div class="col-md-6">
+        <img class="circular-img" src='../../public/img/me.jpg'>
+      </div> <!-- col-md-4 -->
+      <div class="user-info col-md-6">
         <h1>Scott Domes</h1>
         <h3>Joined: October 2015</h3>
         <h3>Bets won: 12</h3>
         <h3>Goals achieved: 1</h3>
-      </div>
-    </div>
+      </div> <!-- col-md-8 -->
+    </div> <!-- user-header -->
+
+    <div class="row heading goal-heading">
+      <h1>Scott's Goals</h1>
+    </div> <!-- goal-heading-->
+
+    <div class="row goal-grid">
+      <div class="col-md-4">
+        <div class="panel panel-default goal">
+          <div class="panel-body">
+            <h3>Scott wants to finish this project!</h3>
+            <h4>Deadline: Monday</h4>
+            <h3>Stakes: 1 beer</h3>
+            <button class="btn btn-success btn-lg disabled">Take Bet!</button>
+            <p>See who took bet</p>
+          </div> <!-- panel-body -->
+        </div> <!-- panel -->
+      </div> <!-- col-md-4 -->
+
+      <div class="col-md-4">
+      </div> <!-- col-md-4 -->
+
+      <div class="col-md-4">
+      </div> <!-- col-md-4 -->
+    </div> <!-- goal-grid -->
   </div> <!-- container -->
 </body>

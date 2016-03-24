@@ -2,9 +2,36 @@ body { padding-top: 70px; }
 
 
 nav {
+  img {
+    height: 50px;
+  }
+}
+
+.user-header {
+  margin: 20px 0;
+  text-align: right;
 
   img {
-    height: 40px;
-    border-radius: 20px;
+    width: 225px;
   }
+
+  .user-info {
+    text-align: left;
+  }
+}
+
+.heading {
+  text-align: center;
+}
+
+.goal-grid {
+  text-align: center;
+  .goal {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.circular-img {
+  border-radius: 150px;
 }
