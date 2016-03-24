@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,11 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140321144528) do
+ActiveRecord::Schema.define(version: 20160324181338) do
 
-  create_table "users", force: true do |t|
-    t.string "name"
-    t.string "email"
+  create_table "bets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "goal_id"
+    t.boolean  "paid",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bets", ["goal_id"], name: "index_bets_on_goal_id"
+  add_index "bets", ["user_id"], name: "index_bets_on_user_id"
+
+  create_table "goals", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "stake_item"
+    t.integer  "stake_qty",  default: 0
+    t.date     "start_date"
+    t.date     "deadline"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "goals", ["user_id"], name: "index_goals_on_user_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
