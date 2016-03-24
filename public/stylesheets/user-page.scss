@@ -3,7 +3,15 @@ body { padding-top: 70px; }
 
 nav {
   img {
-    height: 50px;
+    height: 40px;
+    margin: 5px 0;
+  }
+
+  .dropdown {
+    display: inline-block;
+  }
+  .dropdown a:hover {
+    cursor: pointer;
   }
 }
 
@@ -31,6 +39,20 @@ nav {
   .goal {
     width: 80%;
     margin: 0 auto;
+    height: 300px;
+
+    h3:first-child {
+      height: 80px;
+      margin: 0;
+    }
+
+    h4 {
+      height: 40px;
+    }
+
+    button {
+      margin-bottom: 10px;
+    }
   }
 }
 
@@ -44,6 +66,15 @@ nav {
   }
   td {
     width: 50%;
+  }
+}
+
+footer {
+  background-color: #e6e6e6;
+  height: 30px;
+  p {
+    line-height: 30px;
+    margin: 0;
   }
 }
 

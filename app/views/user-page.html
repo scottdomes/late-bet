@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+  <script src="../../public/stylesheets/jquery-1.12.2.min.js"></script>
+  <script src="../../public/javascript/bootstrap.min.js"></script>
   <script src="/javascript/application.js"></script>
 
 
@@ -20,7 +21,17 @@
         </div> <!-- navbar-header -->
         <div class="navbar-right">
           <img class="circular-img" src="../../public/img/me.jpg">
-          <a href="#">Scott Domes</a>
+          <div class="dropdown">
+            <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Scott Domes
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown-menu-1">
+              <li><a href="#">My profile</a></li>
+              <li><a href="#">New goal</a></li>
+              <li><a href="#">Sign out</a></li>
+            </ul>
+          </div> <!-- dropdown -->
         </div> <!-- navbar-right -->
       </div> <!-- container -->
     </nav>
@@ -113,7 +124,9 @@
     </div> <!-- bets-table-row -->
   </div> <!-- container -->
 
-  <footer>
-
+  <footer class="footer">
+    <div class="container">
+      <p>Copyright 2016.</p>
+    </div>
   </footer>
 </body>
