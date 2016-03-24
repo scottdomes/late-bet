@@ -128,3 +128,50 @@ $GOALS_BOX_HEIGHT: 30px;
 .dropdown-menu-center {
   left: 20%;
 }
+
+#custom-goal {
+  width: 340px;
+  background-color: #5cb85c;
+  height: 500px;
+  margin: 20px auto;
+
+  h2 {
+    color: white;
+    line-height: 50px;
+    margin: 0;
+  }
+
+  input {
+    text-align: center;
+  }
+
+  #input-title {
+    font-size: 24px;
+    width: 90%;
+    margin: 20px 0;
+  }
+
+  #input-deadline {
+    margin-left: 10px;
+  }
+
+  h4, h3 {
+    display: inline-block;
+    height: auto;
+  }
+
+  #quantity {
+    font-size: 24px;
+    width: 40px;
+  }
+
+  #item {
+    font-size: 24px;
+    width: 130px;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+
+}
