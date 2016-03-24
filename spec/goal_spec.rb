@@ -25,8 +25,17 @@ describe Goal do
       )
     end
 
-    it 'the goal title to be valid' do
+    it 'the goal title should not be valid if it is empty' do
       @goal.title = ""
+      expect(@goal).to_not be_valid
+    end
+
+    it 'the goal to be valid' do
+      expect(@goal).to be_valid
+    end
+
+    it 'the stake_item to not be valid if it is empty' do
+      @goal.stake_item = ""
       expect(@goal).to_not be_valid
     end
 
