@@ -13,6 +13,8 @@ AppConfig.establish_connection
 require 'database_cleaner'
 
 RSpec.configure do |config|
+  config.color = true
+  config.tty = true
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
