@@ -8,6 +8,8 @@ class Goal < ActiveRecord::Base
 
   validates :stake_item, presence: true
 
+  validates :stake_qty, numericality: {greater_than_or_equal_to: 1, message: 'number should be greater than 0'}
+
   validates :deadline, presence: true
 
   #could also validate with JavaScript
