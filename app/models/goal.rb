@@ -4,9 +4,9 @@ class Goal < ActiveRecord::Base
 
   belongs_to :user
 
-  validates :title, presence: true
+  validates :title, presence: true, length: {maximum: 40, message: "Limit: 40 characters"}
 
-  validates :stake_item, presence: true
+  validates :stake_item, presence: true, length: {maximum: 40, message: "Limit: 40 characters"}
 
   validates :stake_qty, numericality: {greater_than_or_equal_to: 1, message: 'number should be greater than 0'}
 
