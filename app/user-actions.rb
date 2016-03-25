@@ -68,3 +68,16 @@ post '/goals/complete' do
     redirect back
   end
 end
+
+post '/bets/paid' do
+  @bet = Bet.find(params[:bet_id])
+  @bet.paid = true
+
+  if @bet.save
+    cookies[:success] = "Bet paid!"
+    redirect back
+  else 
+    cookies[:failure] = "Oops! " + @bet.errors.full_messages.join(" and ").downcase.capitalize + "!"
+    redirect back
+  end
+end

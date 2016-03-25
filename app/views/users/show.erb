@@ -128,7 +128,17 @@
                 <% @winnings.each do |bet| %>
                   <tr>
                     <td><%= stringify_winnings(@user, bet) %></td>
-                    <td><%= bet_winner(bet) %></td>
+                    <td>
+                      <% if bet.paid %>
+                        Paid!
+                      <% else %>
+                        Awaiting Payment 
+                        <form method="POST" action="/bets/paid">
+                          <input type='hidden' name="bet_id" value="<%= bet.id %>"/>
+                          <button class="btn btn-default btn-danger">Bet paid!</button>
+                        </form>
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
