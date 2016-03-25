@@ -2,6 +2,16 @@ require_relative 'goal-actions'
 require_relative 'bet-actions'
 require_relative 'user-actions'
 
+helpers do
+  def current_user
+    User.find_by(username: "scott")
+    # if session[:user_id]
+    #   User.find(session[:user_id])
+    # end
+  end
+
+end
+
 enable :sessions
 
 before do
@@ -12,7 +22,8 @@ before do
   # end
   # @scott.goals.each { |goal| goal.bets << Bet.create(user_id: 166)}
   # session[:user] = @scott # TEST
-  session[:user] = User.find_by(username: "scott")
+  # session[:user] =.id
+  # @current_user = session[:user]
 end
 
 
