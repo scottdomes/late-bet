@@ -52,8 +52,10 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                     <% goal.bets.each do |bet| %>
-                      <li><a href="users/<%= User.find(bet.user_id).username %>">
-                        <%= User.find(bet.user_id).username %>
+                      <% better = User.find(bet.user_id) %>
+                      <li><a href="users/<%= better.id %>">
+                        <img class="circular-img sm-img" src="<%= better.image_file_name %>">
+                        <%= better.first_name + " " + better.last_name %>
                       </a></li>
                     <% end %>
                   </ul>
@@ -96,14 +98,22 @@
           <div class="panel-body">
             <table class="table bets-table">
               <thead>
+                <th>Opponent</th>
                 <th>Bet</th>
                 <th>Result</th>
               </thead>
               <tbody>
                 <% @user.bets.each do |bet| %>
                   <tr>
+                    <td>
+                      <% opponent = User.find(bet.goal.user_id) %>
+                      <a href="/users/<%= opponent.id %>">
+                        <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
+                        <p><%= opponent.first_name %></p>
+                      </a>
+                    </td>
                     <td><%= stringify_bet(@user, bet) %></td>
-                    <td><%= bet_winner(bet) %></td>
+                    <td><%= bet_result(bet) %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -114,19 +124,27 @@
 
     <div class="row heading winnings-heading">
       <h1><%= @user.first_name %>'s Winnings</h1>
-    </div> <!-- bets-heading -->
+    </div> <!-- winnings-heading -->
 
     <div class="row winnings-table-row">
       <div class="panel panel-default">
           <div class="panel-body">
             <table class="table winnings-table">
               <thead>
+                <th>Opponent</th>
                 <th>Prize</th>
                 <th>Status</th>
               </thead>
               <tbody>
                 <% @winnings.each do |bet| %>
                   <tr>
+                    <td>
+                      <% opponent = User.find(bet.goal.user_id) %>
+                      <a href="/users/<%= opponent.id %>">
+                        <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
+                        <p><%= opponent.first_name %></p>
+                      </a>
+                    </td>
                     <td><%= stringify_winnings(@user, bet) %></td>
                     <td>
                       <% if bet.paid %>
@@ -145,5 +163,45 @@
             </table>
           </div> <!-- panel-body -->
       </div> <!-- panel -->
-    </div> <!-- bets-table-row -->
+    </div> <!-- winnings-table-row -->
+
+
+    <div class="row heading debts-heading">
+      <h1><%= @user.first_name %>'s Debts</h1>
+    </div> <!-- debts-heading -->
+
+    <div class="row debts-table-row">
+      <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table debts-table">
+              <thead>
+                <th>Opponent</th>
+                <th>Debt</th>
+                <th>Status</th>
+              </thead>
+              <tbody>
+                <% @debts.each do |bet| %>
+                  <tr>
+                    <td>
+                      <% opponent = bet_winner(bet) %>
+                      <a href="/users/<%= opponent.id %>">
+                        <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
+                        <p><%= opponent.first_name %></p>
+                      </a>
+                    </td>
+                    <td><%= stringify_debts(@user, bet) %></td>
+                    <td>
+                      <% if bet.paid %>
+                        Paid!
+                      <% else %>
+                        Awaiting Payment 
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div> <!-- panel-body -->
+      </div> <!-- panel -->
+    </div> <!-- debts-table-row -->
   </div><!-- container -->

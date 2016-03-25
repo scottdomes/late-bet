@@ -9,7 +9,7 @@ helpers do
     string.gsub(/[^A-Za-z0-9\s]/i, '')
   end
 
-  def bet_winner(bet)
+  def bet_result(bet)
     if bet.goal.success
       User.find(bet.goal.user_id).first_name + " wins!"
     elsif bet.goal.fail
@@ -32,11 +32,37 @@ helpers do
   def winnings(user)
     winnings = []
     user.bets.each do |bet|
-      if bet.goal.fail == true
+      if bet.goal.fail
         winnings << bet
       end
     end
+
+    user.goals.each do |goal|
+      if goal.success && goal.bets
+        goal.bets.each do |bet|
+          winnings << bet
+        end
+      end
+    end
     winnings
+  end
+
+  def debts(user)
+    debts = []
+    user.bets.each do |bet|
+      if bet.goal.success == true
+        debts << bet
+      end
+    end
+
+    user.goals.each do |goal|
+      if goal.fail && goal.bets
+        goal.bets.each do |bet|
+          debts << bet
+        end
+      end
+    end
+    debts
   end
 
   def stringify_winnings(user, bet)
@@ -44,10 +70,39 @@ helpers do
     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
     string += " from " + User.find(bet.goal.user_id).first_name
     string += " when " + User.find(bet.goal.user_id).first_name 
-    string += " failed to " + bet.goal.title 
+    string += " failed at the goal \"" + User.find(bet.goal.user_id).first_name 
+    string += " wants to " + bet.goal.title + "\""
     # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
-    string = string.gsub(/[^A-Za-z0-9\s]/i, '')
+    string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
     string += "!"
+  end
+
+  def stringify_debts(user, bet)
+    string = user.first_name + " lost "
+    string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
+    string += " to " + bet_winner(bet).first_name
+    string += " when " + User.find(bet.goal.user_id).first_name
+    string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
+    string += " wants to " + bet.goal.title + "\""
+    # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
+    string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
+    string += "!"
+  end
+
+  def bet_winner(bet)
+    if bet.goal.success
+      User.find(bet.goal.user_id)
+    else
+      User.find(bet.user_id)
+    end
+  end
+
+  def stringify_result(goal)
+    if goal.success
+      "succeeded"
+    else
+      "failed"
+    end
   end
 end
 
