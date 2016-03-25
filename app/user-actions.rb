@@ -13,6 +13,16 @@ helpers do
       "Unresolved!"
     end
   end
+
+  def goal_success(goal)
+    if goal.success
+      "successful-goal"
+    elsif goal.fail
+      "failed-goal"
+    else
+      nil
+    end
+  end
 end
 
 

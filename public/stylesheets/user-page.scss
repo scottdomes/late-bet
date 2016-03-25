@@ -85,6 +85,14 @@ nav {
     }
 
   }
+
+  .goal.successful-goal {
+    border: 2px solid #5cb85c;
+  }
+
+  .goal.failed-goal {
+    border: 2px solid #d9534f;
+  }
 }
 
 
