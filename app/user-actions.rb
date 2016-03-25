@@ -32,8 +32,16 @@ helpers do
   def winnings(user)
     winnings = []
     user.bets.each do |bet|
-      if bet.goal.fail == true
+      if bet.goal.fail
         winnings << bet
+      end
+    end
+
+    user.goals.each do |goal|
+      if goal.success && goal.bets
+        goal.bets.each do |bet|
+          winnings << bet
+        end
       end
     end
     winnings
@@ -44,6 +52,14 @@ helpers do
     user.bets.each do |bet|
       if bet.goal.success == true
         debts << bet
+      end
+    end
+
+    user.goals.each do |goal|
+      if goal.fail && goal.bets
+        goal.bets.each do |bet|
+          debts << bet
+        end
       end
     end
     debts
@@ -64,13 +80,25 @@ helpers do
   def stringify_debts(user, bet)
     string = user.first_name + " lost "
     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
-    string += " to " + User.find(bet.goal.user_id).first_name
+    if bet.goal.success 
+      string += " to " + User.find(bet.goal.user_id).first_name
+    else
+      string += " to " + User.find(bet.user_id).first_name
+    end
     string += " when " + User.find(bet.goal.user_id).first_name
-    string += " succeeded at the goal \"" + User.find(bet.goal.user_id).first_name 
+    string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
     string += " wants to " + bet.goal.title + "\""
     # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
     string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
     string += "!"
+  end
+
+  def stringify_result(goal)
+    if goal.success
+      "succeeded"
+    else
+      "failed"
+    end
   end
 end
 
