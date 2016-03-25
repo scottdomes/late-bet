@@ -1,7 +1,7 @@
 get '/goals' do
   # if session[:user]
   #   @goal = Goal.new
-    erb :'goals'
+    erb :'goals/index'
   # else
   #   cookies[:]
   #   redirect '/goals/'

@@ -20,7 +20,7 @@
             <div class="panel panel-default goal">
               <div class="panel-body">
                 <img class="circular-img" src="/img/me.jpg">
-                <h3><%= goal.user.name %> wants to <%= goal.title %></h3>
+                <h3><%= goal.user.first_name + " " + goal.user.last_name %> wants to <%= goal.title %></h3>
                 <h4>By: <%= goal.deadline %></h4>
                 <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
                 <form method="POST" action="/goals/bets">
@@ -37,8 +37,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                       <% goal.bets.each do |bet| %>
-                        <li><a href="users/<%= User.find(bet.user_id).name %>">
-                          <%= User.find(bet.user_id).name %>
+                        <% user = User.find(bet.user_id) %>
+                        <li><a href="users/<%= user.first_name + user.last_name %>">
+                          <%= user.first_name + " " + user.last_name %>
                         </a></li>
                       <% end %>
                     </ul>
@@ -58,7 +59,7 @@
                 <div class="panel-body">
                   <img class="circular-img" src="/img/me.jpg">
                   <form method="POST" action="/goals">
-                    <h3><%= session[:user].name.split(" ")[0] %> wants to </h3><input id="input-title" name="title" placeholder="Choose a goal!">
+                    <h3><%= session[:user].first_name %> wants to </h3><input id="input-title" name="title" placeholder="Choose a goal!">
                     <h4>By: </h4><!-- <input id="input-deadline" name="deadline" placeholder="Deadline"> -->
                       <input type='text' id="input-deadline" name="deadline" placeholder="Deadline"/>
                      
