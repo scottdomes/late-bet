@@ -9,6 +9,7 @@ before do
   # 5.times do
   #   @scott.goals << Goal.create(title: "Scott wants to finish this project!", stake_qty: 2, stake_item: "beer", deadline: Date.tomorrow)
   # end
+  # @scott.goals.each { |goal| goal.bets << Bet.create(user_id: 166)}
   session[:user] = @scott # TEST
 end
 

@@ -39,8 +39,8 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                     <% goal.bets.each do |bet| %>
-                      <li><a href="users/<%= User.find(bet.user_id).username %>">
-                        <%= User.find(bet.user_id).username %>
+                      <li><a href="users/<%= User.find(bet.user_id).name %>">
+                        <%= User.find(bet.user_id).name %>
                       </a></li>
                     <% end %>
                   </ul>
