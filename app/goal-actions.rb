@@ -27,9 +27,10 @@ post '/goals' do
     user_id: session[:user].id
   )
   if @goal.save
+    cookies[:success] = "Goal successfully created!"
     redirect '/'
   else 
-    @goal_errors = @goal.errors.full_messages
-    erb :'goals'
+    cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
+    redirect '/#custom-goal'
   end
 end

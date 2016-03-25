@@ -14,8 +14,26 @@ nav {
   .dropdown {
     display: inline-block;
   }
+
   .dropdown a:hover {
     cursor: pointer;
+  }
+  .flash {
+    width: 100%;
+    text-align: center;
+
+    p {
+      color: white;
+      margin: 0;
+      line-height: 30px;
+    }
+  }
+  .success {
+    background-color: #5cb85c;
+  }
+
+  .failure {
+    background-color: #d9534f;
   }
 }
 
