@@ -27,7 +27,7 @@
               <h3><%= goal.title %></h3>
               <h4>By: <%= goal.deadline %></h4>
               <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
-              <button class="btn btn-success btn-lg disabled">Take Bet!</button>
+              <button class="btn btn-success btn-lg">Take Bet!</button>
     
               <% if goal.bets.empty? %>
                 <p>No takers yet!</p>
