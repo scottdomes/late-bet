@@ -150,13 +150,20 @@ $GOALS_BOX_HEIGHT: 30px;
 #custom-goal {
   width: 340px;
   background-color: #5cb85c;
-  height: 500px;
+  height: 50px;
   margin: 20px auto;
+  overflow: hidden;
+  transition: .5s height ease-in;
+  -webkit-transition: .5s height ease-in;
 
-  h2 {
+  #add-goal-heading {
     color: white;
     line-height: 50px;
     margin: 0;
+  }
+
+  #add-goal-heading {
+    cursor: pointer; 
   }
 
   input {
@@ -192,4 +199,8 @@ $GOALS_BOX_HEIGHT: 30px;
     margin-top: 10px;
   }
 
+}
+
+#custom-goal.expanded {
+  height: 500px;
 }
