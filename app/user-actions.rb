@@ -9,7 +9,7 @@ helpers do
     string.gsub(/[^A-Za-z0-9\s]/i, '')
   end
 
-  def bet_winner(bet)
+  def bet_result(bet)
     if bet.goal.success
       User.find(bet.goal.user_id).first_name + " wins!"
     elsif bet.goal.fail
@@ -80,17 +80,21 @@ helpers do
   def stringify_debts(user, bet)
     string = user.first_name + " lost "
     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
-    if bet.goal.success 
-      string += " to " + User.find(bet.goal.user_id).first_name
-    else
-      string += " to " + User.find(bet.user_id).first_name
-    end
+    string += " to " + bet_winner(bet).first_name
     string += " when " + User.find(bet.goal.user_id).first_name
     string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
     string += " wants to " + bet.goal.title + "\""
     # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
     string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
     string += "!"
+  end
+
+  def bet_winner(bet)
+    if bet.goal.success
+      User.find(bet.goal.user_id)
+    else
+      User.find(bet.user_id)
+    end
   end
 
   def stringify_result(goal)

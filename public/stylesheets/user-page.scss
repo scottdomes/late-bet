@@ -6,10 +6,6 @@ body {
 
 
 nav {
-  img {
-    height: 40px;
-    margin: 5px 0;
-  }
 
   .dropdown {
     display: inline-block;
@@ -105,7 +101,10 @@ nav {
     text-align: center;
   }
   td {
-    width: 50%;
+    width: 40%;
+  }
+  td:first-child {
+    width: 20%;
   }
 }
 
@@ -212,3 +211,8 @@ $GOALS_BOX_HEIGHT: 30px;
 #custom-goal.expanded {
   height: 500px;
 }
+
+.sm-img {
+    height: 40px;
+    margin: 5px 0;
+  }
