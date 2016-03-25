@@ -84,7 +84,7 @@
   </div> <!-- goal-grid -->
 
     <div class="row heading bets-heading">
-      <h1>Scott's Bets</h1>
+      <h1><%= @user.first_name %>'s Bets</h1>
     </div> <!-- bets-heading -->
 
     <div class="row bets-table-row">
@@ -96,18 +96,12 @@
                 <th>Result</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
-                  <td>Paul wins!</td>
-                </tr>
-                <tr>
-                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
-                  <td>Unresolved.</td>
-                </tr>
-                <tr>
-                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
-                  <td>Scott wins!</td>
-                </tr>
+                <% @user.bets.each do |bet| %>
+                  <tr>
+                    <td><%= @user.first_name + " bet " + User.find(bet.goal.user_id).first_name + " " + bet.goal.stake_qty.to_s + " " + bet.goal.stake_item + " that " + User.find(bet.goal.user_id).first_name + " would " + bet.goal.title + " by " + bet.goal.deadline.to_s + "!"%></td>
+                    <td>Paul wins!</td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div> <!-- panel-body -->
