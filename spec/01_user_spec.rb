@@ -4,7 +4,7 @@ describe Goal do
 
   context 'validations' do
 
-    #Another option for using with FactoryGirl
+    #Another option for using with FactoryGirl. This code is not working.
     #let(:user) {build :user}
 
     before(:each) do
@@ -22,8 +22,18 @@ describe Goal do
       expect(@user).to be_valid
     end
 
-    it 'the user name to not be valid if it is empty' do
-      @user.name = ""
+    it 'the user first_name to not be valid if it is empty' do
+      @user.first_name = ""
+      expect(@user).to_not be_valid
+    end
+
+    it 'the user last_name to not be valid if it is empty' do
+      @user.last_name = ""
+      expect(@user).to_not be_valid
+    end
+
+    it 'the username to not be valid if it is empty' do
+      @user.username = ""
       expect(@user).to_not be_valid
     end
 

@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+require_relative 'spec_helper'
 
 describe Goal do
   # before(:all) do
@@ -9,11 +10,8 @@ describe Goal do
 
 
     before(:each) do
-      @user = User.new()
-      @user.assign_attributes(
-        name: 'Shawn',
-        email: 'kreayshawn@oaklandhiphop.net'
-      )
+      
+      @user = build :user
 
       @goal = Goal.new
       @goal.assign_attributes(

@@ -28,6 +28,6 @@ Set up test database.
 
     rake db:create RACK_ENV=test
     rake db:migrate RACK_ENV=test
-    rspec filename
+    rspec spec/01_user_spec.rb
 
 
