@@ -28,10 +28,10 @@ post '/goals' do
   )
   if @goal.save
     cookies[:success] = "Goal successfully created!"
-    redirect '/'
+    redirect '/goals'
   else 
     cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
-    redirect '/#custom-goal'
+    redirect '/goals/#custom-goal'
   end
 end
 
