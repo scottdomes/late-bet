@@ -15,7 +15,7 @@
     <div class="goal-grid main-page-grid">
       <div class="row">
 
-        <% @goals.each do |goal| %>
+        <% Goal.all.each do |goal| %>
           <div class="col-md-4">
             <div class="panel panel-default goal">
               <div class="panel-body">
