@@ -1,5 +1,6 @@
 require_relative 'goal-actions'
 require_relative 'bet-actions'
+require_relative 'user-actions'
 
 enable :sessions
 

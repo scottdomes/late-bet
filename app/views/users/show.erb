@@ -27,10 +27,19 @@
               <h3><%= goal.user.first_name + " wants to " + goal.title %></h3>
               <h4>By: <%= goal.deadline.strftime("%m:%M %p on %A, %B %e") %></h4>
               <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
-              <% unless goal.user.id = session[:user].id %>
+
+              <% if goal.user.id = session[:user].id %>
+                <form method="POST" action="/goals/complete">
+                  <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
+                  <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
+                  <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
+                </form>
+              <% else %>
                 <button class="btn btn-success btn-lg">Take Bet!</button>
               <% end %>
-    
+
+              <h1>Goal success: <%= goal.success %></h1>
+              <h1>Goal fail: <%= goal.fail %></h1>
               <% if goal.bets.empty? %>
                 <p>No takers yet!</p>
               <% else %>
