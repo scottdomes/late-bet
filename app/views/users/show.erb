@@ -1,18 +1,18 @@
   <div class="container">
     <div class="row user-header">
       <div class="col-md-6">
-        <img class="circular-img" src='/img/me.jpg'>
+        <img class="circular-img" src='<%= @user.image_file_name %>'>
       </div> <!-- col-md-4 -->
       <div class="user-info col-md-6">
         <h1><%= @user.username %></h1>
+        <h3><%= @user.first_name + " " + @user.last_name %></h3>
         <h3>Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
-        <h3>Bets won: 12 <%= @user.id %></h3>
-        <h3>Goals achieved: 1</h3>
+        <h3>Goals achieved: <%= @user.goals.where(success: true).length %></h3>
       </div> <!-- col-md-8 -->
     </div> <!-- user-header -->
 
     <div class="row heading goal-heading">
-      <h1>Scott's Goals</h1>
+      <h1><%= @user.first_name %>'s Goals</h1>
     </div> <!-- goal-heading-->
 
     <div class="goal-grid">
@@ -22,13 +22,26 @@
       <% @user.goals.each do |goal| %>
 
         <div class="col-md-4">
-          <div class="panel panel-default goal">
+          <div class="panel panel-default goal <%= goal_success(goal) %>">
             <div class="panel-body">
-              <h3><%= goal.title %></h3>
-              <h4>By: <%= goal.deadline %></h4>
+              <h3><%= goal.user.first_name + " wants to " + goal.title %></h3>
+              <h4>By: <%= goal.deadline.strftime("%m:%M %p on %A, %B %e") %></h4>
               <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
-              <button class="btn btn-success btn-lg">Take Bet!</button>
-    
+
+              <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> <!-- first part is unncessary for this page -->
+                <form method="POST" action="/goals/complete">
+                  <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
+                  <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
+                  <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
+                </form>
+              <% elsif goal.success == true %>
+                <h1 class="goal-outcome">Success!</h1>
+              <% elsif goal.fail == true %>
+                <h1 class="goal-outcome">Fail.</h1>
+              <% else %>
+                <button class="btn btn-success btn-lg">Take Bet!</button>
+              <% end %>
+
               <% if goal.bets.empty? %>
                 <p>No takers yet!</p>
               <% else %>
@@ -50,11 +63,32 @@
           </div> <!-- panel -->
         </div> <!-- col-md-4 -->
       <% end %>
+
+      <% if @user.id == current_user.id %>
+      <div class="col-md-12">
+        <div id="custom-goal">
+          <h2 id="add-goal-heading">Add a goal!</h2>
+          <div class="panel panel-default goal">
+            <div class="panel-body">
+              <img class="circular-img" src="<%= current_user.image_file_name %>">
+              <form method="POST" action="/goals">
+                <h3><%= current_user.first_name %> wants to </h3><input id="input-title" name="title" placeholder="Choose a goal!">
+                <h4>By: </h4><!-- <input id="input-deadline" name="deadline" placeholder="Deadline"> -->
+                  <input type='text' id="input-deadline" name="deadline" placeholder="Deadline"/>
+                 
+                <h3>Stakes: </h3><input id="quantity" type="number" min="1" max="9" value="1" name="stake_qty"><input id="item" name="stake_item" placeholder="Item">
+                <button class="btn btn-success btn-lg">Save Goal</button>
+              </form>
+            </div> <!-- panel-body -->
+          </div> <!-- panel -->
+        </div> <!-- custom-goal -->
+      </div> <!-- col-md-12 -->
+      <% end %>
     </div> <!-- row -->
   </div> <!-- goal-grid -->
 
     <div class="row heading bets-heading">
-      <h1>Scott's Bets</h1>
+      <h1><%= @user.first_name %>'s Bets</h1>
     </div> <!-- bets-heading -->
 
     <div class="row bets-table-row">
@@ -66,18 +100,12 @@
                 <th>Result</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
-                  <td>Paul wins!</td>
-                </tr>
-                <tr>
-                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
-                  <td>Unresolved.</td>
-                </tr>
-                <tr>
-                  <td>Scott bet Paul 2 beers that Paul would finish the models by 6pm today!</td>
-                  <td>Scott wins!</td>
-                </tr>
+                <% @user.bets.each do |bet| %>
+                  <tr>
+                    <td><%= stringify_bet(@user, bet) %></td>
+                    <td><%= bet_winner(bet) %></td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div> <!-- panel-body -->
