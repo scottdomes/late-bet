@@ -4,12 +4,17 @@ describe Goal do
 
   context 'validations' do
 
+    #Another option for using with FactoryGirl
+    #let(:user) {build :user}
+
     before(:each) do
-      @user = User.new()
-      @user.assign_attributes(
-        name: 'Shawn',
-        email: 'kreayshawn@oaklandhiphop.net'
-      )
+      # @user = User.new()
+      # @user.assign_attributes(
+      #   name: 'Shawn',
+      #   email: 'kreayshawn@oaklandhiphop.net'
+      # )
+
+      @user = build :user
 
     end
 

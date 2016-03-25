@@ -4,9 +4,14 @@ configure do
     ActiveRecord::Base.logger = Logger.new(STDOUT)
   end
 
+  dbfile = "db/#{settings.environment}.sqlite3"
+  puts "connecting to database: #{dbfile}"
   set :database, {
     adapter: "sqlite3",
-    database: "db/db.sqlite3"
+    #Allows the use of different databases depending on the rack environment.
+    #So, when in testing on RSpec, it will use a test DB "test.sqlite3"
+    #Normal app db will be "development.sqlite3"
+    database: dbfile
   }
 
   # Load all models from app/models, using autoload instead of require

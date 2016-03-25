@@ -1,18 +1,19 @@
 require 'rspec'
+require 'factory_girl'
 
-# Hard code the DATABASE environment variable so that it only connects
-# to the test database when running rspec. Take a look inside config.rb
-# to see how this value is being used.
-ENV['DATABASE'] = 'test'
-require 'app_config'
+#Set the environment to test before loading up the sinatra app for Rspec.
+ENV['RACK_ENV'] = 'test'
+require 'sinatra'
 
-# Connect to the database once before running any tests.
-AppConfig.establish_connection
+#Load the applications environment
+require_relative '../config/environment.rb'
 
 # Clean the database between each test run using the database cleaner
 require 'database_cleaner'
+FactoryGirl.find_definitions
 
 RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
   config.color = true
   config.tty = true
   config.before(:suite) do
