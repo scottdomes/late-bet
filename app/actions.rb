@@ -21,7 +21,7 @@ get '/' do
   erb :goals
 end
 
-get '/users/1' do
-  @user = @scott
+get '/users/:id' do
+  @user = User.find(params[:id])
   erb :'users/show'
 end
