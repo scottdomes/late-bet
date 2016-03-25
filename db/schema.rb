@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324181338) do
+ActiveRecord::Schema.define(version: 20160325002226) do
 
   create_table "bets", force: :cascade do |t|
     t.integer  "user_id"
@@ -33,17 +33,21 @@ ActiveRecord::Schema.define(version: 20160324181338) do
     t.date     "deadline"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "fail",       default: false
+    t.boolean  "success",    default: false
   end
 
   add_index "goals", ["user_id"], name: "index_goals_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
     t.string   "email"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
   end
 
 end
