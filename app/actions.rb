@@ -16,7 +16,8 @@ end
 
 # Homepage (Root path)
 get '/' do
-  erb :goals
+  @goals = Goal.all
+  erb :'goals/index'
 end
 
 get '/users/:id' do
