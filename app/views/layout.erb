@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/stylesheets/normalize.css">
   <link rel="stylesheet" href="/stylesheets/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/stylesheets/user-page.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/homepage.css">
 
@@ -24,8 +25,8 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Motivation</a>
-        </div> <!-- navbar-header -->
+          <a class="navbar-brand" href="#"><i class="fa fa-trophy"></i>  Motivation</a>
+        </div> <!-- navbar-header -->  
         <div class="navbar-right">
           <img class="circular-img" src="<%= session[:user].image_file_name %>">
           <div class="dropdown">
@@ -34,9 +35,9 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdown-menu-1">
-              <li><a href="/users/<%= session[:user].id %>">My profile</a></li>
-              <li><a href="/#custom-goal">New goal</a></li>
-              <li><a href="#">Sign out</a></li>
+              <li><a href="/users/<%= session[:user].id %>"><i class="fa fa-user"></i>  My profile</a></li>
+              <li><a href="/#custom-goal"><i class="fa fa-check"></i>  New goal</a></li>
+              <li><a href="#"><i class="fa fa-arrow-circle-left"></i>  Sign out</a></li>
             </ul>
           </div> <!-- dropdown -->
         </div> <!-- navbar-right -->
@@ -58,7 +59,7 @@
   <%= yield %>
   <footer class="footer">
     <div class="container">
-      <p>Copyright 2016.</p>
+      <p><i class="fa fa-trophy"></i>  Copyright 2016.</p>
     </div>
   </footer>
 </body>
