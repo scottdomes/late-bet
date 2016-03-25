@@ -2,7 +2,6 @@
 
     <div class="row heading goal-heading">
       <h1>Goals</h1>
-      <h1><%= @goal_errors.inspect unless @goal_errors.nil? %></h1>
     </div> <!-- goal-heading-->
 
     <div class="row" id="past-goals">
@@ -24,8 +23,10 @@
                 <h3><%= goal.user.name %> wants to <%= goal.title %></h3>
                 <h4>By: <%= goal.deadline %></h4>
                 <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
-                <button class="btn btn-success btn-lg disabled">Take Bet!</button>
-                
+                <form method="POST" action="/goals/bets">
+                  <input type="hidden" name="goal_id" value="<%= goal.id %>">
+                  <button class="btn btn-success btn-lg">Take Bet!</button>
+                </form>
                 <% if goal.bets.empty? %>
                   <p>No takers yet!</p>
                 <% else %>
