@@ -114,7 +114,7 @@
 
     <div class="row heading winnings-heading">
       <h1><%= @user.first_name %>'s Winnings</h1>
-    </div> <!-- bets-heading -->
+    </div> <!-- winnings-heading -->
 
     <div class="row winnings-table-row">
       <div class="panel panel-default">
@@ -145,5 +145,41 @@
             </table>
           </div> <!-- panel-body -->
       </div> <!-- panel -->
-    </div> <!-- bets-table-row -->
+    </div> <!-- winnings-table-row -->
+
+
+    <div class="row heading debts-heading">
+      <h1><%= @user.first_name %>'s Debts</h1>
+    </div> <!-- debts-heading -->
+
+    <div class="row debts-table-row">
+      <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table debts-table">
+              <thead>
+                <th>Debt</th>
+                <th>Status</th>
+              </thead>
+              <tbody>
+                <% @debts.each do |bet| %>
+                  <tr>
+                    <td><%= stringify_debts(@user, bet) %></td>
+                    <td>
+                      <% if bet.paid %>
+                        Paid!
+                      <% else %>
+                        Awaiting Payment 
+                        <form method="POST" action="/bets/paid">
+                          <input type='hidden' name="bet_id" value="<%= bet.id %>"/>
+                          <button class="btn btn-default btn-danger">Bet paid!</button>
+                        </form>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div> <!-- panel-body -->
+      </div> <!-- panel -->
+    </div> <!-- debts-table-row -->
   </div><!-- container -->
