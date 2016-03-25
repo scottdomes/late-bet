@@ -22,7 +22,7 @@
           <a class="navbar-brand" href="#">Motivation</a>
         </div> <!-- navbar-header -->
         <div class="navbar-right">
-          <img class="circular-img" src="/img/me.jpg">
+          <img class="circular-img" src="<%= session[:user].image_file_name %>">
           <div class="dropdown">
             <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <%= session[:user].username %>
