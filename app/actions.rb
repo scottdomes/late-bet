@@ -29,7 +29,7 @@ end
 
 # Homepage (Root path)
 get '/' do
-  erb :goals
+  erb :'goals/index'
 end
 
 get '/users/:id' do
