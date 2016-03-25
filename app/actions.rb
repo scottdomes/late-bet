@@ -32,6 +32,10 @@ get '/' do
   erb :'goals/index'
 end
 
+get '/index' do
+  erb :'index'
+end
+
 get '/users/:id' do
   @user = User.find(params[:id])
   erb :'users/show'
