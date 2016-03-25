@@ -256,4 +256,3 @@ Goal.create(
   stake_item: "week's supply of lip balm.",
   stake_qty: 1
   )
->>>>>>> class-seeding

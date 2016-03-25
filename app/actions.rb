@@ -11,14 +11,14 @@ before do
   # end
   # @scott.goals.each { |goal| goal.bets << Bet.create(user_id: 166)}
   # session[:user] = @scott # TEST
-  session[:user] = User.find_by(username: "scott")
+  session[:user] = User.find_by(username: "paul")
 end
 
 
 # Homepage (Root path)
 get '/' do
   @goals = Goal.all
-  erb :'goals/index'
+  erb :goals
 end
 
 get '/users/:id' do
