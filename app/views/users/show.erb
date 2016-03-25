@@ -52,8 +52,10 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                     <% goal.bets.each do |bet| %>
-                      <li><a href="users/<%= User.find(bet.user_id).username %>">
-                        <%= User.find(bet.user_id).username %>
+                      <% better = User.find(bet.user_id) %>
+                      <li><a href="users/<%= better.id %>">
+                        <img class="circular-img sm-img" src="<%= better.image_file_name %>">
+                        <%= better.first_name + " " + better.last_name %>
                       </a></li>
                     <% end %>
                   </ul>
