@@ -1,13 +1,13 @@
 
-require 'factory_girl'
-FactoryGirl.find_definitions
+# require 'factory_girl'
+# FactoryGirl.find_definitions
 
-FactoryGirl.create :user
+# FactoryGirl.create :user
 
 maz = User.create(
-  first_name: Maz, 
-  last_name: Ahmadi, 
-  user_name: mazzzz, 
+  first_name: "Maz", 
+  last_name: "Ahmadi", 
+  username: "mazzzz", 
   image_file_name: '/img/maz.jpg',
   email: "blank@blank.com"
   )
@@ -20,9 +20,9 @@ Goal.create(
   )
 
 jess = User.create(
-  first_name: Jessica, 
-  last_name: Peters, 
-  user_name: jess, 
+  first_name: "Jessica", 
+  last_name: "Peters", 
+  username: "jess", 
   image_file_name: '/img/jess.jpg',
   email: "blank@blank.com"
   )
@@ -35,9 +35,9 @@ Goal.create(
   )
 
 lenny = User.create(
-  first_name: Lenox, 
-  last_name: Jung, 
-  user_name: lenny, 
+  first_name: "Lenox", 
+  last_name: "Jung", 
+  username: "lenny", 
   image_file_name: '/img/lenox.jpg',
   email: "blank@blank.com"
   )
@@ -50,9 +50,9 @@ Goal.create(
   )
 
 kevin = User.create(
-  first_name: Kevin, 
-  last_name: Hung, 
-  user_name: kevin, 
+  first_name: "Kevin", 
+  last_name: "Hung", 
+  username: "kevin", 
   image_file_name: '/img/kevin.jpg',
   email: "blank@blank.com"
   )
@@ -65,9 +65,9 @@ Goal.create(
   )
 
 nina = User.create(
-  first_name: Nina, 
-  last_name: Winkler, 
-  user_name: nina, 
+  first_name: "Nina", 
+  last_name: "Winkler", 
+  username: "nina", 
   image_file_name: '/img/nina.jpg',
   email: "blank@blank.com"
   )
@@ -80,9 +80,9 @@ Goal.create(
   )
 
 james = User.create(
-  first_name: James, 
-  last_name: McKeen, 
-  user_name: james, 
+  first_name: "James", 
+  last_name: "McKeen", 
+  username: "james", 
   image_file_name: '/img/james.jpg',
   email: "blank@blank.com"
   )
@@ -96,9 +96,9 @@ Goal.create(
 
 
 david = User.create(
-  first_name: David, 
-  last_name: Van Dusen, 
-  user_name: david, 
+  first_name: "David", 
+  last_name: "VanDusen", 
+  username: "david", 
   image_file_name: '/img/david.jpg',
   email: "blank@blank.com"
   )
@@ -111,9 +111,9 @@ Goal.create(
   )
 
 alvin = User.create(
-  first_name: Alvin, 
-  last_name: Chen, 
-  user_name: alvin, 
+  first_name: "Alvin", 
+  last_name: "Chen", 
+  username: "alvin", 
   image_file_name: '/img/alvin.jpg',
   email: "blank@blank.com"
   )
@@ -126,9 +126,9 @@ Goal.create(
   )
 
 justine = User.create(
-  first_name: Justine, 
-  last_name: Herman, 
-  user_name: justine, 
+  first_name: "Justine", 
+  last_name: "Herman", 
+  username: "justine", 
   image_file_name: '/img/justine.jpg',
   email: "blank@blank.com"
   )
@@ -141,9 +141,9 @@ Goal.create(
   )
 
 osama = User.create(
-  first_name: Osama, 
-  last_name: Khan, 
-  user_name: osama, 
+  first_name: "Osama", 
+  last_name: "Khan", 
+  username: "osama", 
   image_file_name: '/img/osama.jpg',
   email: "blank@blank.com"
   )
@@ -156,9 +156,9 @@ Goal.create(
   )
 
 chris = User.create(
-  first_name: Chris, 
-  last_name: Milbourne, 
-  user_name: chris, 
+  first_name: "Chris", 
+  last_name: "Milbourne", 
+  username: "chris", 
   image_file_name: '/img/chris.jpg',
   email: "blank@blank.com"
   )
@@ -171,9 +171,9 @@ Goal.create(
   )
 
 paul = User.create(
-  first_name: Paul, 
-  last_name: Save, 
-  user_name: paul, 
+  first_name: "Paul", 
+  last_name: "Save", 
+  username: "paul", 
   image_file_name: '/img/paul.jpg',
   email: "blank@blank.com"
   )
@@ -186,9 +186,9 @@ Goal.create(
   )
 
 julia = User.create(
-  first_name: Julia, 
-  last_name: Wei, 
-  user_name: jules, 
+  first_name: "Julia", 
+  last_name: "Wei", 
+  username: "jules", 
   image_file_name: '/img/julia.jpg',
   email: "blank@blank.com"
   )
@@ -201,9 +201,9 @@ Goal.create(
   )
 
 scott = User.create(
-  first_name: Scott, 
-  last_name: Domes, 
-  user_name: scott, 
+  first_name: "Scott", 
+  last_name: "Domes", 
+  username: "scott", 
   image_file_name: '/img/scott.jpg',
   email: "blank@blank.com"
   )
@@ -216,9 +216,9 @@ Goal.create(
   )
 
 filip = User.create(
-  first_name: Filip, 
-  last_name: Juristovski, 
-  user_name: scott, 
+  first_name: "Filip", 
+  last_name: "Juristovski", 
+  username: "filip", 
   image_file_name: '/img/filip.jpg',
   email: "blank@blank.com"
   )
@@ -231,9 +231,9 @@ Goal.create(
   )
 
 alex = User.create(
-  first_name: Alex, 
-  last_name: Lindsay, 
-  user_name: alex, 
+  first_name: "Alex", 
+  last_name: "Lindsay", 
+  username: "alex", 
   image_file_name: '/img/alex.jpg',
   email: "blank@blank.com"
   )
