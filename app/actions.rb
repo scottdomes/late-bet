@@ -24,6 +24,7 @@ before do
   # session[:user] = @scott # TEST
   # session[:user] =.id
   # @current_user = session[:user]
+  session[:user] = User.find_by(username: "paul")
 end
 
 
