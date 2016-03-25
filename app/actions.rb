@@ -11,6 +11,7 @@ before do
   # end
   # @scott.goals.each { |goal| goal.bets << Bet.create(user_id: 166)}
   # session[:user] = @scott # TEST
+  session[:user] = User.find_by(username: "scott")
 end
 
 
