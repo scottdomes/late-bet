@@ -98,8 +98,8 @@
               <tbody>
                 <% @user.bets.each do |bet| %>
                   <tr>
-                    <td><%= @user.first_name + " bet " + User.find(bet.goal.user_id).first_name + " " + bet.goal.stake_qty.to_s + " " + bet.goal.stake_item + " that " + User.find(bet.goal.user_id).first_name + " would " + bet.goal.title + " by " + bet.goal.deadline.to_s + "!"%></td>
-                    <td>Paul wins!</td>
+                    <td><%= stringify_bet(@user, bet) %></td>
+                    <td><%= bet_winner(bet) %></td>
                   </tr>
                 <% end %>
               </tbody>
