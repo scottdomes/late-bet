@@ -19,8 +19,12 @@
           <div class="col-md-4">
             <div class="panel panel-default goal">
               <div class="panel-body">
-                <img class="circular-img" src="<%= goal.user.image_file_name %>">
-                <h3 class="height_80"><%= goal.user.first_name + " " + goal.user.last_name %> wants to <%= goal.title %></h3>
+                <a href="/users/<%= goal.user.username %>">
+                  <img class="circular-img" src="<%= goal.user.image_file_name %>">
+                </a>
+                <h3 class="height_80">
+                  <a href="/users/<%= goal.user.username %>"><%= goal.user.first_name + " " + goal.user.last_name %></a> wants to <%= goal.title %>
+                </h3>
                 <h4>By: <%= goal.deadline.strftime("%m:%M %p on %A, %B %e") %></h4>
                 <h3 class="height_80">Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
                 <form method="POST" action="/goals/bets">
@@ -38,7 +42,7 @@
                     <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                       <% goal.bets.each do |bet| %>
                         <% user = User.find(bet.user_id) %>
-                        <li><a href="users/<%= user.first_name + user.last_name %>">
+                        <li><a href="users/<%= user.username %>">
                           <%= user.first_name + " " + user.last_name %>
                         </a></li>
                       <% end %>
