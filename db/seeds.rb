@@ -257,7 +257,7 @@ Goal.create(
   stake_qty: 1
   )
 
-30.times do
+50.times do
     Bet.create(
     user_id: User.all.sample.id,
     goal_id: Goal.all.sample.id,
@@ -267,14 +267,16 @@ end
 
 20.times do 
   goal = Goal.all.sample
-  goal.success = true
-  goal.fail = false
-  goal.save
+  if !goal.success && !goal.fail
+    goal.success = true
+    goal.save
+  end
 end
 
 10.times do 
   goal = Goal.all.sample
-  goal.fail = true
-  goal.success = false
-  goal.save
+  if !goal.success && !goal.fail
+    goal.fail = true
+    goal.save
+  end
 end

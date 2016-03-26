@@ -30,6 +30,11 @@ class Goal < ActiveRecord::Base
           other_user_id: user.id, 
           content: "#{user.first_name} succeeded at their goal to #{title}! You owe #{user.first_name} #{stake_qty} #{stake_item}!"
         )
+        user.notifications.create(
+          other_user_id: bet.user.id,
+          content: "Congratulations! #{bet.user.first_name} owes you #{stake_qty} #{stake_item} because you successfully #{title}"
+        )
+        user.save
         bet.user.save
       end
     elsif fail
@@ -38,6 +43,11 @@ class Goal < ActiveRecord::Base
           other_user_id: user.id, 
           content: "#{user.first_name} failed at their goal to #{title}! You won #{stake_qty} #{stake_item} from #{user.first_name}!"
         )
+        user.notifications.create(
+          other_user_id: bet.user.id,
+          content: "Unfortunately, you owe #{bet.user.first_name} #{stake_qty} #{stake_item} because you did not #{title}"
+        )
+        user.save
         bet.user.save
       end
     end
