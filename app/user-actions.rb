@@ -156,3 +156,12 @@ post '/users/empty_notifications' do
     current_user.save
   end
 end
+
+get '/users/logout' do
+  erb :'users/login'
+end
+
+post '/users/login' do
+  session[:user] = User.find_by(username: params[:user])
+  redirect '/goals'
+end

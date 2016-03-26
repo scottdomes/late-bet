@@ -34,7 +34,6 @@
           <img class="circular-img sm-img" src="<%= current_user.image_file_name %>">
           <div class="dropdown">
             <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-
               <%= current_user.username %>
               <span class="caret"></span>
             </a>
@@ -47,7 +46,7 @@
                 "/goals/#custom-goal"
                 <% end %>
               ><i class="fa fa-check"></i> New goal</a></li>
-              <li><a href="#"><i class="fa fa-arrow-circle-left"></i>  Sign out</a></li>
+              <li><a href="/users/logout"><i class="fa fa-arrow-circle-left"></i>  Sign out</a></li>
             </ul>
           </div> <!-- dropdown -->
 
