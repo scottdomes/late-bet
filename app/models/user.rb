@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   has_many :goals
 
+  has_many :notifications
+
   validates :first_name, presence: true
 
   validates :last_name, presence: true
