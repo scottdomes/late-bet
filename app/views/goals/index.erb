@@ -11,11 +11,76 @@
       </div> <!-- #past-goals-box -->
     </div> <!-- #past-goals -->
 
-    
+    <div class="row heading goal-heading">
+      <h3>Active Goals</h3>
+    </div> <!-- goal-heading-->
     <div class="goal-grid main-page-grid">
       <div class="row">
 
-        <% Goal.all.each do |goal| %>
+        <% Goal.where(success: false, fail: false).each do |goal| %>
+          <div class="col-md-4">
+            <div class="panel panel-default goal">
+              <div class="panel-body">
+                <a href="/users/<%= goal.user.username %>">
+                  <img class="circular-img" src="<%= goal.user.image_file_name %>">
+                </a>
+                <h3 class="height_80">
+                  <a href="/users/<%= goal.user.username %>"><%= goal.user.first_name + " " + goal.user.last_name %></a> wants to <%= goal.title %>
+                </h3>
+                <h4>By: <%= goal.deadline.strftime("%I:%M %p on %A, %B %e") %></h4>
+                <h3 class="height_80">Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
+
+                <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> <!-- first part is unncessary for this page -->
+                <form method="POST" action="/goals/complete">
+                  <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
+                  <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
+                  <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
+                </form>
+                <% elsif goal.success == true %>
+                  <h1 class="goal-outcome">Success!</h1>
+                <% elsif goal.fail == true %>
+                  <h1 class="goal-outcome">Fail.</h1>
+                <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
+                  <form method="POST" action="/goals/bets">
+                    <input type="hidden" name="goal_id" value="<%= goal.id %>">
+                    <button class="btn btn-success btn-lg">Take Bet!</button>
+                  </form>
+                <% else %>
+                  <h4>You took the bet! Awaiting result</h4>
+                <% end %>
+
+                <% if goal.bets.empty? %>
+                  <p>No takers yet!</p>
+                <% else %>
+                  <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      See who took bet
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
+                      <% goal.bets.each do |bet| %>
+                        <% better = User.find(bet.user_id) %>
+                        <li><a href="users/<%= better.username %>">
+                          <img class="circular-img sm-img" src="<%= better.image_file_name %>">
+                          <%= better.first_name + " " + better.last_name %>
+                        </a></li>
+                      <% end %>
+                    </ul>
+                  </div> <!-- dropdown -->
+                <% end %>
+              </div> <!-- panel-body -->
+            </div> <!-- panel -->
+          </div> <!-- col-md-4 -->
+        <% end %>
+        </div> <!-- row -->
+
+    <div class="row heading goal-heading">
+      <h3>Completed Goals</h3>
+    </div> <!-- goal-heading-->
+    <div class="goal-grid main-page-grid">
+      <div class="row">
+
+        <% Goal.where("success = ? or fail= ?", true, true).each do |goal| %>
           <div class="col-md-4">
             <div class="panel panel-default goal">
               <div class="panel-body">
