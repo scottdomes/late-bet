@@ -26,7 +26,7 @@
           <div class="panel panel-default goal <%= goal_success(goal) %>">
             <div class="panel-body">
               <h3><%= goal.user.first_name + " wants to " + goal.title %></h3>
-              <h4>By: <%= goal.deadline.strftime("%m:%M %p on %A, %B %e") %></h4>
+              <h4>By: <%= goal.deadline.strftime("%I:%M %p on %A, %B %e") %></h4>
               <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
 
               <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> <!-- first part is unncessary for this page -->
