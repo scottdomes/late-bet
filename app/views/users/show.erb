@@ -212,4 +212,38 @@
           </div> <!-- panel-body -->
       </div> <!-- panel -->
     </div> <!-- debts-table-row -->
+
+    <% if current_user.id == @user.id && @user.notifications %>
+
+    <div class="row heading notifications-heading">
+      <h1>Your Notifications</h1>
+    </div> <!-- notifications-heading -->
+
+      <div class="row notifications-table-row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+              <table class="table notifications-table">
+                <thead>
+                  <th>Opponent</th>
+                  <th>Event</th>
+                </thead>
+                <tbody>
+                  <% @user.notifications.each do |notification| %>
+                    <tr>
+                      <td>
+                        <% opponent = User.find(notification.other_user_id) %>
+                        <a href="/users/<%= opponent.username %>">
+                          <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
+                          <p><%= opponent.first_name %></p>
+                        </a>
+                      </td>
+                      <td><%= notification.content %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+      </div> <!-- notifications-table-row -->
+    <% end %>
   </div><!-- container -->

@@ -66,9 +66,6 @@
     </nav>
 
   </header>
-  <% current_user.notifications.each do |notification| %>
-   <h1><%= notification.content %></h1>
-  <% end %>
   <%= yield %>
   <footer class="footer">
     <div class="container">
