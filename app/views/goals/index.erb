@@ -27,10 +27,26 @@
                 </h3>
                 <h4>By: <%= goal.deadline.strftime("%I:%M %p on %A, %B %e") %></h4>
                 <h3 class="height_80">Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
-                <form method="POST" action="/goals/bets">
-                  <input type="hidden" name="goal_id" value="<%= goal.id %>">
-                  <button class="btn btn-success btn-lg">Take Bet!</button>
+
+                <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> <!-- first part is unncessary for this page -->
+                <form method="POST" action="/goals/complete">
+                  <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
+                  <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
+                  <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
                 </form>
+                <% elsif goal.success == true %>
+                  <h1 class="goal-outcome">Success!</h1>
+                <% elsif goal.fail == true %>
+                  <h1 class="goal-outcome">Fail.</h1>
+                <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
+                  <form method="POST" action="/goals/bets">
+                    <input type="hidden" name="goal_id" value="<%= goal.id %>">
+                    <button class="btn btn-success btn-lg">Take Bet!</button>
+                  </form>
+                <% else %>
+                  <h4>You took the bet! Awaiting result</h4>
+                <% end %>
+
                 <% if goal.bets.empty? %>
                   <p>No takers yet!</p>
                 <% else %>
