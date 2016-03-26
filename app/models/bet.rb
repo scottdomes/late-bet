@@ -3,9 +3,15 @@ class Bet < ActiveRecord::Base
   belongs_to :user
 
   validate :user_cannot_bet_on_self
-  validates_uniqueness_of :user_id, :message => " cannot make same bet twice"
+  validate :user_cannot_make_same_bet_twice
 
   after_create :add_bet_notification
+
+  def user_cannot_make_same_bet_twice
+    unless goal.bets.where(user_id: user.id).empty?
+      errors.add(:user, "cannot make same bet twice")
+    end
+  end
 
   def user_cannot_bet_on_self
     if goal.user == user
