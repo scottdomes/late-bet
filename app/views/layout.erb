@@ -21,14 +21,14 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Motivation</a>
         </div> <!-- navbar-header -->
-        <div class="navbar-right">
+        <div class="navbar-right pull-right">
           <img class="circular-img sm-img" src="<%= session[:user].image_file_name %>">
           <div class="dropdown">
             <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <%= session[:user].username %>
               <span class="caret"></span>
             </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown-menu-1">
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-1">
               <li><a href="/users/<%= session[:user].id %>">My profile</a></li>
               <li><a href="/#custom-goal">New goal</a></li>
               <li><a href="#">Sign out</a></li>
