@@ -53,7 +53,7 @@
 
           <div class="dropdown">
             <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <h3><i class="fa fa-flag <%= "live" if current_user.notifications %>"></i></h3>
+              <h3><i id="notifications-button" class="fa fa-flag <%= "live" unless current_user.notifications.empty? %>"></i></h3>
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-1">
               <% current_user.notifications.each do |notification| %>

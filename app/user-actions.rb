@@ -144,3 +144,7 @@ post '/bets/paid' do
     redirect back
   end
 end
+
+post '/users/empty_notifications' do
+  current_user.notifications = []
+end
