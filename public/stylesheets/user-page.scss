@@ -6,6 +6,17 @@ body {
 }
 
 nav {
+  h3 {
+    margin: 0; 
+    line-height: 30px;
+    font-size: 1.2em;
+    margin-left: 20px;
+  }
+
+  i.live {
+    color: red;
+  }
+
   .dropdown, .navbar-header, .navbar-right {
     display: inline-block;
   }
