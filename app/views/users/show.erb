@@ -20,7 +20,7 @@
       <div class="row">
 
 
-      <% @user.goals.each do |goal| %>
+      <% @user.goals.sort_by{ |goal| goal.created_at }.each do |goal| %>
 
         <div class="col-md-4">
           <div class="panel panel-default goal <%= goal_success(goal) %>">
