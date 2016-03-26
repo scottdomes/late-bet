@@ -25,7 +25,7 @@ maz = User.create(
   )
 Goal.create(
   user_id: maz.id, 
-  title: "finish Lighthouse Labs!", 
+  title: "finish Lighthouse Labs", 
   deadline: "2016/04/28 18:00",
   stake_item: "Macbook Pro",
   stake_qty: 1
@@ -40,7 +40,7 @@ jess = User.create(
   )
 Goal.create(
   user_id: jess.id, 
-  title: "eat lunch and supper!", 
+  title: "eat lunch and supper", 
   deadline: "2016/03/29 23:00",
   stake_item: "fancy expensive Prado coffee",
   stake_qty: 1
@@ -55,7 +55,7 @@ lenny = User.create(
   )
 Goal.create(
   user_id: lenny.id, 
-  title: "actually do his readings.", 
+  title: "actually do his readings", 
   deadline: "2016/04/01 18:00",
   stake_item: "bottle of Jones",
   stake_qty: 1
@@ -70,7 +70,7 @@ kevin = User.create(
   )
 Goal.create(
   user_id: kevin.id, 
-  title: "finish Lighthouse Labs!", 
+  title: "finish Lighthouse Labs", 
   deadline: "2016/04/28 18:00",
   stake_item: "$50 Starbucks gift card",
   stake_qty: 1
@@ -85,7 +85,7 @@ nina = User.create(
   )
 Goal.create(
   user_id: nina.id, 
-  title: "get a dev job.", 
+  title: "get a dev job", 
   deadline: "2016/06/01 12:00",
   stake_item: "apartment (a nice one!)",
   stake_qty: 1
@@ -100,7 +100,7 @@ james = User.create(
   )
 Goal.create(
   user_id: james.id, 
-  title: "eat something.", 
+  title: "eat something", 
   deadline: "2016/03/28 23:00",
   stake_item: "bottle of a Pepto Bismol",
   stake_qty: 1
@@ -116,9 +116,9 @@ david = User.create(
   )
 Goal.create(
   user_id: david.id, 
-  title: "learn a piece on cello.", 
+  title: "learn a piece on cello", 
   deadline: "2016/03/28 23:00",
-  stake_item: "picture of himself.",
+  stake_item: "picture of himself",
   stake_qty: 1
   )
 
@@ -131,9 +131,9 @@ alvin = User.create(
   )
 Goal.create(
   user_id: alvin.id, 
-  title: "go to the gym four times a week.", 
+  title: "go to the gym four times a week", 
   deadline: "2016/06/01 12:00",
-  stake_item: "coffees.",
+  stake_item: "coffees",
   stake_qty: 2
   )
 
@@ -146,9 +146,9 @@ justine = User.create(
   )
 Goal.create(
   user_id: justine.id, 
-  title: "kick ass in today's presentation.", 
+  title: "kick ass in today's presentation", 
   deadline: "2016/03/28 9:00",
-  stake_item: "granola bars.",
+  stake_item: "granola bars",
   stake_qty: 2
   )
 
@@ -161,9 +161,9 @@ osama = User.create(
   )
 Goal.create(
   user_id: osama.id, 
-  title: "finish the project!", 
+  title: "finish the project", 
   deadline: "2016/03/28 9:00",
-  stake_item: "hours of coding.",
+  stake_item: "hours of coding",
   stake_qty: 3
   )
 
@@ -176,9 +176,9 @@ chris = User.create(
   )
 Goal.create(
   user_id: chris.id, 
-  title: "figure out the Google API.", 
+  title: "figure out the Google API", 
   deadline: "2016/03/28 9:00",
-  stake_item: "lawn mowning.",
+  stake_item: "lawn mowning",
   stake_qty: 1
   )
 
@@ -191,9 +191,9 @@ paul = User.create(
   )
 Goal.create(
   user_id: paul.id, 
-  title: "not cause any Git conflicts.", 
+  title: "not cause any Git conflicts", 
   deadline: "2016/03/28 9:00",
-  stake_item: "Cheeto.",
+  stake_item: "Cheeto",
   stake_qty: 1
   )
 
@@ -206,9 +206,9 @@ julia = User.create(
   )
 Goal.create(
   user_id: julia.id, 
-  title: "bike the seawall.", 
+  title: "bike the seawall", 
   deadline: "2016/04/04 9:00",
-  stake_item: "beers.",
+  stake_item: "beers",
   stake_qty: 2
   )
 
@@ -221,9 +221,9 @@ scott = User.create(
   )
 Goal.create(
   user_id: scott.id, 
-  title: "beat Paul in foosball.", 
+  title: "beat Paul in foosball", 
   deadline: "2016/04/01 9:00",
-  stake_item: "beer.",
+  stake_item: "beer",
   stake_qty: 1
   )
 
@@ -236,9 +236,9 @@ filip = User.create(
   )
 Goal.create(
   user_id: filip.id, 
-  title: "not suck every day.", 
+  title: "not suck every day", 
   deadline: "2016/04/08 9:00",
-  stake_item: "night of sweet lovin'.",
+  stake_item: "night of sweet lovin'",
   stake_qty: 1
   )
 
@@ -251,9 +251,9 @@ alex = User.create(
   )
 Goal.create(
   user_id: alex.id, 
-  title: "make an MVP of MoleBot.", 
+  title: "make an MVP of MoleBot", 
   deadline: "2016/06/01 9:00",
-  stake_item: "week's supply of lip balm.",
+  stake_item: "week's supply of lip balm",
   stake_qty: 1
   )
 
