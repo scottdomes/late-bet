@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326211102) do
+ActiveRecord::Schema.define(version: 20160326221531) do
 
   create_table "bets", force: :cascade do |t|
     t.integer  "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20160326211102) do
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "read",          default: false
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"

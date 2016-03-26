@@ -146,5 +146,13 @@ post '/bets/paid' do
 end
 
 post '/users/empty_notifications' do
-  current_user.notifications = []
+  current_user.notifications.each do |notification|
+    notification.read = true
+    notification.save
+  end
+  
+  if current_user.notifications.length > 10
+    current_user.notifications = current_user.notifications[1..9]
+    current_user.save
+  end
 end
