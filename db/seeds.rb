@@ -258,7 +258,7 @@ Goal.create(
   )
 
 30.times do
-  Bet.create(
+    Bet.create(
     user_id: User.all.sample.id,
     goal_id: Goal.all.sample.id,
     paid: [true, false].sample

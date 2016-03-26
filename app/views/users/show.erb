@@ -139,7 +139,7 @@
                 <% @winnings.each do |bet| %>
                   <tr>
                     <td>
-                      <% opponent = User.find(bet.goal.user_id) %>
+                      <% opponent = bet_loser(bet) %>
                       <a href="/users/<%= opponent.id %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>
