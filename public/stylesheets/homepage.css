@@ -1,3 +1,5 @@
+h1 { font-family: 'Droid Sans', arial, serif; }
+
 .row{
   position: relative;
   top: 10px;
@@ -76,6 +78,29 @@
     width: 100%;
 }
 
+.height_80#user_name{
+  font-family: 'Droid Sans', arial, serif;
+  font-size: 20px;
+}
+.height_80#stake_name{
+  font-family: 'Droid Sans', arial, serif;
+  font-size: 20px;
+}
+#dead_line{
+  font-family: 'Droid Sans', arial, serif;
+  font-size: 16px;  
+}
+.dropdown-toggle#dropdown-menu-1{
+  font-family: 'Droid Sans', arial, serif;
+  font-size: 16px; 
+}
+.navbar-brand#brand_name{
+  font-family: 'Droid Sans', arial, serif;
+  font-size: 20px; 
+
+}
+
+
 /*.image { 
   position: relative; 
   width: 100%; 
@@ -119,3 +144,74 @@
     left: 50%;
 }
 */
+
+body{
+  font-family: 'Roboto', sans-serif;
+  color: #000;
+}
+
+#container_quote{
+  width:800px;
+  margin:50px auto;
+  padding: 20px;
+  width:50%;
+}
+#container_quote h2{
+  text-align:center;
+  color:#045;
+}
+
+#quoteContainer{
+  width:75%;
+  background: #fff;
+  padding:10px;
+  margin:30px auto;
+  text-align: center;
+  height:70px;
+}
+#container_quote{
+  font-family: 'Droid Sans', arial, serif;
+  font-size: 16px; 
+  font-style: italic;
+}
+
+#buttonContainer{
+  width: 100%;
+  text-align: center;
+}
+#quoteButton{
+  width:200px;
+  margin-top: 10px;
+  border:2px solid #46b8da;
+  color:#045;
+  font-family: inherit;
+  font-weight: bold;
+  padding:5px;
+  text-decoration: none;
+  text-align: center;
+}
+
+#quoteButton:hover{
+  cursor:pointer;
+  background:#09c;
+  color: #fff;  
+}
+#quoteButton:active{
+  cursor: pointer;
+}
+#quoteButton{
+  display: inline-block;
+}
+#quoteGenius{
+  font-style: italic;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/*MEDIA QUERIES*/
+@media screen and(max-width:760px){
+  #quoteButton,#addNew{
+    display: block;
+  }
+}

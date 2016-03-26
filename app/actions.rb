@@ -29,13 +29,17 @@ end
 
 
 # Homepage (Root path)
+# get '/' do
+#   erb :goals
+# end
 get '/' do
-  erb :goals
+  erb :'index'
 end
 
 get '/index' do
   erb :'index'
 end
+
 
 get '/users/:id' do
   @user = User.find(params[:id])

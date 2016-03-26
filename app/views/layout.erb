@@ -19,18 +19,22 @@
   <link rel="stylesheet" href="/stylesheets/user-page.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/homepage.css">
 
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+  <script src="jquery-1.11.2.min.js" type="text/javascript"></script>
+
 </head>
 <body>
   <header>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#"><i class="fa fa-trophy"></i>  Motivation</a>
+          <a id="brand_name" class="navbar-brand" href="#"><i class="fa fa-trophy"></i>  Motivation</a>
         </div> <!-- navbar-header -->  
         <div class="navbar-right">
           <img class="circular-img sm-img" src="<%= session[:user].image_file_name %>">
           <div class="dropdown">
             <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
               <%= session[:user].username %>
               <span class="caret"></span>
             </a>
