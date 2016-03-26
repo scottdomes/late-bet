@@ -17,7 +17,7 @@
     <div class="goal-grid main-page-grid">
       <div class="row">
 
-        <% Goal.where(success: false, fail: false).each do |goal| %>
+        <% Goal.where(success: false, fail: false).order(:created_at).each do |goal| %>
           <div class="col-md-4">
             <div class="panel panel-default goal">
               <div class="panel-body">
@@ -80,7 +80,7 @@
     <div class="goal-grid main-page-grid">
       <div class="row">
 
-        <% Goal.where("success = ? or fail= ?", true, true).each do |goal| %>
+        <% Goal.where("success = ? or fail= ?", true, true).order(:updated_at).each do |goal| %>
           <div class="col-md-4">
             <div class="panel panel-default goal">
               <div class="panel-body">
