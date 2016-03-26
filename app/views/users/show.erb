@@ -53,7 +53,7 @@
                   <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                     <% goal.bets.each do |bet| %>
                       <% better = User.find(bet.user_id) %>
-                      <li><a href="users/<%= better.id %>">
+                      <li><a href="/users/<%= better.id %>">
                         <img class="circular-img sm-img" src="<%= better.image_file_name %>">
                         <%= better.first_name + " " + better.last_name %>
                       </a></li>
@@ -139,7 +139,7 @@
                 <% @winnings.each do |bet| %>
                   <tr>
                     <td>
-                      <% opponent = User.find(bet.goal.user_id) %>
+                      <% opponent = bet_loser(bet) %>
                       <a href="/users/<%= opponent.id %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>

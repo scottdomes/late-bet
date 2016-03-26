@@ -256,7 +256,25 @@ Goal.create(
   stake_item: "week's supply of lip balm.",
   stake_qty: 1
   )
-<<<<<<< HEAD
 
-=======
->>>>>>> goal-page-friday
+30.times do
+    Bet.create(
+    user_id: User.all.sample.id,
+    goal_id: Goal.all.sample.id,
+    paid: [true, false].sample
+  )
+end
+
+20.times do 
+  goal = Goal.all.sample
+  goal.success = true
+  goal.fail = false
+  goal.save
+end
+
+10.times do 
+  goal = Goal.all.sample
+  goal.fail = true
+  goal.success = false
+  goal.save
+end

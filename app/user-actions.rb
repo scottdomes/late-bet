@@ -4,7 +4,7 @@ helpers do
     string += User.find(bet.goal.user_id).first_name + " "
     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
     string += " that " + User.find(bet.goal.user_id).first_name 
-    string += " would " + bet.goal.title 
+    string += " would not " + bet.goal.title 
     string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e") + "!"
     string.gsub(/[^A-Za-z0-9\s]/i, '')
   end
@@ -68,9 +68,9 @@ helpers do
   def stringify_winnings(user, bet)
     string = user.first_name + " won "
     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
-    string += " from " + User.find(bet.goal.user_id).first_name
+    string += " from " + bet_loser(bet).first_name
     string += " when " + User.find(bet.goal.user_id).first_name 
-    string += " failed at the goal \"" + User.find(bet.goal.user_id).first_name 
+    string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
     string += " wants to " + bet.goal.title + "\""
     # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
     string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
@@ -91,6 +91,14 @@ helpers do
 
   def bet_winner(bet)
     if bet.goal.success
+      User.find(bet.goal.user_id)
+    else
+      User.find(bet.user_id)
+    end
+  end
+
+  def bet_loser(bet)
+    if bet.goal.fail
       User.find(bet.goal.user_id)
     else
       User.find(bet.user_id)
