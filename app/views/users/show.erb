@@ -152,10 +152,12 @@
                         Paid!
                       <% else %>
                         Awaiting Payment 
-                        <form method="POST" action="/bets/paid">
-                          <input type='hidden' name="bet_id" value="<%= bet.id %>"/>
-                          <button class="btn btn-default btn-danger">Bet paid!</button>
-                        </form>
+                        <% if bet_winner(bet) == current_user %>
+                          <form method="POST" action="/bets/paid">
+                            <input type='hidden' name="bet_id" value="<%= bet.id %>"/>
+                            <button class="btn btn-default btn-danger">Bet paid!</button>
+                          </form>
+                        <% end %>
                       <% end %>
                     </td>
                   </tr>
