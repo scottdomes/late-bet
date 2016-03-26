@@ -1,10 +1,15 @@
 helpers do
   def stringify_bet(user, bet)
-    string = user.first_name + " bet " + User.find(bet.goal.user_id).first_name + " " + bet.goal.stake_qty.to_s + " " + bet.goal.stake_item + " that " + User.find(bet.goal.user_id).first_name + " would " + bet.goal.title + " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e") + "!"
+    string = user.first_name + " bet "
+    string += User.find(bet.goal.user_id).first_name + " "
+    string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
+    string += " that " + User.find(bet.goal.user_id).first_name 
+    string += " would not " + bet.goal.title 
+    string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e") + "!"
     string.gsub(/[^A-Za-z0-9\s]/i, '')
   end
 
-  def bet_winner(bet)
+  def bet_result(bet)
     if bet.goal.success
       User.find(bet.goal.user_id).first_name + " wins!"
     elsif bet.goal.fail
@@ -23,6 +28,90 @@ helpers do
       nil
     end
   end
+
+  def winnings(user)
+    winnings = []
+    user.bets.each do |bet|
+      if bet.goal.fail
+        winnings << bet
+      end
+    end
+
+    user.goals.each do |goal|
+      if goal.success && goal.bets
+        goal.bets.each do |bet|
+          winnings << bet
+        end
+      end
+    end
+    winnings
+  end
+
+  def debts(user)
+    debts = []
+    user.bets.each do |bet|
+      if bet.goal.success == true
+        debts << bet
+      end
+    end
+
+    user.goals.each do |goal|
+      if goal.fail && goal.bets
+        goal.bets.each do |bet|
+          debts << bet
+        end
+      end
+    end
+    debts
+  end
+
+  def stringify_winnings(user, bet)
+    string = user.first_name + " won "
+    string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
+    string += " from " + bet_loser(bet).first_name
+    string += " when " + User.find(bet.goal.user_id).first_name 
+    string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
+    string += " wants to " + bet.goal.title + "\""
+    # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
+    string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
+    string += "!"
+  end
+
+  def stringify_debts(user, bet)
+    string = user.first_name + " lost "
+    string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
+    string += " to " + bet_winner(bet).first_name
+    string += " when " + User.find(bet.goal.user_id).first_name
+    string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
+    string += " wants to " + bet.goal.title + "\""
+    # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
+    string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
+    string += "!"
+  end
+
+  def bet_winner(bet)
+    if bet.goal.success
+      User.find(bet.goal.user_id)
+    else
+      User.find(bet.user_id)
+    end
+  end
+
+  def bet_loser(bet)
+    if bet.goal.fail
+      User.find(bet.goal.user_id)
+    else
+      User.find(bet.user_id)
+    end
+  end
+
+  def stringify_result(goal)
+    if goal.success
+      "succeeded"
+    else
+      "failed"
+    end
+  end
 end
 
 
@@ -39,6 +128,19 @@ post '/goals/complete' do
     redirect back
   else 
     cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
+    redirect back
+  end
+end
+
+post '/bets/paid' do
+  @bet = Bet.find(params[:bet_id])
+  @bet.paid = true
+
+  if @bet.save
+    cookies[:success] = "Bet paid!"
+    redirect back
+  else 
+    cookies[:failure] = "Oops! " + @bet.errors.full_messages.join(" and ").downcase.capitalize + "!"
     redirect back
   end
 end

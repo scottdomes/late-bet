@@ -20,9 +20,9 @@
             <div class="panel panel-default goal">
               <div class="panel-body">
                 <img class="circular-img" src="<%= goal.user.image_file_name %>">
-                <h3><%= goal.user.first_name + " " + goal.user.last_name %> wants to <%= goal.title %></h3>
-                <h4>By: <%= goal.deadline %></h4>
-                <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
+                <h3 class="height_80"><%= goal.user.first_name + " " + goal.user.last_name %> wants to <%= goal.title %></h3>
+                <h4>By: <%= goal.deadline.strftime("%m:%M %p on %A, %B %e") %></h4>
+                <h3 class="height_80">Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
                 <form method="POST" action="/goals/bets">
                   <input type="hidden" name="goal_id" value="<%= goal.id %>">
                   <button class="btn btn-success btn-lg">Take Bet!</button>
@@ -54,7 +54,7 @@
         <div class="row">
           <div class="col-md-12">
             <div id="custom-goal">
-              <h2>Add a goal!</h2>
+              <h2 id="add-goal-heading">Add a goal!</h2>
               <div class="panel panel-default goal">
                 <div class="panel-body">
                   <img class="circular-img" src="<%= session[:user].image_file_name %>">

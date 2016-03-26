@@ -24,12 +24,13 @@ before do
   # session[:user] = @scott # TEST
   # session[:user] =.id
   # @current_user = session[:user]
+  session[:user] = User.find_by(username: "paul")
 end
 
 
 # Homepage (Root path)
 get '/' do
-  erb :'goals/index'
+  erb :goals
 end
 
 get '/index' do
@@ -38,5 +39,7 @@ end
 
 get '/users/:id' do
   @user = User.find(params[:id])
+  @winnings = winnings(@user)
+  @debts = debts(@user)
   erb :'users/show'
 end

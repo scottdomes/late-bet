@@ -30,4 +30,13 @@ Set up test database.
     rake db:migrate RACK_ENV=test
     rspec spec/01_user_spec.rb
 
+USING Sass
+-----------
+
+Compiling the scss just needs the sass gem to be installed (it is now part of our Gemfile as of 2016-03-25)
+
+Then go to the stylesheet folder and type the following:
+
+    sass user-page.scss
+
 
