@@ -37,8 +37,13 @@ nav {
   margin: 20px 0;
   text-align: right;
 
+  h1 {
+    margin-top: 0;
+  }
+
   img {
-    width: 225px;
+    width: 100%;
+    max-width: 225px;
   }
 
   .user-info {
@@ -155,7 +160,7 @@ $GOALS_BOX_HEIGHT: 30px;
 }
 
 #custom-goal {
-  width: 340px;
+  max-width: 340px;
   background-color: #5cb85c;
   height: 50px;
   margin: 20px auto;
@@ -216,3 +221,14 @@ $GOALS_BOX_HEIGHT: 30px;
     height: 40px;
     margin: 5px 0;
   }
+
+
+@media (max-width: 400px) {
+    h1 {
+      font-size: 1.5em;
+    }
+    h3 {
+      font-size: 1.3em;
+      margin-top: 10px;
+    }
+}
