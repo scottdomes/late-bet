@@ -60,7 +60,7 @@ nav {
   margin: 20px; 
 
   .goal {
-    width: 310px;
+    max-width: 310px;
     margin: 20px auto;
 
     .height_80 {
@@ -230,5 +230,13 @@ $GOALS_BOX_HEIGHT: 30px;
     h3 {
       font-size: 1.3em;
       margin-top: 10px;
+    }
+
+    .goal-grid {
+      margin-top: 0;
+    }
+
+    #custom-goal.expanded {
+      height: 480px;
     }
 }
