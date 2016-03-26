@@ -264,3 +264,17 @@ Goal.create(
     paid: [true, false].sample
   )
 end
+
+20.times do 
+  goal = Goal.all.sample
+  goal.success = true
+  goal.fail = false
+  goal.save
+end
+
+10.times do 
+  goal = Goal.all.sample
+  goal.fail = true
+  goal.success = false
+  goal.save
+end
