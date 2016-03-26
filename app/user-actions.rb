@@ -4,7 +4,7 @@ helpers do
     string += User.find(bet.goal.user_id).first_name + " "
     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
     string += " that " + User.find(bet.goal.user_id).first_name 
-    string += " would " + bet.goal.title 
+    string += " would not " + bet.goal.title 
     string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e") + "!"
     string.gsub(/[^A-Za-z0-9\s]/i, '')
   end
