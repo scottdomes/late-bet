@@ -228,7 +228,7 @@
                   <th>Event</th>
                 </thead>
                 <tbody>
-                  <% @user.notifications.each do |notification| %>
+                  <% @user.notifications.sort_by{ |notif| notif.created_at }.reverse.each do |notification| %>
                     <tr>
                       <td>
                         <% opponent = User.find(notification.other_user_id) %>
