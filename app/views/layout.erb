@@ -56,14 +56,18 @@
               <h3><i id="notifications-button" class="fa fa-flag <%= "live" unless current_user.notifications.empty? %>"></i></h3>
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-1">
-              <% current_user.notifications.each do |notification| %>
-                <% opponent = User.find(notification.other_user_id) %>
-              <li>
-                <a href="/users/<%= current_user.username %>#notif-table">
-                    <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
-                    <%= notification.content %>
-                </a>
-              </li>
+              <% if current_user.notifications.present? %>
+                <% current_user.notifications.each do |notification| %>
+                  <% opponent = User.find(notification.other_user_id) %>
+                <li>
+                  <a href="/users/<%= current_user.username %>#notif-table">
+                      <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
+                      <%= notification.content %>
+                  </a>
+                </li>
+                <% end %>
+              <% else %>
+                <li class="empty-notifications"><p>No new notifications!</p></li>
               <% end %>
             </ul>
           </div> <!-- dropdown -->

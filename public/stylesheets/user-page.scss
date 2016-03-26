@@ -17,6 +17,14 @@ nav {
     color: red;
   }
 
+  .empty-notifications {
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
   .dropdown, .navbar-header, .navbar-right {
     display: inline-block;
   }
