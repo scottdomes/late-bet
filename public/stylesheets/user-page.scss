@@ -239,4 +239,10 @@ $GOALS_BOX_HEIGHT: 30px;
     #custom-goal.expanded {
       height: 480px;
     }
+    .bets-table, .winnings-table, .debts-table {
+      /* Removes "opponent" column from tables */
+      td:first-child, th:first-child {
+        display: none;
+      }
+    }
 }
