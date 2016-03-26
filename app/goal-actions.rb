@@ -1,4 +1,4 @@
-get '/goals' do
+get '/goals/?' do
   # if session[:user]
   #   @goal = Goal.new
     erb :'goals/index'

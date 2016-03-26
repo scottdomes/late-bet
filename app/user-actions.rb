@@ -5,8 +5,8 @@ helpers do
     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
     string += " that " + User.find(bet.goal.user_id).first_name 
     string += " would not " + bet.goal.title 
-    string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e") + "!"
-    string.gsub(/[^A-Za-z0-9\s]/i, '')
+    string += " by " + bet.goal.deadline.strftime("%I:%M %p on %A, %B %e") + "!"
+    string.gsub(/[^A-Za-z0-9\s()]/i, '')
   end
 
   def bet_result(bet)
@@ -73,7 +73,7 @@ helpers do
     string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
     string += " wants to " + bet.goal.title + "\""
     # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
-    string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
+    string = string.gsub(/[^A-Za-z0-9\s"()]/i, '')
     string += "!"
   end
 
@@ -85,7 +85,7 @@ helpers do
     string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
     string += " wants to " + bet.goal.title + "\""
     # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
-    string = string.gsub(/[^A-Za-z0-9\s"]/i, '')
+    string = string.gsub(/[^A-Za-z0-9\s"()]/i, '')
     string += "!"
   end
 

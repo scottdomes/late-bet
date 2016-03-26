@@ -1,12 +1,13 @@
   <div class="container">
     <div class="row user-header">
-      <div class="col-md-6">
+      <div class="col-xs-6">
         <img class="circular-img" src='<%= @user.image_file_name %>'>
       </div> <!-- col-md-4 -->
-      <div class="user-info col-md-6">
+      <div class="user-info col-xs-6">
         <h1><%= @user.username %></h1>
         <h3><%= @user.first_name + " " + @user.last_name %></h3>
         <h3>Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
+        <h3>Bets won: <%= winnings(@user).length %></h3>
         <h3>Goals achieved: <%= @user.goals.where(success: true).length %></h3>
       </div> <!-- col-md-8 -->
     </div> <!-- user-header -->
@@ -25,10 +26,10 @@
           <div class="panel panel-default goal <%= goal_success(goal) %>">
             <div class="panel-body">
               <h3><%= goal.user.first_name + " wants to " + goal.title %></h3>
-              <h4>By: <%= goal.deadline.strftime("%m:%M %p on %A, %B %e") %></h4>
+              <h4>By: <%= goal.deadline.strftime("%I:%M %p on %A, %B %e") %></h4>
               <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
 
-              <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> <!-- first part is unncessary for this page -->
+              <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> 
                 <form method="POST" action="/goals/complete">
                   <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
                   <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
@@ -38,8 +39,13 @@
                 <h1 class="goal-outcome">Success!</h1>
               <% elsif goal.fail == true %>
                 <h1 class="goal-outcome">Fail.</h1>
+              <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
+                <form method="POST" action="/goals/bets">
+                    <input type="hidden" name="goal_id" value="<%= goal.id %>">
+                    <button class="btn btn-success btn-lg">Take Bet!</button>
+                  </form>
               <% else %>
-                <button class="btn btn-success btn-lg">Take Bet!</button>
+                  <h4>You took the bet! Awaiting result</h4>
               <% end %>
 
               <% if goal.bets.empty? %>
@@ -53,7 +59,7 @@
                   <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                     <% goal.bets.each do |bet| %>
                       <% better = User.find(bet.user_id) %>
-                      <li><a href="/users/<%= better.id %>">
+                      <li><a href="/users/<%= better.username %>">
                         <img class="circular-img sm-img" src="<%= better.image_file_name %>">
                         <%= better.first_name + " " + better.last_name %>
                       </a></li>
@@ -107,7 +113,7 @@
                   <tr>
                     <td>
                       <% opponent = User.find(bet.goal.user_id) %>
-                      <a href="/users/<%= opponent.id %>">
+                      <a href="/users/<%= opponent.username %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>
                       </a>
@@ -140,7 +146,7 @@
                   <tr>
                     <td>
                       <% opponent = bet_loser(bet) %>
-                      <a href="/users/<%= opponent.id %>">
+                      <a href="/users/<%= opponent.username %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>
                       </a>
@@ -151,10 +157,12 @@
                         Paid!
                       <% else %>
                         Awaiting Payment 
-                        <form method="POST" action="/bets/paid">
-                          <input type='hidden' name="bet_id" value="<%= bet.id %>"/>
-                          <button class="btn btn-default btn-danger">Bet paid!</button>
-                        </form>
+                        <% if bet_winner(bet) == current_user %>
+                          <form method="POST" action="/bets/paid">
+                            <input type='hidden' name="bet_id" value="<%= bet.id %>"/>
+                            <button class="btn btn-default btn-danger">Bet paid!</button>
+                          </form>
+                        <% end %>
                       <% end %>
                     </td>
                   </tr>
@@ -184,7 +192,7 @@
                   <tr>
                     <td>
                       <% opponent = bet_winner(bet) %>
-                      <a href="/users/<%= opponent.id %>">
+                      <a href="/users/<%= opponent.username %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>
                       </a>
