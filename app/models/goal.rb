@@ -28,7 +28,7 @@ class Goal < ActiveRecord::Base
       bets.each do |bet|
         bet.user.notifications.create(
           other_user_id: user.id, 
-          content: "#{user.first_name} succeeded at their goal to #{title}! You owe #{user.first_name} ${stake_qty} #{stake_item}!"
+          content: "#{user.first_name} succeeded at their goal to #{title}! You owe #{user.first_name} #{stake_qty} #{stake_item}!"
         )
         bet.user.save
       end
