@@ -7,6 +7,7 @@
         <h1><%= @user.username %></h1>
         <h3><%= @user.first_name + " " + @user.last_name %></h3>
         <h3>Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
+        <h3>Bets won: <%= winnings(@user).length %></h3>
         <h3>Goals achieved: <%= @user.goals.where(success: true).length %></h3>
       </div> <!-- col-md-8 -->
     </div> <!-- user-header -->
