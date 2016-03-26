@@ -33,8 +33,8 @@ get '/' do
   erb :goals
 end
 
-get '/users/:id' do
-  @user = User.find(params[:id])
+get '/users/:username' do
+  @user = User.find_by(username: params[:username])
   @winnings = winnings(@user)
   @debts = debts(@user)
   erb :'users/show'
