@@ -24,7 +24,7 @@ before do
   # session[:user] = @scott # TEST
   # session[:user] =.id
   # @current_user = session[:user]
-  session[:user] = User.find_by(username: "paul")
+  session[:user] = current_user
 end
 
 
@@ -33,8 +33,8 @@ get '/' do
   erb :'goals/index'
 end
 
-get '/users/:id' do
-  @user = User.find(params[:id])
+get '/users/:username' do
+  @user = User.find_by(username: params[:username])
   @winnings = winnings(@user)
   @debts = debts(@user)
   erb :'users/show'
