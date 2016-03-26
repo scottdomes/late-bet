@@ -33,10 +33,7 @@ Set up test database.
 USING Sass
 -----------
 
-Compiling the scss just needs the sass gem to be installed (it is now part of our Gemfile as of 2016-03-25)
-
-Then go to the stylesheet folder and type the following:
-
-    sass user-page.scss
+Get scss installed on your sublime and then you just need to SAVE your
+scss file and the according "css" and "css.map" files will be updated/or created.
 
 
