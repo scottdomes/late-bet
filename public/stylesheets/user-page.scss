@@ -6,10 +6,7 @@ body {
 }
 
 nav {
-<<<<<<< HEAD
 
-  .dropdown {
-=======
   h3 {
     margin: 0; 
     line-height: 30px;
@@ -34,7 +31,6 @@ nav {
   }
 
   .dropdown, .navbar-header, .navbar-right {
->>>>>>> 329341beef36a4dbc156453bda6eb09c694f1ea8
     display: inline-block;
   }
 
@@ -244,3 +240,7 @@ $GOALS_BOX_HEIGHT: 30px;
     height: 40px;
     margin: 5px 0;
   }
+
+.awaiting_results {
+  color: green;
+}

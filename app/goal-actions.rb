@@ -2,14 +2,21 @@
 helpers do
 
   def stringify_recent_winners
-    string = goal_maker_first_name + " won "
-    string += recent_goal_qty.to_s + " " + recent_goal_item
-    if number_of_bettors > 1
-      string += " each " + "from "
+    if number_of_bettors > 0
+      string = goal_maker_first_name + " won "
+      string += recent_goal_qty.to_s + " " + recent_goal_item
+      if number_of_bettors > 1
+        string += " each " + "from "
+      else
+        string += " from "
+      end
+      string += bettors_first_names
     else
-      string += "from "
+      string = goal_maker_first_name + " wanted to "
+      string += @recent_goal.title + ". "
+      string += goal_maker_first_name + " achieved this goal!"
     end
-    string += bettors_first_names
+    string
   end
 
   def goal_maker_first_name
@@ -30,7 +37,11 @@ helpers do
   end
 
   def number_of_bettors
-    @recent_goal.bets.count
+    if defined? @recent_goal.bets.count
+      @recent_goal.bets.count
+    else
+      0
+    end 
   end
 
   def bettors_first_names
