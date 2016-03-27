@@ -1,3 +1,53 @@
+helpers do
+
+  def stringify_recent_winners
+    string = goal_maker_first_name + " won "
+    string += recent_goal_qty.to_s + " " + recent_goal_item
+    if number_of_bettors > 1
+      string += " each " + "from "
+    else
+      string += "from "
+    end
+    string += bettors_first_names
+  end
+
+  def goal_maker_first_name
+    @recent_goal = Goal.most_recent_successes(1).first
+    #goal_user_first_name = @recent_goal.map(&:user).map(&:first_name)
+    @recent_goal.user.first_name
+  end
+
+  #the quantity of the goal
+  def recent_goal_qty
+    @recent_goal.stake_qty
+  end
+
+  # the recent item of the goal
+  def recent_goal_item
+    #item = @recent_goal.map(&:stake_item)
+    @recent_goal.stake_item
+  end
+
+  def number_of_bettors
+    @recent_goal.bets.count
+  end
+
+  def bettors_first_names
+    # Gets the first better name
+    # @recent_goal.bets.first.user.first_name
+
+    # Goes through each bet and display the better name
+    # @recent_goal.bets.each do |bet|
+    #   puts bet.user.first_name
+    # end
+
+    # Gets all the bettors names
+    @recent_goal.bets.collect {|b| b.user.first_name}.to_sentence
+  end
+
+end
+
+
 get '/goals' do
   # if session[:user]
   #   @goal = Goal.new
@@ -18,30 +68,7 @@ end
 #   #   redirect '/goals/'
 #   # end
 # end
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Setting up logic to display past results. ~~~~~~~~~~~~~~~~~~
-# def recent_bets
-#   bets = Bet.most_recent(1)
-#   #winner should be the winner name
-#   first_name = bets.map(&:user).map(&:first_name)
 
-
-#   @recent_goal_winner = get_winner(bets)
-#   loser = get_loser(bets)
-#   {winner: winner, loser: loser}
-# end
-
-# def goal_success_or_fail
-#   if Bet.most_recent
-# end
-
-# @recent_goal_first_name + @recent_success_or_fail + @recent_goal_qty + recent_item + "from" + @recent_bettor + "by" + @recent_title  
-# Maz + won + 1 + Macbook Pro + from + James + by + finish lighthouse labs
-
-# ~~~~~~~~~~ OR ~~~~~~~
-# Maz won 3 Mabook pros from James, Scott, and Paul. GOAL Success: "finish lighthouse labs"
-# James, Scott, and Paul each won 1 Macbook pro from Maz. Goal Fail: "finish lighthouse labs"
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF logic to display past results. ~~~~~~~~~~~~~~~~~~
 
 post '/goals' do
   @goal = Goal.new(
@@ -59,4 +86,3 @@ post '/goals' do
     redirect '/goals/#custom-goal'
   end
 end
-

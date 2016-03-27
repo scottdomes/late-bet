@@ -6,12 +6,12 @@
 
     <div class="row" id="past-goals">
       <div id="past-goals-box">
-        <p>Last week:</p>
-        <p id="past-goals-content">@recent[:winner] showed up to class on time and won 3 beers from Paul!</p>
+        <p>Recent Wins:</p>
+        <!-- Need to modify the below to connect to goal-actions -->
+        <p id="past-goals-content"><%= stringify_recent_winners %></p>
         <!-- <p id="past-goals-content">Julia showed up to class on time and won 3 beers from Paul!</p> --> 
       </div> <!-- #past-goals-box -->
     </div> <!-- #past-goals -->
-
     
     <div class="goal-grid main-page-grid">
       <div class="row">

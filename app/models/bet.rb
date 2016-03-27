@@ -2,8 +2,6 @@ class Bet < ActiveRecord::Base
   belongs_to :goal
   belongs_to :user
 
-  scope :most_recent, ->(n) {order(updated_at: :desc).limit(n)}
-
   validate :user_cannot_bet_on_self
 
   def user_cannot_bet_on_self
