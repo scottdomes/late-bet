@@ -3,7 +3,7 @@ class Bet < ActiveRecord::Base
   belongs_to :user
 
   validate :user_cannot_bet_on_self
-  validate :user_cannot_make_same_bet_twice
+  validate :user_cannot_make_same_bet_twice, :on => :create
 
   after_create :add_bet_notification
 
