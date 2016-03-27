@@ -1,16 +1,52 @@
 # helpers do
-#   def stringify_winnings(user, bet)
-#     string = user.first_name + " won "
-#     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
-#     string += " from " + bet_loser(bet).first_name
-#     string += " when " + User.find(bet.goal.user_id).first_name 
-#     string += " " + stringify_result(bet.goal) + " at the goal \"" + User.find(bet.goal.user_id).first_name 
-#     string += " wants to " + bet.goal.title + "\""
-#     # string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e")
-#     string = string.gsub(/[^A-Za-z0-9\s"()]/i, '')
-#     string += "!"
+
+#   def stringify_recent_winners
+#     string = goal_maker_first_name + " won "
+#     string += recent_goal_qty.to_s + " " + recent_goal_item
+#     if number_of_bettors > 1
+#       string += " each " + "from "
+#     else
+#       string += "from "
+#     end
+#     string += bettors_first_names
 #   end
+
+#   def goal_maker_first_name
+#     @recent_goal = Goal.most_recent_successes(1).first
+#     #goal_user_first_name = @recent_goal.map(&:user).map(&:first_name)
+#     @recent_goal.user.first_name
+#   end
+
+#   #the quantity of the goal
+#   def recent_goal_qty
+#     @recent_goal.stake_qty
+#   end
+
+#   # the recent item of the goal
+#   def recent_goal_item
+#     #item = @recent_goal.map(&:stake_item)
+#     @recent_goal.stake_item
+#   end
+
+#   def number_of_bettors
+#     @recent_goal.bets.count
+#   end
+
+#   def bettors_first_names
+#     # Gets the first better name
+#     # @recent_goal.bets.first.user.first_name
+
+#     # Goes through each bet and display the better name
+#     # @recent_goal.bets.each do |bet|
+#     #   puts bet.user.first_name
+#     # end
+
+#     # Gets all the bettors names
+#     @recent_goal.bets.collect {|b| b.user.first_name}.to_sentence
+#   end
+
 # end
+
 
 # get '/goals' do
 #   # if session[:user]
@@ -32,34 +68,7 @@
 # #   #   redirect '/goals/'
 # #   # end
 # # end
-# # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Setting up logic to display past results. ~~~~~~~~~~~~~~~~~~
-# @recent_goal = Goal.most_recent_successes(1)
 
-# def recent_goals
-#   goals = Goal.most_recent_successes(1)
-#   #winner should be the winner name
-#   # first_name = goals.map(&:user).map(&:first_name)
-#   first_name = goals.map(&:user)
-#   # update = goals.map(&:updated_at)
-#   # sentence = "{first_name)"
-#   #puts first_name
-
-#   # @recent_goal_winner = get_winner(bets)
-#   # loser = get_loser(bets)
-#   # {winner: winner, loser: loser}
-# end
-
-# def goal_maker_first_name
-#   goal_user_first_name = @recent_goal.map(&:user).map(&:first_name)
-# end
-  
-# # testing for first name of better
-# def test1
-#   #better_first_name = @recent_goal.map(&:user).map(&:bet).map(&:first_name)
-#   #better_first_name = @recent_goal.map(&:user).map(&:bets) #not quite
-#   better_first_name = @recent_goal.map(&:bets).map(&:user).map(&:first_name) #not quite #
-  
-# end
 
 # post '/goals' do
 #   @goal = Goal.new(

@@ -6,7 +6,8 @@ body {
 
 
 nav {
-  .dropdown, .navbar-header, .navbar-right {
+
+  .dropdown {
     display: inline-block;
   }
 
@@ -36,13 +37,8 @@ nav {
   margin: 20px 0;
   text-align: right;
 
-  h1 {
-    margin-top: 0;
-  }
-
   img {
-    width: 100%;
-    max-width: 225px;
+    width: 225px;
   }
 
   .user-info {
@@ -59,7 +55,7 @@ nav {
   margin: 20px; 
 
   .goal {
-    max-width: 310px;
+    width: 310px;
     margin: 20px auto;
 
     .height_80 {
@@ -138,12 +134,13 @@ $GOALS_BOX_HEIGHT: 30px;
   background-color: #5cb85c;
   margin: 10px auto;
   text-align: center;
-  height: $GOALS_BOX_HEIGHT;
+  height: auto;
   border-radius: 10px;
 
   p {
     display: inline-block;
     color: white;
+    padding-top: 0.5em;
     line-height: $GOALS_BOX_HEIGHT;
   }
 }
@@ -159,7 +156,7 @@ $GOALS_BOX_HEIGHT: 30px;
 }
 
 #custom-goal {
-  max-width: 340px;
+  width: 340px;
   background-color: #5cb85c;
   height: 50px;
   margin: 20px auto;
@@ -220,28 +217,3 @@ $GOALS_BOX_HEIGHT: 30px;
     height: 40px;
     margin: 5px 0;
   }
-
-
-@media (max-width: 400px) {
-    h1 {
-      font-size: 1.5em;
-    }
-    h3 {
-      font-size: 1.3em;
-      margin-top: 10px;
-    }
-
-    .goal-grid {
-      margin-top: 0;
-    }
-
-    #custom-goal.expanded {
-      height: 480px;
-    }
-    .bets-table, .winnings-table, .debts-table {
-      /* Removes "opponent" column from tables */
-      td:first-child, th:first-child {
-        display: none;
-      }
-    }
-}

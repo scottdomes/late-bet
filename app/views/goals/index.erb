@@ -5,10 +5,10 @@
     </div> <!-- goal-heading-->
 
     <div class="row" id="past-goals">
-      <div id="past-goals-box">
-        <p>Recent Wins:</p>
+      <div id="past-goals-box" style="display: none;" >
+        <p>Recent Wins: <%= stringify_recent_winners %></p>
         <!-- Need to modify the below to connect to goal-actions -->
-        <p id="past-goals-content"><%= stringify_recent_winners %></p>
+        <!-- <p id="past-goals-content"><%= stringify_recent_winners %></p> -->
         <!-- <p id="past-goals-content">Julia showed up to class on time and won 3 beers from Paul!</p> --> 
       </div> <!-- #past-goals-box -->
     </div> <!-- #past-goals -->
