@@ -34,7 +34,7 @@ class Goal < ActiveRecord::Base
         )
         user.notifications.create(
           other_user_id: bet.user.id,
-          content: "Congratulations! #{bet.user.first_name} owes you #{stake_qty} #{stake_item} because you successfully #{title}"
+          content: "Congratulations! You succeeded at your goal to #{title}. #{bet.user.first_name} owes you #{stake_qty} #{stake_item}."
         )
         user.save
         bet.user.save
@@ -47,7 +47,7 @@ class Goal < ActiveRecord::Base
         )
         user.notifications.create(
           other_user_id: bet.user.id,
-          content: "Unfortunately, you owe #{bet.user.first_name} #{stake_qty} #{stake_item} because you did not #{title}"
+          content: "Unfortunately, you owe #{bet.user.first_name} #{stake_qty} #{stake_item}. You failed at your goal to #{title}."
         )
         user.save
         bet.user.save
