@@ -13,9 +13,9 @@ helpers do
 
 end
 
-# before do
-#   session[:user] = User.find_by(username: "scott")
-# end
+before do
+  session[:user] = User.find_by(username: "scott") unless session[:user]
+end
 
 enable :sessions
 
