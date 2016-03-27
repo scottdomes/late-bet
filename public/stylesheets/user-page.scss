@@ -6,10 +6,7 @@ body {
 }
 
 nav {
-<<<<<<< HEAD
 
-  .dropdown {
-=======
   h3 {
     margin: 0; 
     line-height: 30px;
@@ -34,7 +31,6 @@ nav {
   }
 
   .dropdown, .navbar-header, .navbar-right {
->>>>>>> 329341beef36a4dbc156453bda6eb09c694f1ea8
     display: inline-block;
   }
 
@@ -184,16 +180,19 @@ $GOALS_BOX_HEIGHT: 30px;
 
 #custom-goal {
   width: 340px;
+  margin-top: 20px;
   background-color: #5cb85c;
-  height: 50px;
-  margin: 20px auto;
-  overflow: hidden;
-  transition: .5s height ease-in;
-  -webkit-transition: .5s height ease-in;
+  padding-bottom: 20px;
+  border-radius: 4px;
+
+  .goal {
+    margin: 0 auto;
+    height: 395px;
+  }
 
   #add-goal-heading {
     color: white;
-    line-height: 50px;
+    line-height: 35px;
     margin: 0;
   }
 
@@ -206,9 +205,9 @@ $GOALS_BOX_HEIGHT: 30px;
   }
 
   #input-title {
-    font-size: 24px;
+    font-size: 20px;
     width: 90%;
-    margin: 20px 0;
+    margin: 5px 0;
   }
 
   #input-deadline {
@@ -218,15 +217,16 @@ $GOALS_BOX_HEIGHT: 30px;
   h4, h3 {
     display: inline-block;
     height: auto;
+    font-size: 20px;
   }
 
   #quantity {
-    font-size: 24px;
+    font-size: 20px;
     width: 40px;
   }
 
   #item {
-    font-size: 24px;
+    font-size: 20px;
     width: 130px;
   }
 
