@@ -5,7 +5,7 @@ helpers do
     string += bet.goal.stake_qty.to_s + " " + bet.goal.stake_item
     string += " that " + User.find(bet.goal.user_id).first_name 
     string += " would not " + bet.goal.title 
-    string += " by " + bet.goal.deadline.strftime("%m:%M %p on %A, %B %e") + "!"
+    string += " by " + bet.goal.deadline.strftime("%I:%M %p on %A, %B %e") + "!"
     string.gsub(/[^A-Za-z0-9\s()]/i, '')
   end
 
@@ -143,4 +143,25 @@ post '/bets/paid' do
     cookies[:failure] = "Oops! " + @bet.errors.full_messages.join(" and ").downcase.capitalize + "!"
     redirect back
   end
+end
+
+post '/users/empty_notifications' do
+  current_user.notifications.each do |notification|
+    notification.read = true
+    notification.save
+  end
+  
+  if current_user.notifications.length > 10
+    current_user.notifications = current_user.notifications[1..9]
+    current_user.save
+  end
+end
+
+get '/users/logout' do
+  erb :'users/login'
+end
+
+post '/users/login' do
+  session[:user] = User.find_by(username: params[:user])
+  redirect '/goals'
 end

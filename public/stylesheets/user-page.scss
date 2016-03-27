@@ -1,13 +1,40 @@
+
 body { 
   padding-top: 70px;
   padding-bottom: 30px;
   position: relative;
 }
 
-
 nav {
+<<<<<<< HEAD
 
   .dropdown {
+=======
+  h3 {
+    margin: 0; 
+    line-height: 30px;
+    font-size: 1.2em;
+    margin-left: 20px;
+  }
+
+  i.live {
+    color: red;
+  }
+
+  .read-notification {
+    opacity: .5;
+  }
+
+  .centered-text {
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .dropdown, .navbar-header, .navbar-right {
+>>>>>>> 329341beef36a4dbc156453bda6eb09c694f1ea8
     display: inline-block;
   }
 
@@ -25,7 +52,7 @@ nav {
     }
   }
   .success {
-    background-color: #5cb85c;
+    background-color: #6f5499;
   }
 
   .failure {
@@ -92,7 +119,7 @@ nav {
 }
 
 
-.bets-table, .winnings-table, .debts-table {
+.bets-table, .winnings-table, .debts-table, .notifications-table {
   width: 80%;
   text-align: center;
   margin: 0 auto;

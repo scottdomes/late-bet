@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325002226) do
+ActiveRecord::Schema.define(version: 20160326221531) do
 
   create_table "bets", force: :cascade do |t|
     t.integer  "user_id"
@@ -30,14 +30,25 @@ ActiveRecord::Schema.define(version: 20160325002226) do
     t.string   "stake_item"
     t.integer  "stake_qty",  default: 0
     t.date     "start_date"
-    t.date     "deadline"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "fail",       default: false
     t.boolean  "success",    default: false
+    t.datetime "deadline"
   end
 
   add_index "goals", ["user_id"], name: "index_goals_on_user_id"
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "other_user_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "read",          default: false
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

@@ -1,3 +1,4 @@
+
 helpers do
 
   def stringify_recent_winners
@@ -47,8 +48,7 @@ helpers do
 
 end
 
-
-get '/goals' do
+get '/goals/?' do
   # if session[:user]
   #   @goal = Goal.new
     #@recent = recent_bets
@@ -72,10 +72,10 @@ end
 
 post '/goals' do
   @goal = Goal.new(
-    title: params[:title],
+    title: params[:title].gsub(/[^A-Za-z0-9\s()]/i, ''),
     deadline: params[:deadline],
     stake_qty: params[:stake_qty],
-    stake_item: params[:stake_item],
+    stake_item: params[:stake_item].gsub(/[^A-Za-z0-9\s()]/i, ''),
     user_id: session[:user].id
   )
   if @goal.save
