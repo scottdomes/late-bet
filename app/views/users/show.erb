@@ -1,15 +1,15 @@
   <div class="container">
-    <div id="user_profile"class="jumbotron">
+    <div id="user_profile" class="jumbotron">
       <div class="row user-header">
         <div class="col-xs-6">
           <img class="circular-img" src='<%= @user.image_file_name %>'>
         </div> <!-- col-md-4 -->
         <div class="user-info col-xs-6">
-          <h1><%= @user.username.capitalize %></h1>
-          <h3><%= @user.first_name + " " + @user.last_name %></h3>
-          <h4>Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
-          <h4>Bets won: <%= winnings(@user).length %></h3>
-          <h4>Goals achieved: <%= @user.goals.where(success: true).length %></h3>
+          <h1>  <%= @user.username.capitalize %></h1>
+          <h3><i class="fa fa-user"></i>  <%= @user.first_name + " " + @user.last_name %></h3>
+          <h4><i class="fa fa-clock-o"></i>  Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
+          <h4><i class="fa fa-thumbs-o-up"></i>  Bets won: <%= winnings(@user).length %></h3>
+          <h4><i class="fa fa-trophy"></i>  Goals achieved: <%= @user.goals.where(success: true).length %></h3>
         </div> <!-- col-md-8 -->
       </div> <!-- user-header -->
   </div><!--jumbotron container-->
@@ -101,7 +101,7 @@
   </div> <!-- goal-grid -->
 
     <div class="row heading bets-heading">
-      <h1><%= @user.first_name %>'s Bets</h1>
+      <h1><i class="fa fa-rocket"></i>  <%= @user.first_name %>'s Bets</h1>
     </div> <!-- bets-heading -->
 
     <div class="row bets-table-row">
@@ -136,7 +136,7 @@
     </div> <!-- bets-table-row -->
 
     <div class="row heading winnings-heading">
-      <h1><%= @user.first_name %>'s Winnings</h1>
+      <h1><i class="fa fa-trophy"></i>  <%= @user.first_name %>'s Winnings</h1>
     </div> <!-- winnings-heading -->
 
     <div class="row winnings-table-row">
@@ -182,7 +182,7 @@
 
 
     <div class="row heading debts-heading">
-      <h1><%= @user.first_name %>'s Debts</h1>
+      <h1><i class="fa fa-database"></i>  <%= @user.first_name %>'s Debts</h1>
     </div> <!-- debts-heading -->
 
     <div class="row debts-table-row">

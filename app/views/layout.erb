@@ -21,7 +21,7 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/homepage.css">
 
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
-  <script src="/stylesheets/jquery-1.11.2.min.js" type="text/javascript"></script>
+  <script src="/stylesheets/jquery_quotes_counter.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -37,7 +37,7 @@
           <img class="circular-img sm-img" src="<%= current_user.image_file_name %>">
           <div class="dropdown">
             <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <%= current_user.username %>
+              <%= current_user.username.capitalize %>
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-1">

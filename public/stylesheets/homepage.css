@@ -157,6 +157,8 @@ h1 { font-family: 'Droid Sans', arial, serif; }
 }*/
 
 #container_quote{
+  position: relative;
+  top: -50px;
 
   width:800px;
   margin:50px auto;
@@ -255,12 +257,16 @@ h1 { font-family: 'Droid Sans', arial, serif; }
  /* font-size: 16px; */
 }
 .jumbotron#user_profile{
-  background-color: #ecf0f1;
+  background-color: #F8F8F8 ;
+  position: relative;
+  top: 20px;
+
 }
 .font_goal{
   font-family: 'Droid Sans', arial, serif;
 /*   font-size: 26px; */
 }
+
 
 /*.bet_table_style#font{
   font-family: 'Droid Sans', arial, serif;
