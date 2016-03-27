@@ -40,6 +40,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-1">
               <li><a href="/users/<%= current_user.username %>"><i class="fa fa-user"></i>  My profile</a></li>
+              <li><a href="/goals"><i class="fa fa-trophy"></i> All Goals</a></li>
               <li><a href=
                 <% if request.path == "/goals" || request.path == ("/users/" + current_user.username) %>
                 "#custom-goal"
