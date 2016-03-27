@@ -21,7 +21,7 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/homepage.css">
 
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
-  <script src="jquery-1.11.2.min.js" type="text/javascript"></script>
+  <script src="/stylesheets/jquery-1.11.2.min.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -29,7 +29,9 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a id="brand_name" class="navbar-brand" href="/goals/"><i class="fa fa-trophy"></i> Hotseat</a>
+          <a id="brand_name" class="navbar-brand" href="/"><i class="fa fa-trophy"></i> Hotseat</a>
+
+
         </div> <!-- navbar-header -->  
         <div class="navbar-right pull-right">
           <img class="circular-img sm-img" src="<%= current_user.image_file_name %>">
@@ -40,6 +42,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-1">
               <li><a href="/users/<%= current_user.username %>"><i class="fa fa-user"></i>  My profile</a></li>
+              <li><a href="/goals"><i class="fa fa-trophy"></i> All Goals</a></li>
               <li><a href=
                 <% if request.path == "/goals" || request.path == ("/users/" + current_user.username) %>
                 "#custom-goal"
