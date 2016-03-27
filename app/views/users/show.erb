@@ -1,20 +1,21 @@
   <div class="container">
-    <div class="row user-header">
-      <div class="col-xs-6">
-        <img class="circular-img" src='<%= @user.image_file_name %>'>
-      </div> <!-- col-md-4 -->
-      <div class="user-info col-xs-6">
-        <h1><%= @user.username %></h1>
-        <h3><%= @user.first_name + " " + @user.last_name %></h3>
-        <h3>Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
-        <h3>Bets won: <%= winnings(@user).length %></h3>
-        <h3>Goals achieved: <%= @user.goals.where(success: true).length %></h3>
-      </div> <!-- col-md-8 -->
-    </div> <!-- user-header -->
-
-    <div class="row heading goal-heading">
-      <h1><%= @user.first_name %>'s Goals</h1>
-    </div> <!-- goal-heading-->
+    <div id="user_profile"class="jumbotron">
+      <div class="row user-header">
+        <div class="col-xs-6">
+          <img class="circular-img" src='<%= @user.image_file_name %>'>
+        </div> <!-- col-md-4 -->
+        <div class="user-info col-xs-6">
+          <h1><%= @user.username.capitalize %></h1>
+          <h3><%= @user.first_name + " " + @user.last_name %></h3>
+          <h4>Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
+          <h4>Bets won: <%= winnings(@user).length %></h3>
+          <h4>Goals achieved: <%= @user.goals.where(success: true).length %></h3>
+        </div> <!-- col-md-8 -->
+      </div> <!-- user-header -->
+  </div><!--jumbotron container-->
+      <div class="row heading goal-heading">
+        <h1><%= @user.first_name %>'s Goals</h1>
+      </div> <!-- goal-heading-->
 
     <div class="goal-grid">
       <div class="row">
@@ -38,7 +39,11 @@
               <% elsif goal.success == true %>
                 <h1 class="goal-outcome">Success!</h1>
               <% elsif goal.fail == true %>
-                <h1 class="goal-outcome">Fail.</h1>
+              <button class="btn btn-danger btn-lg"><i class="fa fa-times"></i> 
+                <!-- <h1 class="goal-outcome"> -->
+                  Failed
+                <!-- </h1> -->
+              </button>
               <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
                 <form method="POST" action="/goals/bets">
                     <input type="hidden" name="goal_id" value="<%= goal.id %>">
@@ -75,7 +80,7 @@
       <% if @user.id == current_user.id %>
       <div class="col-md-12">
         <div id="custom-goal">
-          <h2 id="add-goal-heading">Add a goal!</h2>
+          <h2 id="add-goal-heading">Add a goal</h2>
           <div class="panel panel-default goal">
             <div class="panel-body">
               <img class="circular-img" src="<%= current_user.image_file_name %>">
@@ -104,9 +109,11 @@
           <div class="panel-body">
             <table class="table bets-table">
               <thead>
-                <th>Opponent</th>
-                <th>Bet</th>
-                <th>Result</th>
+                <div id="font" class="bet_table_style">
+                  <th>Opponent</th>
+                  <th>Bet</th>
+                  <th>Result</th>
+                </div>
               </thead>
               <tbody>
                 <% @user.bets.each do |bet| %>

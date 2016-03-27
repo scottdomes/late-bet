@@ -24,7 +24,7 @@
             <div class="panel panel-default goal">
               <div class="panel-body">
                 <a href="/users/<%= goal.user.username %>">
-                  <img class="circular-img" src="<%= goal.user.image_file_name %>">
+                  <img id="rotating_img"class="circular-img" src="<%= goal.user.image_file_name %>">
                 </a>
                 <h3 id="user_name" class="height_80">
                   <a href="/users/<%= goal.user.username %>"><%= goal.user.first_name + " " + goal.user.last_name %></a> wants to <%= goal.title %>
@@ -39,7 +39,12 @@
                   <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
                 </form>
                 <% elsif goal.success == true %>
-                  <h1 class="goal-outcome">Success!</h1>
+
+                <button class="btn btn-success btn-lg">
+                  <!-- <h1 class="goal-outcome"> -->
+                    Success!
+                  <!-- </h1> -->
+                </button>
                 <% elsif goal.fail == true %>
                   <h1 class="goal-outcome">Fail.</h1>
                 <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
@@ -102,9 +107,17 @@
                   <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
                 </form>
                 <% elsif goal.success == true %>
-                  <h1 class="goal-outcome">Success!</h1>
+                  <button class="btn btn-success btn-lg"><i class="fa fa-check"></i> 
+                  <!-- <h1 class="goal-outcome"> -->
+                    Success
+                  <!-- </h1> -->
+                </button>
                 <% elsif goal.fail == true %>
-                  <h1 class="goal-outcome">Fail.</h1>
+                <button class="btn btn-danger btn-lg"><i class="fa fa-times"></i> 
+                  <!-- <h1 class="goal-outcome"> -->
+                    Failed
+                  <!-- </h1> -->
+                </button>
                 <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
                   <form method="POST" action="/goals/bets">
                     <input type="hidden" name="goal_id" value="<%= goal.id %>">
@@ -152,7 +165,7 @@
                     <h4>By: </h4><!-- <input id="input-deadline" name="deadline" placeholder="Deadline"> -->
                       <input type='text' id="input-deadline" name="deadline" placeholder="Deadline"/>
                      
-                    <h3>Stakes: </h3><input id="quantity" type="number" min="1" max="9" value="1" name="stake_qty"><input id="item" name="stake_item" placeholder="Item">
+                    <h3> Stakes: </h3><input id="quantity" type="number" min="1" max="9" value="1" name="stake_qty"><input id="item" name="stake_item" placeholder="Item">
                     <button class="btn btn-success btn-lg"><i class="fa fa-thumbs-o-up"></i>Save Goal</button>
                   </form>
                 </div> <!-- panel-body -->
