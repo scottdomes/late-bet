@@ -4,6 +4,8 @@ class Goal < ActiveRecord::Base
 
   belongs_to :user
 
+  scope :most_recent_successes, ->(n) {order(updated_at: :desc).where(success: true).limit(n)}
+
   validates :title, presence: true, length: {maximum: 40, message: "Limit: 40 characters"}
 
   validates :stake_item, presence: true, length: {maximum: 40, message: "Limit: 40 characters"}
