@@ -1,20 +1,21 @@
   <div class="container">
-    <div class="row user-header">
-      <div class="col-xs-6">
-        <img class="circular-img" src='<%= @user.image_file_name %>'>
-      </div> <!-- col-md-4 -->
-      <div class="user-info col-xs-6">
-        <h1><%= @user.username %></h1>
-        <h3><%= @user.first_name + " " + @user.last_name %></h3>
-        <h3>Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
-        <h3>Bets won: <%= winnings(@user).length %></h3>
-        <h3>Goals achieved: <%= @user.goals.where(success: true).length %></h3>
-      </div> <!-- col-md-8 -->
-    </div> <!-- user-header -->
-
-    <div class="row heading goal-heading">
-      <h1><%= @user.first_name %>'s Goals</h1>
-    </div> <!-- goal-heading-->
+    <div id="user_profile" class="jumbotron">
+      <div class="row user-header">
+        <div class="col-xs-6">
+          <img class="circular-img" src='<%= @user.image_file_name %>'>
+        </div> <!-- col-md-4 -->
+        <div class="user-info col-xs-6">
+          <h1>  <%= @user.username.capitalize %></h1>
+          <h3><i class="fa fa-user"></i>  <%= @user.first_name + " " + @user.last_name %></h3>
+          <h4><i class="fa fa-clock-o"></i>  Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
+          <h4><i class="fa fa-thumbs-o-up"></i>  Bets won: <%= winnings(@user).length %></h3>
+          <h4><i class="fa fa-trophy"></i>  Goals achieved: <%= @user.goals.where(success: true).length %></h3>
+        </div> <!-- col-md-8 -->
+      </div> <!-- user-header -->
+  </div><!--jumbotron container-->
+      <div class="row heading goal-heading">
+        <h1><%= @user.first_name %>'s Goals</h1>
+      </div> <!-- goal-heading-->
 
     <div class="goal-grid">
       <div class="row">
@@ -59,14 +60,18 @@
               <% elsif goal.success == true %>
                 <h1 class="goal-outcome">Success!</h1>
               <% elsif goal.fail == true %>
-                <h1 class="goal-outcome">Fail.</h1>
+              <button class="btn btn-danger btn-lg"><i class="fa fa-times"></i> 
+                <!-- <h1 class="goal-outcome"> -->
+                  Failed
+                <!-- </h1> -->
+              </button>
               <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
                 <form method="POST" action="/goals/bets">
                     <input type="hidden" name="goal_id" value="<%= goal.id %>">
                     <button class="btn btn-success btn-lg">Take Bet!</button>
                   </form>
               <% else %>
-                  <h4>You took the bet! Awaiting result</h4>
+                  <h4 class="awaiting_results">You took the bet! Awaiting result</h4>
               <% end %>
 
               <% if goal.bets.empty? %>
@@ -96,7 +101,7 @@
   </div> <!-- goal-grid -->
 
     <div class="row heading bets-heading">
-      <h1><%= @user.first_name %>'s Bets</h1>
+      <h1><i class="fa fa-rocket"></i>  <%= @user.first_name %>'s Bets</h1>
     </div> <!-- bets-heading -->
 
     <div class="row bets-table-row">
@@ -104,9 +109,11 @@
           <div class="panel-body">
             <table class="table bets-table">
               <thead>
-                <th>Opponent</th>
-                <th>Bet</th>
-                <th>Result</th>
+                <div id="font" class="bet_table_style">
+                  <th>Opponent</th>
+                  <th>Bet</th>
+                  <th>Result</th>
+                </div>
               </thead>
               <tbody>
                 <% @user.bets.each do |bet| %>
@@ -129,7 +136,7 @@
     </div> <!-- bets-table-row -->
 
     <div class="row heading winnings-heading">
-      <h1><%= @user.first_name %>'s Winnings</h1>
+      <h1><i class="fa fa-trophy"></i>  <%= @user.first_name %>'s Winnings</h1>
     </div> <!-- winnings-heading -->
 
     <div class="row winnings-table-row">
@@ -175,7 +182,7 @@
 
 
     <div class="row heading debts-heading">
-      <h1><%= @user.first_name %>'s Debts</h1>
+      <h1><i class="fa fa-database"></i>  <%= @user.first_name %>'s Debts</h1>
     </div> <!-- debts-heading -->
 
     <div class="row debts-table-row">

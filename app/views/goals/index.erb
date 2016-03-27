@@ -39,6 +39,7 @@
             </div> <!-- custom-goal -->
           </div> <!-- col-md-4 -->
 
+
           <div id="active-goals">
             <% Goal.where(success: false, fail: false).order(:created_at).reverse.each do |goal| %>
               <div class="col-md-4">
@@ -126,9 +127,17 @@
                   <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
                 </form>
                 <% elsif goal.success == true %>
-                  <h1 class="goal-outcome">Success!</h1>
+                  <button class="btn btn-success btn-lg"><i class="fa fa-check"></i> 
+                  <!-- <h1 class="goal-outcome"> -->
+                    Success
+                  <!-- </h1> -->
+                </button>
                 <% elsif goal.fail == true %>
-                  <h1 class="goal-outcome">Fail.</h1>
+                <button class="btn btn-danger btn-lg"><i class="fa fa-times"></i> 
+                  <!-- <h1 class="goal-outcome"> -->
+                    Failed
+                  <!-- </h1> -->
+                </button>
                 <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
                   <form method="POST" action="/goals/bets">
                     <input type="hidden" name="goal_id" value="<%= goal.id %>">
@@ -163,5 +172,6 @@
         <% end %>
         </div> <!-- row -->
       </div><!-- goal-grid -->
+
   </div> <!-- container -->
 
