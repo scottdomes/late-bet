@@ -19,6 +19,9 @@ class Goal < ActiveRecord::Base
 
   after_update :add_goal_notification
 
+  before_save { |goal| goal.title = goal.title.downcase }
+  before_save { |goal| goal.stake_item = goal.stake_item.downcase }
+
   def deadline_date_cannot_be_in_the_past
     if deadline < Date.today
       errors.add(:deadline, "Dates can't be in the past.")
