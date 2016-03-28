@@ -47,8 +47,11 @@ nav {
       line-height: 30px;
     }
   }
+  .pending {
+    background-color: #d9edf7;
+  }
   .success {
-    background-color: #6f5499;
+    background-color: #5cb85c;
   }
 
   .failure {

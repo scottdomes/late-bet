@@ -24,17 +24,22 @@ $(document).ready(function() {
         dataType: 'html',
         data: $(this).serialize(),
         success: function(result) {
+        $('#flash').removeClass('failure');
+        $('#flash').removeClass('success');
+        $('#flash p').text("Submitting goal...");
+        $('#flash').show();
         $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
+          $('#flash p').text(result);
           if (result == "Goal successfully created!") {
+            $('#flash').addClass('success');
             $('#active-goals .col-md-4:first-child .goal').hide().fadeIn(2000);
+            $('#flash').fadeOut(4000);
+          } else {
+            $('#flash').addClass('failure');
           }
         });
         $('#custom-goal input').val("");
-        $('#flash p').text(result);
-        $('#flash').fadeIn();
-        if (result == "Goal successfully created!"){
-          $('#flash').fadeOut(4000);
-        };
+        $('#custom-goal input#quantity').val(1);
       }
     });
    return false;
