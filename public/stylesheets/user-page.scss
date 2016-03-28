@@ -183,8 +183,12 @@ $GOALS_BOX_HEIGHT: 30px;
 }
 
 .main-page-grid {
-  .goal {
+  .goal, #custom-goal {
     height: 450px;
+  }
+
+  #custom-goal .goal{
+    height: 400px;
   }
 }
 
