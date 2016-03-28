@@ -16,7 +16,7 @@
     <div class="row heading goal-heading">
       <h3>Active Goals</h3>
     </div> <!-- goal-heading-->
-    <div id="active-goals-wrapper">
+    
       <div id="active-goals-grid" class="goal-grid main-page-grid">
         <div class="row">
 
@@ -39,7 +39,7 @@
             </div> <!-- custom-goal -->
           </div> <!-- col-md-4 -->
 
-
+        <div id="active-goals-wrapper">
           <div id="active-goals">
             <% Goal.where(success: false, fail: false).order(:created_at).reverse.each do |goal| %>
               <div class="col-md-4">
