@@ -23,13 +23,18 @@ $(document).ready(function() {
         type: 'POST',
         dataType: 'html',
         data: $(this).serialize(),
-        success: function(data) {
+        success: function(result) {
         $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
-          $('#active-goals .col-md-4:first-child .goal').hide().fadeIn(2000);
+          if (result == "Goal successfully created!") {
+            $('#active-goals .col-md-4:first-child .goal').hide().fadeIn(2000);
+          }
         });
-        $('#flash p').text(data);
-        $('#flash').fadeIn().fadeOut(2000);
-
+        $('#custom-goal input').val("");
+        $('#flash p').text(result);
+        $('#flash').fadeIn();
+        if (result == "Goal successfully created!"){
+          $('#flash').fadeOut(4000);
+        };
       }
     });
    return false;
