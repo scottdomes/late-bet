@@ -5,11 +5,11 @@ post '/goals/bets' do
   )
   if @bet.save
     # cookies[:success] = "Bet successfully added!"
-    @flash = "Bet successfully added!"
+    "Bet successfully added!"
     # redirect '/goals'
   else 
     # cookies[:failure] = "Oops! " + @bet.errors.full_messages.join(" and ").downcase.capitalize + "!"
     # redirect '/goals'
-    @flash = "Oops! " + @bet.errors.full_messages.join(" and ").downcase.capitalize + "!"
+    "Oops! " + @bet.errors.full_messages.join(" and ").downcase.capitalize + "!"
   end
 end
