@@ -31,10 +31,7 @@ $(document).ready(function() {
         dataType: 'html',
         data: $(this).serialize(),
         success: function(result) {
-          $('#flash').removeClass('failure');
-          $('#flash').removeClass('success');
-          $('#flash p').text("Submitting goal...");
-          $('#flash').show();
+          setUpFlash("goal");
           $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
             $('#flash p').text(result);
             if (result == "Goal successfully created!") {
@@ -62,7 +59,7 @@ $(document).ready(function() {
         dataType: 'html',
         data: $(this).serialize(),
         success: function(result) {
-          setUpFlash("bet")
+          setUpFlash("bet");
           console.log(form);
           console.log($(form).parent().parent());
           $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
