@@ -21,59 +21,64 @@ $(document).ready(function() {
     $('#notifications-button').removeClass('live');
   });
 
-  $('#add-goal-form').submit(function(e){
-    e.preventDefault();
-    var form = $(this);
-    var post_url = form.attr('action');
-    $.ajax({
-        url: post_url,
-        type: 'POST',
-        dataType: 'html',
-        data: $(this).serialize(),
-        success: function(result) {
-          setUpFlash("goal");
-          $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
-            $('#flash p').text(result);
-            if (result == "Goal successfully created!") {
-              $('#flash').addClass('success');
-              $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
-              $('#flash').fadeOut(4000);
-            } else {
-              $('#flash').addClass('failure');
-            }
-          });
-          $('#custom-goal input').val("");
-          $('#custom-goal input#quantity').val(1);
-      }
+
+  $(document).on('click', '#submit-goal-button', function() {
+    $('#add-goal-form').submit(function(e){
+      e.preventDefault();
+      var form = $(this);
+      var post_url = form.attr('action');
+      $.ajax({
+          url: post_url,
+          type: 'POST',
+          dataType: 'html',
+          data: $(this).serialize(),
+          success: function(result) {
+            setUpFlash("goal");
+            $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
+              $('#flash p').text(result);
+              if (result == "Goal successfully created!") {
+                $('#flash').addClass('success');
+                $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
+                $('#flash').fadeOut(4000);
+              } else {
+                $('#flash').addClass('failure');
+              }
+            });
+            $('#custom-goal input').val("");
+            $('#custom-goal input#quantity').val(1);
+        }
+      });
+     return false;
     });
-   return false;
   });
 
-  $('.submit-bet-form').submit(function(e){
-    e.preventDefault();
-    var form = $(this);
-    var post_url = form.attr('action');
-    $.ajax({
-        url: post_url,
-        type: 'POST',
-        dataType: 'html',
-        data: $(this).serialize(),
-        success: function(result) {
-          setUpFlash("bet");
-          console.log(form);
-          console.log($(form).parent().parent());
-          $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
-            $('#flash p').text(result);
-            if (result == "Bet successfully added!") {
-              $('#flash').addClass('success');
-              $('#flash').fadeOut(4000);
-            } else {
-              $('#flash').addClass('failure');
-            }
-          });
-      }
+  $(document).on('click', '.submit-bet', function() {
+    $('.submit-bet-form').submit(function(e){
+      e.preventDefault();
+      var form = $(this);
+      var post_url = form.attr('action');
+      $.ajax({
+          url: post_url,
+          type: 'POST',
+          dataType: 'html',
+          data: $(this).serialize(),
+          success: function(result) {
+            setUpFlash("bet");
+            console.log(form);
+            console.log($(form).parent().parent());
+            $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
+              $('#flash p').text(result);
+              if (result == "Bet successfully added!") {
+                $('#flash').addClass('success');
+                $('#flash').fadeOut(4000);
+              } else {
+                $('#flash').addClass('failure');
+              }
+            });
+        }
+      });
+     return false;
     });
-   return false;
   });
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 });
