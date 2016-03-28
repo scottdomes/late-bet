@@ -31,7 +31,7 @@
                     <img class="circular-img" src="<%= session[:user].image_file_name %>">
                     <form id="add-goal-form" method="POST" action="/goals">
                       <h3><%= session[:user].first_name %> wants to </h3><input id="input-title" name="title" placeholder="Choose a goal!">
-                      <h4>By: </h4><!-- <input id="input-deadline" name="deadline" placeholder="Deadline"> -->
+                      <h4>By: </h4>
                         <input type='text' id="input-deadline" name="deadline" placeholder="Deadline"/>
                        
                       <h3>Stakes: </h3><input id="quantity" type="number" min="1" max="9" value="1" name="stake_qty"><input id="item" name="stake_item" placeholder="Item">
@@ -70,7 +70,7 @@
                       <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
                         <form id="<%= goal.id %>" class="submit-bet-form" method="POST" action="/goals/bets">
                           <input type="hidden" name="goal_id" value="<%= goal.id %>">
-                          <button class="btn btn-success btn-lg"><i class="fa fa-thumbs-o-up"></i> Take Bet!</button>
+                          <button class="btn btn-success btn-lg submit-bet"><i class="fa fa-thumbs-o-up"></i> Take Bet!</button>
                         </form>
                       <% else %>
                         <h4 class="awaiting_results">You took the bet! Awaiting result</h4>
