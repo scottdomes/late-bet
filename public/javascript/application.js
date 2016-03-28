@@ -36,7 +36,7 @@ $(document).ready(function() {
             $('#flash p').text(result);
             if (result == "Goal successfully created!") {
               $('#flash').addClass('success');
-              $('#active-goals .col-md-4:first-child .goal').hide().fadeIn(2000);
+              $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
               $('#flash').fadeOut(4000);
             } else {
               $('#flash').addClass('failure');

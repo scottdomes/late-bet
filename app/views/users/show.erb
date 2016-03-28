@@ -18,7 +18,10 @@
       </div> <!-- goal-heading-->
 
     <div class="goal-grid user-goal-grid">
-      <div class="row">
+
+    <div id="active-goals-wrapper">
+        <div id="active-goals">
+          <div class="row">
 
         <% if @user.id == current_user.id %>
           <div class="col-md-4">
@@ -40,8 +43,6 @@
           </div> <!-- col-md-4 -->
         <% end %>
 
-    <div id="active-goals-wrapper">
-        <div id="active-goals">
           <% i = 2 %>
           <% @user.goals.sort_by{ |goal| goal.created_at }.reverse.each do |goal| %>
 
@@ -102,7 +103,6 @@
                 </div> <!-- panel-body -->
               </div> <!-- panel -->
             </div> <!-- col-md-4 -->
-          </div> <!-- #active-goals -->
           <% if i % 3 == 0 %>
             </div> <!-- row -->
             <div class="row">
@@ -110,6 +110,7 @@
           <% i += 1 %>
         <% end %>
       </div> <!-- row -->
+      </div>
     </div> <!-- #active-goals-wrapper -->
 
     
