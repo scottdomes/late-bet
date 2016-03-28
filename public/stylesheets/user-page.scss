@@ -47,8 +47,11 @@ nav {
       line-height: 30px;
     }
   }
+  .pending {
+    background-color: #3498db;
+  }
   .success {
-    background-color: #6f5499;
+    background-color: #5cb85c;
   }
 
   .failure {
@@ -80,6 +83,7 @@ nav {
   .goal {
     width: 310px;
     margin: 20px auto;
+    min-height: 347px;
 
     .height_80 {
       height: 80px;
@@ -111,6 +115,16 @@ nav {
 
   .goal.failed-goal {
     border: 2px solid #d9534f;
+  }
+}
+
+.user-goal-grid {
+  #custom-goal {
+    height: 347px;
+  }
+
+  h3 {
+    height: 52px;
   }
 }
 
@@ -169,8 +183,12 @@ $GOALS_BOX_HEIGHT: 30px;
 }
 
 .main-page-grid {
-  .goal {
+  .goal, #custom-goal {
     height: 450px;
+  }
+
+  #custom-goal .goal{
+    height: 400px;
   }
 }
 
@@ -187,7 +205,7 @@ $GOALS_BOX_HEIGHT: 30px;
 
   .goal {
     margin: 0 auto;
-    height: 395px;
+    min-height: 300px;
   }
 
   #add-goal-heading {
@@ -247,8 +265,4 @@ $GOALS_BOX_HEIGHT: 30px;
 
 .awaiting_results {
   color: green;
-}
-
-.panel-body {
-  height: 24.5em;
 }
