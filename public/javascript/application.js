@@ -24,7 +24,7 @@ $(document).ready(function() {
         dataType: 'html',
         data: $(this).serialize(),
         success: function(data) {
-        $('#active-goals-wrapper').load(location.href + " #active-goals-grid", function() {
+        $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
           $('#active-goals .col-md-4:first-child .goal').hide().fadeIn(2000);
         });
         $('#flash p').text(data);
