@@ -83,7 +83,6 @@ nav {
   .goal {
     width: 310px;
     margin: 20px auto;
-    min-height: 296px;
 
     .height_80 {
       height: 80px;
@@ -115,6 +114,20 @@ nav {
 
   .goal.failed-goal {
     border: 2px solid #d9534f;
+  }
+}
+
+.user-goal-grid {
+  #custom-goal {
+    height: 345px;
+
+    .goal {
+      height: 286px;
+    }
+  }
+
+  h3 {
+    height: 52px;
   }
 }
 
