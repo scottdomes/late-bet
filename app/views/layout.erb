@@ -82,17 +82,11 @@
 
         </div> <!-- navbar-right -->
       </div> <!-- container -->
-      <% if cookies[:success].present? %>
-        <div class="flash success">
-          <p><%= cookies[:success] %></p>
-        </div>
-        <% cookies[:success] = nil %>
-      <% elsif cookies[:failure] %>
-        <div class="flash failure">
-          <p><%= cookies[:failure] %></p>
-        </div>
-        <% cookies[:failure] = nil %>
-      <% end %>
+      <div id="flash-container">
+          <div id="flash" class="flash success">
+            <p></p>
+          </div>
+      </div>
     </nav>
 
   </header>

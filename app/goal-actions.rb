@@ -90,10 +90,12 @@ post '/goals' do
     user_id: session[:user].id
   )
   if @goal.save
-    cookies[:success] = "Goal successfully created!"
-    redirect back
+    # cookies[:success] = "Goal successfully created!"
+    # redirect back
+    return "Goal successfully created!"
   else 
-    cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
-    redirect '/goals/#custom-goal'
+    # cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
+    # redirect '/goals/#custom-goal'
+    return "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
   end
 end

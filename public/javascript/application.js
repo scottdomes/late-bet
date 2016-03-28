@@ -14,21 +14,23 @@ $(document).ready(function() {
     $('#notifications-button').removeClass('live');
   });
 
-//   $('#add-goal-form').submit(function(e){
-//     e.preventDefault();
-//     var form = $(this);
-//     var post_url = form.attr('action');
-//     $.ajax({
-//         url: post_url,
-//         type: 'POST',
-//         dataType: 'html',
-//         data: $(this).serialize(),
-//         success: function(data) {
-//          $('#active-goals-wrapper').load(location.href + " #active-goals-grid");
-//         $('#flash-container').load(location.href + " #flash-inner");
-//       }
-//     });
-//    return false;
-// });
+  $('#add-goal-form').submit(function(e){
+    e.preventDefault();
+    var form = $(this);
+    var post_url = form.attr('action');
+    $.ajax({
+        url: post_url,
+        type: 'POST',
+        dataType: 'html',
+        data: $(this).serialize(),
+        success: function(data) {
+        $('#active-goals-wrapper').load(location.href + " #active-goals-grid");
+        $('#flash p').text(data);
+        $('#flash').fadeIn().fadeOut(2000);
+
+      }
+    });
+   return false;
+});
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 });
