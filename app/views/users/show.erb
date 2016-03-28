@@ -27,7 +27,7 @@
               <div class="panel panel-default goal">
                 <div class="panel-body">
                   <img class="circular-img" src="<%= current_user.image_file_name %>">
-                  <form method="POST" action="/goals">
+                  <form id="add-goal-form" method="POST" action="/goals">
                     <h3><%= current_user.first_name %> wants to </h3><input id="input-title" name="title" placeholder="Choose a goal!">
                     <h4>By: </h4><!-- <input id="input-deadline" name="deadline" placeholder="Deadline"> -->
                       <input type='text' id="input-deadline" name="deadline" placeholder="Deadline"/>
@@ -41,64 +41,69 @@
           </div> <!-- col-md-4 -->
         <% end %>
 
+    <div id="active-goals-wrapper">
+        <div id="active-goals">
+          <% @user.goals.sort_by{ |goal| goal.created_at }.reverse.each do |goal| %>
 
-      <% @user.goals.sort_by{ |goal| goal.created_at }.each do |goal| %>
+            <div class="col-md-4">
+              <div class="panel panel-default goal <%= goal_success(goal) %>">
+                <div class="panel-body">
+                  <h3><%= goal.user.first_name + " wants to " + goal.title %></h3>
+                  <h4>By: <%= goal.deadline.strftime("%I:%M %p on %A, %B %e") %></h4>
+                  <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
 
-        <div class="col-md-4">
-          <div class="panel panel-default goal <%= goal_success(goal) %>">
-            <div class="panel-body">
-              <h3><%= goal.user.first_name + " wants to " + goal.title %></h3>
-              <h4>By: <%= goal.deadline.strftime("%I:%M %p on %A, %B %e") %></h4>
-              <h3>Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
+                  <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> 
+                    <form method="POST" action="/goals/complete">
+                      <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
+                      <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
+                      <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
+                    </form>
+                  <% elsif goal.success == true %>
+                    <h1 class="goal-outcome">Success!</h1>
+                  <% elsif goal.fail == true %>
+                  <button class="btn btn-danger btn-lg"><i class="fa fa-times"></i> 
+                    <!-- <h1 class="goal-outcome"> -->
+                      Failed
+                    <!-- </h1> -->
+                  </button>
+                  <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
+                    <form method="POST" action="/goals/bets">
+                        <input type="hidden" name="goal_id" value="<%= goal.id %>">
+                        <button class="btn btn-success btn-lg">Take Bet!</button>
+                      </form>
+                  <% else %>
+                      <h4 class="awaiting_results">You took the bet! Awaiting result</h4>
+                  <% end %>
 
-              <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> 
-                <form method="POST" action="/goals/complete">
-                  <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
-                  <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
-                  <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
-                </form>
-              <% elsif goal.success == true %>
-                <h1 class="goal-outcome">Success!</h1>
-              <% elsif goal.fail == true %>
-              <button class="btn btn-danger btn-lg"><i class="fa fa-times"></i> 
-                <!-- <h1 class="goal-outcome"> -->
-                  Failed
-                <!-- </h1> -->
-              </button>
-              <% elsif goal.bets.find_by(user_id: current_user.id).nil? %>
-                <form method="POST" action="/goals/bets">
-                    <input type="hidden" name="goal_id" value="<%= goal.id %>">
-                    <button class="btn btn-success btn-lg">Take Bet!</button>
-                  </form>
-              <% else %>
-                  <h4 class="awaiting_results">You took the bet! Awaiting result</h4>
-              <% end %>
+                  <% if goal.bets.empty? %>
+                    <p>No takers yet!</p>
+                  <% else %>
+                    <div class="dropdown">
+                      <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        See who took bet
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
+                        <% goal.bets.each do |bet| %>
+                          <% better = User.find(bet.user_id) %>
+                          <li><a href="/users/<%= better.username %>">
+                            <img class="circular-img sm-img" src="<%= better.image_file_name %>">
+                            <%= better.first_name + " " + better.last_name %>
+                          </a></li>
+                        <% end %>
+                      </ul>
+                    </div> <!-- dropdown -->
+                  <% end %>
+                </div> <!-- panel-body -->
+              </div> <!-- panel -->
+            </div> <!-- col-md-4 -->
+          <% end %>
+        </div> <!-- #active-goals -->
+      </div> <!-- #active-goals-wrapper -->
 
-              <% if goal.bets.empty? %>
-                <p>No takers yet!</p>
-              <% else %>
-                <div class="dropdown">
-                  <a class="dropdown-toggle" id="dropdown-menu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    See who took bet
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
-                    <% goal.bets.each do |bet| %>
-                      <% better = User.find(bet.user_id) %>
-                      <li><a href="/users/<%= better.username %>">
-                        <img class="circular-img sm-img" src="<%= better.image_file_name %>">
-                        <%= better.first_name + " " + better.last_name %>
-                      </a></li>
-                    <% end %>
-                  </ul>
-                </div> <!-- dropdown -->
-              <% end %>
-            </div> <!-- panel-body -->
-          </div> <!-- panel -->
-        </div> <!-- col-md-4 -->
-      <% end %>
     </div> <!-- row -->
   </div> <!-- goal-grid -->
+
 
     <div class="row heading bets-heading">
       <h1><i class="fa fa-rocket"></i>  <%= @user.first_name %>'s Bets</h1>
