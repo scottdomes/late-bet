@@ -26,7 +26,6 @@
               <h2 id="add-goal-heading">Add a goal!</h2>
               <div class="panel panel-default goal">
                 <div class="panel-body">
-                  <img class="circular-img" src="<%= current_user.image_file_name %>">
                   <form id="add-goal-form" method="POST" action="/goals">
                     <h3><%= current_user.first_name %> wants to </h3><input id="input-title" name="title" placeholder="Choose a goal!">
                     <h4>By: </h4><!-- <input id="input-deadline" name="deadline" placeholder="Deadline"> -->
@@ -43,6 +42,7 @@
 
     <div id="active-goals-wrapper">
         <div id="active-goals">
+          <% i = 0 %>
           <% @user.goals.sort_by{ |goal| goal.created_at }.reverse.each do |goal| %>
 
             <div class="col-md-4">
@@ -93,6 +93,12 @@
                         <% end %>
                       </ul>
                     </div> <!-- dropdown -->
+
+
+                    <% if i % 3 == 0 %>
+                      </row><row>
+                    <% end %>  
+                    <% i += 1 %>
                   <% end %>
                 </div> <!-- panel-body -->
               </div> <!-- panel -->
