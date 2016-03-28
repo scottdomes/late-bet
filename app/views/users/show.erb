@@ -42,7 +42,7 @@
 
     <div id="active-goals-wrapper">
         <div id="active-goals">
-          <% i = 0 %>
+          <% i = 2 %>
           <% @user.goals.sort_by{ |goal| goal.created_at }.reverse.each do |goal| %>
 
             <div class="col-md-4">
@@ -96,20 +96,23 @@
                       </div> <!-- dropdown -->
 
 
-                      <% if i % 3 == 0 %>
-                        </row><row>
-                      <% end %>  
-                      <% i += 1 %>
+
                     <% end %>
                   </div> <!-- .bet-submit-area -->
                 </div> <!-- panel-body -->
               </div> <!-- panel -->
             </div> <!-- col-md-4 -->
-          <% end %>
-        </div> <!-- #active-goals -->
-      </div> <!-- #active-goals-wrapper -->
+          </div> <!-- #active-goals -->
+          <% if i % 3 == 0 %>
+            </div> <!-- row -->
+            <div class="row">
+          <% end %> 
+          <% i += 1 %>
+        <% end %>
+      </div> <!-- row -->
+    </div> <!-- #active-goals-wrapper -->
 
-    </div> <!-- row -->
+    
   </div> <!-- goal-grid -->
 
 
