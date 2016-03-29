@@ -8,7 +8,7 @@
           <h1>  <%= @user.username.capitalize %></h1>
           <h3><i class="fa fa-user"></i>  <%= @user.first_name + " " + @user.last_name %></h3>
           <h4><i class="fa fa-clock-o"></i>  Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
-          <h4><i class="fa fa-thumbs-o-up"></i>  Bets won: <%= winnings(@user).length %></h3>
+          <h4><i class="fa fa-thumbs-o-up"></i>  Bets won: <%= @user.winnings.length %></h3>
           <h4><i class="fa fa-trophy"></i>  Goals achieved: <%= @user.goals.where(success: true).length %></h3>
         </div> <!-- col-md-8 -->
       </div> <!-- user-header -->
@@ -166,16 +166,16 @@
                 <th>Status</th>
               </thead>
               <tbody>
-                <% @winnings.each do |bet| %>
+                <% @user.winnings.each do |bet| %>
                   <tr>
                     <td>
-                      <% opponent = bet_loser(bet) %>
+                      <% opponent = bet.result[:loser] %>
                       <a href="/users/<%= opponent.username %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>
                       </a>
                     </td>
-                    <td><%= stringify_winnings(@user, bet) %></td>
+                    <td><%= stringify_winnings(bet) %></td>
                     <td>
                       <% if bet.paid %>
                         Paid!
@@ -212,16 +212,16 @@
                 <th>Status</th>
               </thead>
               <tbody>
-                <% @debts.each do |bet| %>
+                <% @user.debts.each do |bet| %>
                   <tr>
                     <td>
-                      <% opponent = bet_winner(bet) %>
+                      <% opponent = bet.result[:winner] %>
                       <a href="/users/<%= opponent.username %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>
                       </a>
                     </td>
-                    <td><%= stringify_debts(@user, bet) %></td>
+                    <td><%= stringify_debts(bet) %></td>
                     <td>
                       <% if bet.paid %>
                         Paid!
