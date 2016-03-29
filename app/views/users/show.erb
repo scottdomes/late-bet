@@ -8,7 +8,7 @@
           <h1>  <%= @user.username.capitalize %></h1>
           <h3><i class="fa fa-user"></i>  <%= @user.first_name + " " + @user.last_name %></h3>
           <h4><i class="fa fa-clock-o"></i>  Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
-          <h4><i class="fa fa-thumbs-o-up"></i>  Bets won: <%= @user.winnings.length %></h3>
+          <h4><i class="fa fa-thumbs-o-up"></i>  Bets won: <%= @user.bet_results[:winnings].length %></h3>
           <h4><i class="fa fa-trophy"></i>  Goals achieved: <%= @user.goals.where(success: true).length %></h3>
         </div> <!-- col-md-8 -->
       </div> <!-- user-header -->
@@ -166,7 +166,7 @@
                 <th>Status</th>
               </thead>
               <tbody>
-                <% @user.winnings.each do |bet| %>
+                <% @user.bet_results[:winnings].each do |bet| %>
                   <tr>
                     <td>
                       <% opponent = bet.result[:loser] %>
@@ -212,7 +212,7 @@
                 <th>Status</th>
               </thead>
               <tbody>
-                <% @user.debts.each do |bet| %>
+                <% @user.bet_results[:debts].each do |bet| %>
                   <tr>
                     <td>
                       <% opponent = bet.result[:winner] %>
