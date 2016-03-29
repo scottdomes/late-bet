@@ -142,8 +142,8 @@
                         <p><%= opponent.first_name %></p>
                       </a>
                     </td>
-                    <td><%= stringify_bet(@user, bet) %></td>
-                    <td><%= bet_result(bet) %></td>
+                    <td><%= bet.to_full_string %></td>
+                    <td><%= bet.result %></td>
                   </tr>
                 <% end %>
               </tbody>

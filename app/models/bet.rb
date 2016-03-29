@@ -27,4 +27,18 @@ class Bet < ActiveRecord::Base
     goal.user.save
   end
 
+  def to_full_string
+    "#{user.first_name} bet #{goal.user.first_name} #{goal.stake_qty} #{goal.stake_item} that #{goal.user.first_name} would not #{goal.title} by #{goal.deadline.strftime("%I:%M %p on %A, %B %e")}!"
+  end
+
+  def result
+    if goal.success
+      goal.user.first_name + " wins!"
+    elsif goal.fail
+      user.first_name + " wins!"
+    else
+      "Unresolved!"
+    end
+  end
+
 end
