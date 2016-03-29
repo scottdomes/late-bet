@@ -1,5 +1,4 @@
 helpers do
-
   def bet_result_short(bet)
     if bet.result
       "#{bet.result[:winner].first_name} wins!"
