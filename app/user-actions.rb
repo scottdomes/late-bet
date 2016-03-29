@@ -1,6 +1,6 @@
 helpers do
 
-  def stringify_bet_result(bet)
+  def bet_result_short(bet)
     if bet.result
       "#{bet.result[:winner].first_name} wins!"
     else
@@ -16,21 +16,15 @@ helpers do
     end
   end
 
-  def stringify_winnings(bet)
-    "#{bet.result[:winner].first_name} won #{bet.goal.stake_qty} #{bet.goal.stake_item} from #{bet.result[:loser].first_name} when #{bet.goal.user.first_name} #{stringify_result(bet.goal)} #{bet.goal.title}!"
-  end
-
-  def stringify_debts(bet)
-    "#{bet.result[:winner].first_name} lost #{bet.goal.stake_qty} #{bet.goal.stake_item} from #{bet.result[:loser].first_name} when #{bet.goal.user.first_name} #{stringify_result(bet.goal)} #{bet.goal.title}!"
-  end
-
-
-  def stringify_result(goal)
-    if goal.success
-      "did"
+  def bet_result_long(bet)
+    if bet.goal.success
+      verb1 = "won"
+      verb2 = "did"
     else
-      "failed to"
+      verb1 = "lost"
+      verb2 = "failed to"
     end
+    "#{bet.result[:winner].first_name} #{verb1} #{bet.goal.stake_qty} #{bet.goal.stake_item} from #{bet.result[:loser].first_name} when #{bet.goal.user.first_name} #{verb2} #{bet.goal.title}!"
   end
 end
 

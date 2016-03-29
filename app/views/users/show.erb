@@ -143,7 +143,7 @@
                       </a>
                     </td>
                     <td><%= bet.to_full_string %></td>
-                    <td><%= stringify_bet_result(bet) %></td>
+                    <td><%= bet_result_short(bet) %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -175,7 +175,7 @@
                         <p><%= opponent.first_name %></p>
                       </a>
                     </td>
-                    <td><%= stringify_winnings(bet) %></td>
+                    <td><%= bet_result_long(bet) %></td>
                     <td>
                       <% if bet.paid %>
                         Paid!
@@ -221,7 +221,7 @@
                         <p><%= opponent.first_name %></p>
                       </a>
                     </td>
-                    <td><%= stringify_debts(bet) %></td>
+                    <td><%= bet_result_long(bet) %></td>
                     <td>
                       <% if bet.paid %>
                         Paid!
