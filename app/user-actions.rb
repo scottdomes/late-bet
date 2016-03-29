@@ -1,13 +1,26 @@
 helpers do
+  def stringify_bet_result(bet)
+    if bet.result
+      "#{bet.result[:winner].first_name} wins!"
+    else
+      "Unresolved!"
+    end
+  end
 
+
+  def bet_winner(bet)
+    if bet.goal.success
+      User.find(bet.goal.user_id)
+    else
+      User.find(bet.user_id)
+    end
+  end
 
   def goal_success(goal)
     if goal.success
       "successful-goal"
     elsif goal.fail
       "failed-goal"
-    else
-      nil
     end
   end
 
@@ -71,13 +84,7 @@ helpers do
     string += "!"
   end
 
-  def bet_winner(bet)
-    if bet.goal.success
-      User.find(bet.goal.user_id)
-    else
-      User.find(bet.user_id)
-    end
-  end
+
 
   def bet_loser(bet)
     if bet.goal.fail

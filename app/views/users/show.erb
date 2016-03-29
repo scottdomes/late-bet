@@ -143,7 +143,7 @@
                       </a>
                     </td>
                     <td><%= bet.to_full_string %></td>
-                    <td><%= bet.result %></td>
+                    <td><%= stringify_bet_result(bet) %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -181,7 +181,7 @@
                         Paid!
                       <% else %>
                         Awaiting Payment 
-                        <% if bet_winner(bet) == current_user %>
+                        <% if bet.result[:winner] == current_user %>
                           <form method="POST" action="/bets/paid">
                             <input type='hidden' name="bet_id" value="<%= bet.id %>"/>
                             <button class="btn btn-default btn-danger">Bet paid!</button>

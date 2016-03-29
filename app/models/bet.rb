@@ -33,11 +33,9 @@ class Bet < ActiveRecord::Base
 
   def result
     if goal.success
-      goal.user.first_name + " wins!"
+      { winner: goal.user, loser: user }
     elsif goal.fail
-      user.first_name + " wins!"
-    else
-      "Unresolved!"
+      { winner: user, loser: goal.user }
     end
   end
 
