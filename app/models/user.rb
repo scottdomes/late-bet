@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
           results[:winnings] << bet
         end
       elsif goal.fail && goal.bets
-        goal.bet.each do |bet|
+        goal.bets.each do |bet|
           results[:debts] << bet
         end
       end
