@@ -30,11 +30,14 @@ $(document).ready(function() {
         data: form.serialize(),
         success: function(res) {
           var data = res.data;
-          $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
-            displayFlash(data);
-          });
+          displayFlash(data);
+          reloadBetSubmitArea(form);
         }
     });
+  }
+
+  function reloadBetSubmitArea(form) {
+    $(form).parent().load(location.href + "  #" + form.attr("id"));
   }
 
   
@@ -56,6 +59,7 @@ $(document).ready(function() {
     $('#add-goal-form').submit(function(e){
       e.preventDefault();
       var form = $(this);
+      submitForm(form);
       var post_url = form.attr('action');
       $.ajax({
           url: post_url,
