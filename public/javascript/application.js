@@ -30,8 +30,15 @@ $(document).ready(function() {
         data: form.serialize(),
         success: function(res) {
           var data = res.data;
+          if (data.success) {
+            if (form.attr("class") == "submit-bet-form") {
+              reloadBetSubmitArea(form);
+            } else if (form.attr("id") == "add-goal-form") {
+              loadNewGoal(form);
+              resetCustomGoal();
+            }
+          }
           displayFlash(data);
-          reloadBetSubmitArea(form);
         }
     });
   }
@@ -40,7 +47,17 @@ $(document).ready(function() {
     $(form).parent().load(location.href + "  #" + form.attr("id"));
   }
 
-  
+  function loadNewGoal(form) {
+    $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
+      $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
+    });
+  }
+
+  function resetCustomGoal() {
+    $('#custom-goal input').val("");
+    $('#custom-goal input#quantity').val(1);
+  }
+
   
   $('#notifications-button').click(function () {
     $.ajax({
@@ -58,28 +75,29 @@ $(document).ready(function() {
   $(document).on('click', '#submit-goal-button', function() {
     $('#add-goal-form').submit(function(e){
       e.preventDefault();
+      setUpFlash("goal");
       var form = $(this);
       submitForm(form);
-      var post_url = form.attr('action');
-      $.ajax({
-          url: post_url,
-          type: 'POST',
-          dataType: 'json',
-          data: $(this).serialize(),
-          success: function(res) {
-            var data = res.data;
-            setUpFlash("goal");
-            $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
-              displayFlash(data)
-              if (data.success) {
-                $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
-              }
-            });
-            $('#custom-goal input').val("");
-            $('#custom-goal input#quantity').val(1);
-        }
-      });
-     return false;
+     //  var post_url = form.attr('action');
+     //  $.ajax({
+     //      url: post_url,
+     //      type: 'POST',
+     //      dataType: 'json',
+     //      data: $(this).serialize(),
+     //      success: function(res) {
+     //        var data = res.data;
+     //        setUpFlash("goal");
+     //        $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
+     //          displayFlash(data)
+     //          if (data.success) {
+     //            $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
+     //          }
+     //        });
+     //        $('#custom-goal input').val("");
+     //        $('#custom-goal input#quantity').val(1);
+     //    }
+     //  });
+     // return false;
     });
   });
 
