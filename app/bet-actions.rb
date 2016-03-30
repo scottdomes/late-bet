@@ -3,7 +3,7 @@ post '/goals/bets' do
     goal_id: params[:goal_id],
     user_id: session[:user].id
   )
-  if @bet
+  if @bet.save
     json :data => { success: true, message: "Bet successfully created!" }
   else 
     json :data => { success: false, message: "Oops! " + @bet.errors.full_messages.join(" and ").downcase.capitalize + "!" }

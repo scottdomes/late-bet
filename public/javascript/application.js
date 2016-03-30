@@ -16,13 +16,29 @@ $(document).ready(function() {
     if (data.success == true) {
       $flash
         .addClass('success')
-        .fadeOut(4000);
+        .fadeOut(2000);
     } else {
        $flash.addClass('failure');
     }
   }
 
-  $('.success').delay(2000).fadeOut();
+  function submitForm(form) {
+    $.ajax({
+        url: form.attr('action'),
+        type: 'POST',
+        dataType: 'json',
+        data: $(this).serialize(),
+        success: function(res) {
+          var data = res.data;
+          $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
+            displayFlash(data);
+          });
+        }
+    });
+    return false;
+  }
+
+  
   
   $('#notifications-button').click(function () {
     $.ajax({
@@ -64,27 +80,24 @@ $(document).ready(function() {
     });
   });
 
-    $('.submit-bet-form').click(function(e){
-      e.preventDefault();
-      var form = $(this);
-      var post_url = form.attr('action');
-      setUpFlash("bet");
-      $.ajax({
-          url: post_url,
-          type: 'POST',
-          dataType: 'json',
-          data: $(this).serialize(),
-          success: function(res) {
-            var data = res.data;
-                     
-            $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
-              displayFlash(data);
-              if (data.success == true ){
-                $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
-              }
-            });
-        }
-      });
-     return false;
-    });
+  $('.submit-bet-form').click(function(e){
+    e.preventDefault();
+    setUpFlash("bet");
+    // submitForm($(this));
+    var form = $(this);
+    submitForm(form);
+    // $.ajax({
+    //     url: form.attr('action'),
+    //     type: 'POST',
+    //     dataType: 'json',
+    //     data: $(this).serialize(),
+    //     success: function(res) {
+    //       var data = res.data;
+    //       $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
+    //         displayFlash(data);
+    //       });
+    //     }
+    // });
+    // return false;
+  });
 });
