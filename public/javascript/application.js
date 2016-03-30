@@ -27,7 +27,7 @@ $(document).ready(function() {
         url: form.attr('action'),
         type: 'POST',
         dataType: 'json',
-        data: $(this).serialize(),
+        data: form.serialize(),
         success: function(res) {
           var data = res.data;
           $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
@@ -35,7 +35,6 @@ $(document).ready(function() {
           });
         }
     });
-    return false;
   }
 
   
@@ -83,21 +82,7 @@ $(document).ready(function() {
   $('.submit-bet-form').click(function(e){
     e.preventDefault();
     setUpFlash("bet");
-    // submitForm($(this));
     var form = $(this);
     submitForm(form);
-    // $.ajax({
-    //     url: form.attr('action'),
-    //     type: 'POST',
-    //     dataType: 'json',
-    //     data: $(this).serialize(),
-    //     success: function(res) {
-    //       var data = res.data;
-    //       $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
-    //         displayFlash(data);
-    //       });
-    //     }
-    // });
-    // return false;
   });
 });
