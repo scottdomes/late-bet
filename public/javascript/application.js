@@ -1,11 +1,24 @@
-function setUpFlash(type) {
-  $('#flash').removeClass('failure');
-  $('#flash').removeClass('success');
-  $('#flash p').text("Submitting " + type + "...");
-  $('#flash').show();
-}
-
 $(document).ready(function() {
+
+  var $flash = $('#flash');
+
+  function setUpFlash(type) {
+    $flash
+      .removeClass('failure')
+      .removeClass('success')
+      .find('p').text("Submitting " + type + "...")
+      .show();
+  }
+
+  function displayFlash(result) {
+    $('#flash p').text(result);
+    if (result == "Goal successfully created!") {
+      $('#flash').addClass('success');
+      $('#flash').fadeOut(4000);
+    } else {
+      $('#flash').addClass('failure');
+    }
+  }
 
   $('.success').delay(2000).fadeOut();
   
@@ -30,18 +43,19 @@ $(document).ready(function() {
       $.ajax({
           url: post_url,
           type: 'POST',
-          dataType: 'html',
+          dataType: 'json',
           data: $(this).serialize(),
-          success: function(result) {
+          success: function(res) {
+            var data = res.data;
             setUpFlash("goal");
             $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
-              $('#flash p').text(result);
-              if (result == "Goal successfully created!") {
-                $('#flash').addClass('success');
+              $flash.find('p').text(data.message);
+              if (data.success) {
+                $flash.addClass('success');
                 $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
-                $('#flash').fadeOut(4000);
+                $flash.fadeOut(4000);
               } else {
-                $('#flash').addClass('failure');
+                $flash.addClass('failure');
               }
             });
             $('#custom-goal input').val("");
@@ -64,15 +78,10 @@ $(document).ready(function() {
           data: $(this).serialize(),
           success: function(result) {
             setUpFlash("bet");
-            console.log(form);
-            console.log($(form).parent().parent());
             $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
-              $('#flash p').text(result);
-              if (result == "Bet successfully added!") {
-                $('#flash').addClass('success');
-                $('#flash').fadeOut(4000);
-              } else {
-                $('#flash').addClass('failure');
+              displayFlash(result)
+              if (result.success == true ){
+                $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
               }
             });
         }

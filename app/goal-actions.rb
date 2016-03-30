@@ -92,10 +92,10 @@ post '/goals' do
   if @goal.save
     # cookies[:success] = "Goal successfully created!"
     # redirect back
-    return "Goal successfully created!"
+    json :data => { success: true, message:  "Goal successfully created!" }
   else 
     # cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
     # redirect '/goals/#custom-goal'
-    return "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
+    json :data => { success: false, message: "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!" }
   end
 end
