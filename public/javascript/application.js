@@ -4,10 +4,10 @@ $(document).ready(function() {
 
   function setUpFlash(type) {
     $flash
+      .show()
       .removeClass('failure')
       .removeClass('success')
-      .find('p').text("Submitting " + type + "...")
-      .show();
+      .find('p').text("Submitting " + type + "...");
   }
 
   function displayFlash(data) {
@@ -64,11 +64,11 @@ $(document).ready(function() {
     });
   });
 
-  $(document).on('click', '.submit-bet', function() {
-    $('.submit-bet-form').submit(function(e){
+    $('.submit-bet-form').click(function(e){
       e.preventDefault();
       var form = $(this);
       var post_url = form.attr('action');
+      setUpFlash("bet");
       $.ajax({
           url: post_url,
           type: 'POST',
@@ -76,9 +76,9 @@ $(document).ready(function() {
           data: $(this).serialize(),
           success: function(res) {
             var data = res.data;
-            setUpFlash("bet");
+                     
             $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
-              displayFlash(data)
+              displayFlash(data);
               if (data.success == true ){
                 $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
               }
@@ -87,6 +87,4 @@ $(document).ready(function() {
       });
      return false;
     });
-  });
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 });
