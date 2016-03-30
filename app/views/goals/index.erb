@@ -58,10 +58,10 @@
                     <h3 id="stake_name" class="height_80">Stakes: <%= goal.stake_qty.to_s + " " + goal.stake_item %></h3>
                     <div id="<%= goal.id %>" class="bet-submit-area">
                       <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> 
-                      <form method="POST" action="/goals/complete">
+                      <form id="complete-goal-form" method="POST" action="/goals/complete">
                         <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
-                        <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
-                        <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
+                        <button class="btn btn-success btn-lg complete-goal-button" name="success" value="true">I did this!</button>
+                        <button class="btn btn-danger btn-lg complete-goal-button" name="fail" value="true">I failed.</button>
                       </form>
                       <% elsif goal.success == true %>
                         <h1 class="goal-outcome">Success!</h1>

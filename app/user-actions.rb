@@ -37,11 +37,10 @@ post '/goals/complete' do
   end
 
   if @goal.save
-    cookies[:success] = "Goal complete!"
-    redirect back
+    json :data => { success: true, message: "Goal completed!" }
+
   else 
-    cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
-    redirect back
+    json :data => { success: false, message: "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!" }
   end
 end
 
