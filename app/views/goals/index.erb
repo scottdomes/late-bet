@@ -24,10 +24,10 @@
                 <h4 id="add-goal-heading"><i class="fa fa-rocket"></i> Add a goal!</h4>
                 <div class="panel panel-default goal">
                   <div class="panel-body">
-                    <img class="circular-img" src="<%= session[:user].image_file_name %>">
+                    <img class="circular-img" src="<%= current_user.image_file_name %>">
 
                     <form id="add-goal-form" method="POST" action="/goals">
-                      <h3><%= session[:user].first_name %> wants to </h3>
+                      <h3><%= current_user.first_name %> wants to </h3>
 
                       <input id="input-title" name="title" placeholder="Choose a goal!">
 
@@ -92,10 +92,9 @@
                           </a>
                           <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                             <% goal.bets.each do |bet| %>
-                              <% better = User.find(bet.user_id) %>
-                              <li><a href="/users/<%= better.username %>">
-                                <img class="circular-img sm-img" src="<%= better.image_file_name %>">
-                                <%= better.first_name + " " + better.last_name %>
+                              <li><a href="/users/<%= bet.user.username %>">
+                                <img class="circular-img sm-img" src="<%= bet.user.image_file_name %>">
+                                <%= bet.user.first_name + " " + bet.user.last_name %>
                               </a></li>
                             <% end %>
                           </ul>
@@ -122,7 +121,7 @@
     <div class="row heading goal-heading">
       <h3>Completed Goals</h3>
     </div> <!-- goal-heading-->
-    
+
     <div class="goal-grid main-page-grid">
       <div class="row">
 
@@ -177,10 +176,9 @@
                       </a>
                       <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdown-menu-1">
                         <% goal.bets.each do |bet| %>
-                          <% better = User.find(bet.user_id) %>
-                          <li><a href="/users/<%= better.username %>">
-                            <img class="circular-img sm-img" src="<%= better.image_file_name %>">
-                            <%= better.first_name + " " + better.last_name %>
+                          <li><a href="/users/<%= bet.user.username %>">
+                            <img class="circular-img sm-img" src="<%= bet.user.image_file_name %>">
+                            <%= bet.user.first_name + " " + bet.user.last_name %>
                           </a></li>
                         <% end %>
                       </ul>
