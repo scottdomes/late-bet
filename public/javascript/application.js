@@ -36,8 +36,11 @@ $(document).ready(function() {
             } else if (form.attr("id") == "add-goal-form") {
               loadNewGoal(form);
               resetCustomGoal();
-            } else if (form.attr("id") == "complete-goal-form") {
+            } else if (form.attr("class") == "complete-goal-form" && form.parents('.main-page-grid')) {
+              debugger
               removeGoal(form);
+            } else if (form.attr("class") == "complete-goal-form" && form.parents('.user-goal-grid')) {
+              displayGoalResult(form, data);
             }
           }
           displayFlash(data);
@@ -65,6 +68,14 @@ $(document).ready(function() {
     $('#active-goals-wrapper').load(location.href + " #active-goals");
   }
 
+  function displayGoalResult(form, data) {
+    if (data.user_succeeded) {
+      $(form).parent().parent().addClass('successful-goal');
+    } else {
+      $(form).parent().parent().addClass('failed-goal');
+    }
+  }
+
   
   $('#notifications-button').click(function () {
     $.ajax({
@@ -89,7 +100,7 @@ $(document).ready(function() {
   });
 
   $(document).on('click', '.complete-goal-button', function() {
-    $('#complete-goal-form').submit(function(e) {
+    $('.complete-goal-form').submit(function(e) {
       e.preventDefault();
       setUpFlash("goal");
       var form = $(this);

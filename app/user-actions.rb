@@ -37,7 +37,7 @@ post '/goals/complete' do
   end
 
   if @goal.save
-    json :data => { success: true, message: "Goal completed!" }
+    json :data => { success: true, user_succeeded: params[:success], message: "Goal completed!" }
 
   else 
     json :data => { success: false, message: "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!" }
