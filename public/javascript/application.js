@@ -39,6 +39,10 @@ $(document).ready(function() {
             }
           }
           displayFlash(data);
+        },
+        error: function(res) {
+          var data = res.data
+          displayFlash(data)
         }
     });
   }
@@ -78,26 +82,6 @@ $(document).ready(function() {
       setUpFlash("goal");
       var form = $(this);
       submitForm(form);
-     //  var post_url = form.attr('action');
-     //  $.ajax({
-     //      url: post_url,
-     //      type: 'POST',
-     //      dataType: 'json',
-     //      data: $(this).serialize(),
-     //      success: function(res) {
-     //        var data = res.data;
-     //        setUpFlash("goal");
-     //        $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
-     //          displayFlash(data)
-     //          if (data.success) {
-     //            $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
-     //          }
-     //        });
-     //        $('#custom-goal input').val("");
-     //        $('#custom-goal input#quantity').val(1);
-     //    }
-     //  });
-     // return false;
     });
   });
 
