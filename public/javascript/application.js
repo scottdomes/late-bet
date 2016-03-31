@@ -43,6 +43,10 @@ $(document).ready(function() {
             }
           }
           displayFlash(data);
+        },
+        error: function(res) {
+          var data = res.data
+          displayFlash(data)
         }
     });
   }
