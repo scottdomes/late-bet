@@ -36,10 +36,9 @@ $(document).ready(function() {
             } else if (form.attr("id") == "add-goal-form") {
               loadNewGoal(form);
               resetCustomGoal();
-            } else if (form.attr("class") == "complete-goal-form" && form.parents('.main-page-grid')) {
-              debugger
+            } else if (form.attr("class") == "complete-goal-form" && form.parents('.main-page-grid').length != 0) {
               removeGoal(form);
-            } else if (form.attr("class") == "complete-goal-form" && form.parents('.user-goal-grid')) {
+            } else if (form.attr("class") == "complete-goal-form" && form.parents('.user-goal-grid').length != 0) {
               displayGoalResult(form, data);
             }
           }
@@ -69,10 +68,11 @@ $(document).ready(function() {
   }
 
   function displayGoalResult(form, data) {
+    reloadBetSubmitArea(form);
     if (data.user_succeeded) {
-      $(form).parent().parent().addClass('successful-goal');
+      $(form).parents().eq(2).addClass('successful-goal');
     } else {
-      $(form).parent().parent().addClass('failed-goal');
+      $(form).parents().eq(2).addClass('failed-goal');
     }
   }
 

@@ -47,7 +47,7 @@
           <% @user.goals.sort_by{ |goal| goal.created_at }.reverse.each do |goal| %>
 
             <div class="col-md-4">
-              <div class="panel panel-default goal <%= goal_success(goal) %>">
+              <div id="<%= goal.id %>" class="panel panel-default goal <%= goal_success(goal) %>">
                 <div class="panel-body">
                   <h3><%= goal.user.first_name + " wants to " + goal.title %></h3>
                   <h4>By: <%= goal.deadline.strftime("%I:%M %p on %A, %B %e") %></h4>
