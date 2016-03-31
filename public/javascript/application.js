@@ -52,7 +52,7 @@ $(document).ready(function() {
   }
 
   function reloadBetSubmitArea(form) {
-    $(form).parent().load(location.href + "  #" + form.attr("id"));
+    $(form).parent('.bet-submit-area').load(location.href + "  #" + form.attr("id"));
   }
 
   function loadNewGoal(form) {
@@ -74,12 +74,7 @@ $(document).ready(function() {
 
   function displayGoalResult(form, data) {
     reloadBetSubmitArea(form);
-
-    if (data.user_succeeded) {
-      $(form).parents().eq(2).addClass('successful-goal'); // ternary within addClass
-    } else {
-      $(form).parents().eq(2).addClass('failed-goal');
-    }
+    $(form).parents('.goal').addClass(data.user_succeeded ? 'successful-goal' : 'failed-goal');
   }
 
   
