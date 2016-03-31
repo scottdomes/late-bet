@@ -67,14 +67,16 @@ $(document).ready(function() {
   }
 
   function removeGoal(form) {
-    $(form).parents().eq(3).fadeOut(1000);
+    var goalPanel = $(form).parents('col-md-4');
+    goalPanel.fadeOut(2000);
     $('#active-goals-wrapper').load(location.href + " #active-goals");
   }
 
   function displayGoalResult(form, data) {
     reloadBetSubmitArea(form);
+
     if (data.user_succeeded) {
-      $(form).parents().eq(2).addClass('successful-goal');
+      $(form).parents().eq(2).addClass('successful-goal'); // ternary within addClass
     } else {
       $(form).parents().eq(2).addClass('failed-goal');
     }
@@ -93,29 +95,22 @@ $(document).ready(function() {
     $('#notifications-button').removeClass('live');
   });
 
-
-  $(document).on('click', '#submit-goal-button', function() {
-    $('#add-goal-form').submit(function(e){
+  function formSubmitter(flashText) {
+    return function(e) {
       e.preventDefault();
-      setUpFlash("goal");
+      setUpFlash(flashText);
       var form = $(this);
       submitForm(form);
-    });
+    }
+  }
+
+  $(document).on('click', '#submit-goal-button', function() {
+    $('#add-goal-form').submit(formSubmitter("goal"));
   });
 
   $(document).on('click', '.complete-goal-button', function() {
-    $('.complete-goal-form').submit(function(e) {
-      e.preventDefault();
-      setUpFlash("goal");
-      var form = $(this);
-      submitForm(form);
-    });
+    $('.complete-goal-form').submit(formSubmitter("goal"));
   });
 
-  $('.submit-bet-form').click(function(e){
-    e.preventDefault();
-    setUpFlash("bet");
-    var form = $(this);
-    submitForm(form);
-  });
+  $('.submit-bet-form').click(formSubmitter("bet"));
 });
