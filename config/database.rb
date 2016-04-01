@@ -4,6 +4,7 @@ configure do
     ActiveRecord::Base.logger = Logger.new(STDOUT)
   end
 
+configure :development do
   dbfile = "db/#{settings.environment}.sqlite3"
   puts "connecting to database: #{dbfile}"
   set :database, {
@@ -13,6 +14,7 @@ configure do
     #Normal app db will be "development.sqlite3"
     database: dbfile
   }
+end
 
   configure :production do
   db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///localhost/mydb')
