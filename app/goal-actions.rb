@@ -2,9 +2,10 @@
 helpers do
 
   def stringify_recent_winners
+    goal = Goal.most_recent_successes(1).first
     if number_of_bettors > 0
-      string = goal_maker_first_name + " won "
-      string += recent_goal_qty.to_s + " " + recent_goal_item
+      string = goal.user.first_name + " won "
+      string += goal.stake_qty.to_s + " " + goal.stake_item
       if number_of_bettors > 1
         string += " each " + "from "
       else
@@ -12,28 +13,11 @@ helpers do
       end
       string += bettors_first_names
     else
-      string = goal_maker_first_name + " wanted to "
-      string += @recent_goal.title + ". "
-      string += goal_maker_first_name + " achieved this goal!"
+      string = goal.user.first_name + " wanted to "
+      string += goal.title + ". "
+      string += goal.user.first_name + " achieved this goal!"
     end
     string
-  end
-
-  def goal_maker_first_name
-    @recent_goal = Goal.most_recent_successes(1).first
-    #goal_user_first_name = @recent_goal.map(&:user).map(&:first_name)
-    @recent_goal.user.first_name
-  end
-
-  #the quantity of the goal
-  def recent_goal_qty
-    @recent_goal.stake_qty
-  end
-
-  # the recent item of the goal
-  def recent_goal_item
-    #item = @recent_goal.map(&:stake_item)
-    @recent_goal.stake_item
   end
 
   def number_of_bettors
@@ -45,14 +29,6 @@ helpers do
   end
 
   def bettors_first_names
-    # Gets the first better name
-    # @recent_goal.bets.first.user.first_name
-
-    # Goes through each bet and display the better name
-    # @recent_goal.bets.each do |bet|
-    #   puts bet.user.first_name
-    # end
-
     # Gets all the bettors names
     @recent_goal.bets.collect {|b| b.user.first_name}.to_sentence
   end
