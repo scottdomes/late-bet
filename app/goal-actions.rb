@@ -60,26 +60,8 @@ helpers do
 end
 
 get '/goals/?' do
-  # if session[:user]
-  #   @goal = Goal.new
-    #@recent = recent_bets
     erb :'goals/index'
-  # else
-  #   cookies[:]
-  #   redirect '/goals/'
-  # end
 end
-
-# get '/goals/new' do
-#   # if session[:user]
-#   #   @goal = Goal.new
-#     erb :'goals/new'
-#   # else
-#   #   cookies[:]
-#   #   redirect '/goals/'
-#   # end
-# end
-
 
 post '/goals' do
   @goal = Goal.new(
@@ -90,12 +72,8 @@ post '/goals' do
     user_id: session[:user].id
   )
   if @goal.save
-    # cookies[:success] = "Goal successfully created!"
-    # redirect back
     json :data => { success: true, message:  "Goal successfully created!" }
   else 
-    # cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
-    # redirect '/goals/#custom-goal'
     json :data => { success: false, message: "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!" }
   end
 end
