@@ -6,6 +6,5 @@
 /db/*.sqlite3-journal
 .DS_Store
 public/stylesheets/.sass-cache
-public/stylesheets/user-page.css
 public/stylesheets/user-page.css.map
 public/assets
