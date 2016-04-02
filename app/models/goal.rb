@@ -15,7 +15,7 @@ class Goal < ActiveRecord::Base
   validates :deadline, presence: true
 
   #could also validate with JavaScript
-  validate :deadline_date_cannot_be_in_the_past, if: :deadline
+  validate :deadline_date_cannot_be_in_the_past, if: :deadline, on: :create
 
   after_update :add_goal_notification
 
