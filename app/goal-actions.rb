@@ -19,9 +19,9 @@ helpers do
     string
   end
 
+  #the goal makers first name
   def goal_maker_first_name
     @recent_goal = Goal.most_recent_successes(1).first
-    #goal_user_first_name = @recent_goal.map(&:user).map(&:first_name)
     @recent_goal.user.first_name
   end
 
@@ -44,16 +44,8 @@ helpers do
     end 
   end
 
+  #the bettors first name
   def bettors_first_names
-    # Gets the first better name
-    # @recent_goal.bets.first.user.first_name
-
-    # Goes through each bet and display the better name
-    # @recent_goal.bets.each do |bet|
-    #   puts bet.user.first_name
-    # end
-
-    # Gets all the bettors names
     @recent_goal.bets.collect {|b| b.user.first_name}.to_sentence
   end
 
