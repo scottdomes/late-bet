@@ -8,7 +8,7 @@
           <h1>  <%= @user.username.capitalize %></h1>
           <h3><i class="fa fa-user"></i>  <%= @user.first_name + " " + @user.last_name %></h3>
           <h4><i class="fa fa-clock-o"></i>  Joined: <%= @user.created_at.strftime("%B %Y") %></h3>
-          <h4><i class="fa fa-thumbs-o-up"></i>  Bets won: <%= winnings(@user).length %></h3>
+          <h4><i class="fa fa-thumbs-o-up"></i>  Bets won: <%= @user.bet_results[:winnings].length %></h3>
           <h4><i class="fa fa-trophy"></i>  Goals achieved: <%= @user.goals.where(success: true).length %></h3>
         </div> <!-- col-md-8 -->
       </div> <!-- user-header -->
@@ -47,7 +47,7 @@
           <% @user.goals.sort_by{ |goal| goal.created_at }.reverse.each do |goal| %>
 
             <div class="col-md-4">
-              <div class="panel panel-default goal <%= goal_success(goal) %>">
+              <div id="<%= goal.id %>" class="panel panel-default goal <%= goal_success(goal) %>">
                 <div class="panel-body">
                   <h3><%= goal.user.first_name + " wants to " + goal.title %></h3>
                   <h4>By: <%= goal.deadline.strftime("%I:%M %p on %A, %B %e") %></h4>
@@ -55,10 +55,10 @@
 
                   <div id="<%= goal.id %>" class="bet-submit-area">
                     <% if goal.user.id == current_user.id && goal.success == false && goal.fail == false %> 
-                      <form method="POST" action="/goals/complete">
+                      <form class="complete-goal-form" method="POST" action="/goals/complete">
                         <input type='hidden' name="goal_id" value="<%= goal.id %>"/>
-                        <button class="btn btn-success btn-lg" name="success" value="true">I did this!</button>
-                        <button class="btn btn-danger btn-lg" name="fail" value="true">I failed.</button>
+                        <button class="btn btn-success btn-lg complete-goal-button" name="success" value="true">I did this!</button>
+                        <button class="btn btn-danger btn-lg complete-goal-button" name="fail" value="true">I failed.</button>
                       </form>
                     <% elsif goal.success == true %>
                       <h1 class="goal-outcome">Success!</h1>
@@ -142,8 +142,8 @@
                         <p><%= opponent.first_name %></p>
                       </a>
                     </td>
-                    <td><%= stringify_bet(@user, bet) %></td>
-                    <td><%= bet_result(bet) %></td>
+                    <td><%= bet.to_full_string %></td>
+                    <td><%= bet_result_short(bet) %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -166,22 +166,22 @@
                 <th>Status</th>
               </thead>
               <tbody>
-                <% @winnings.each do |bet| %>
+                <% @user.bet_results[:winnings].each do |bet| %>
                   <tr>
                     <td>
-                      <% opponent = bet_loser(bet) %>
+                      <% opponent = bet.result[:loser] %>
                       <a href="/users/<%= opponent.username %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>
                       </a>
                     </td>
-                    <td><%= stringify_winnings(@user, bet) %></td>
+                    <td><%= bet_result_long(bet) %></td>
                     <td>
                       <% if bet.paid %>
                         Paid!
                       <% else %>
                         Awaiting Payment 
-                        <% if bet_winner(bet) == current_user %>
+                        <% if bet.result[:winner] == current_user %>
                           <form method="POST" action="/bets/paid">
                             <input type='hidden' name="bet_id" value="<%= bet.id %>"/>
                             <button class="btn btn-default btn-danger">Bet paid!</button>
@@ -212,16 +212,16 @@
                 <th>Status</th>
               </thead>
               <tbody>
-                <% @debts.each do |bet| %>
+                <% @user.bet_results[:debts].each do |bet| %>
                   <tr>
                     <td>
-                      <% opponent = bet_winner(bet) %>
+                      <% opponent = bet.result[:winner] %>
                       <a href="/users/<%= opponent.username %>">
                         <img class="circular-img sm-img" src="<%= opponent.image_file_name %>">
                         <p><%= opponent.first_name %></p>
                       </a>
                     </td>
-                    <td><%= stringify_debts(@user, bet) %></td>
+                    <td><%= bet_result_long(bet) %></td>
                     <td>
                       <% if bet.paid %>
                         Paid!

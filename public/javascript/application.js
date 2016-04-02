@@ -1,13 +1,82 @@
-function setUpFlash(type) {
-  $('#flash').removeClass('failure');
-  $('#flash').removeClass('success');
-  $('#flash p').text("Submitting " + type + "...");
-  $('#flash').show();
-}
-
 $(document).ready(function() {
 
-  $('.success').delay(2000).fadeOut();
+  var $flash = $('#flash');
+
+  function setUpFlash(type) {
+    $flash
+      .show()
+      .removeClass('failure')
+      .removeClass('success')
+      .find('p').text("Submitting " + type + "...");
+  }
+
+  function displayFlash(data) {
+    $flash
+      .find('p').text(data.message)
+    if (data.success == true) {
+      $flash
+        .addClass('success')
+        .fadeOut(2000);
+    } else {
+       $flash.addClass('failure');
+    }
+  }
+
+  function submitForm(form) {
+    $.ajax({
+        url: form.attr('action'),
+        type: 'POST',
+        dataType: 'json',
+        data: form.serialize(),
+        success: function(res) {
+          var data = res.data;
+          if (data.success) {
+            if (form.attr("class") == "submit-bet-form") {
+              reloadBetSubmitArea(form);
+            } else if (form.attr("id") == "add-goal-form") {
+              loadNewGoal(form);
+              resetCustomGoal();
+            } else if (form.attr("class") == "complete-goal-form" && form.parents('.main-page-grid').length != 0) {
+              removeGoal(form);
+            } else if (form.attr("class") == "complete-goal-form" && form.parents('.user-goal-grid').length != 0) {
+              displayGoalResult(form, data);
+            }
+          }
+          displayFlash(data);
+        },
+        error: function(res) {
+          var data = res.data
+          displayFlash(data)
+        }
+    });
+  }
+
+  function reloadBetSubmitArea(form) {
+    $(form).parent('.bet-submit-area').load(location.href + "  #" + form.attr("id"));
+  }
+
+  function loadNewGoal(form) {
+    $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
+      $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
+    });
+  }
+
+  function resetCustomGoal() {
+    $('#custom-goal input').val("");
+    $('#custom-goal input#quantity').val(1);
+  }
+
+  function removeGoal(form) {
+    var goalPanel = $(form).parents('col-md-4');
+    goalPanel.fadeOut(2000);
+    $('#active-goals-wrapper').load(location.href + " #active-goals");
+  }
+
+  function displayGoalResult(form, data) {
+    reloadBetSubmitArea(form);
+    $(form).parents('.goal').addClass(data.user_succeeded ? 'successful-goal' : 'failed-goal');
+  }
+
   
   $('#notifications-button').click(function () {
     $.ajax({
@@ -21,64 +90,22 @@ $(document).ready(function() {
     $('#notifications-button').removeClass('live');
   });
 
+  function formSubmitter(flashText) {
+    return function(e) {
+      e.preventDefault();
+      setUpFlash(flashText);
+      var form = $(this);
+      submitForm(form);
+    }
+  }
 
   $(document).on('click', '#submit-goal-button', function() {
-    $('#add-goal-form').submit(function(e){
-      e.preventDefault();
-      var form = $(this);
-      var post_url = form.attr('action');
-      $.ajax({
-          url: post_url,
-          type: 'POST',
-          dataType: 'html',
-          data: $(this).serialize(),
-          success: function(result) {
-            setUpFlash("goal");
-            $('#active-goals-wrapper').load(location.href + " #active-goals", function() {
-              $('#flash p').text(result);
-              if (result == "Goal successfully created!") {
-                $('#flash').addClass('success');
-                $('#active-goals .row:first-child .col-md-4:nth-child(2) .goal').hide().fadeIn(2000);
-                $('#flash').fadeOut(4000);
-              } else {
-                $('#flash').addClass('failure');
-              }
-            });
-            $('#custom-goal input').val("");
-            $('#custom-goal input#quantity').val(1);
-        }
-      });
-     return false;
-    });
+    $('#add-goal-form').submit(formSubmitter("goal"));
   });
 
-  $(document).on('click', '.submit-bet', function() {
-    $('.submit-bet-form').submit(function(e){
-      e.preventDefault();
-      var form = $(this);
-      var post_url = form.attr('action');
-      $.ajax({
-          url: post_url,
-          type: 'POST',
-          dataType: 'html',
-          data: $(this).serialize(),
-          success: function(result) {
-            setUpFlash("bet");
-            console.log(form);
-            console.log($(form).parent().parent());
-            $(form).parent().load(location.href + "  #" + form.attr("id"), function() {
-              $('#flash p').text(result);
-              if (result == "Bet successfully added!") {
-                $('#flash').addClass('success');
-                $('#flash').fadeOut(4000);
-              } else {
-                $('#flash').addClass('failure');
-              }
-            });
-        }
-      });
-     return false;
-    });
+  $(document).on('click', '.complete-goal-button', function() {
+    $('.complete-goal-form').submit(formSubmitter("goal"));
   });
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+
+  $('.submit-bet-form').click(formSubmitter("bet"));
 });

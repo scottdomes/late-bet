@@ -2,9 +2,10 @@
 helpers do
 
   def stringify_recent_winners
+    goal = Goal.most_recent_successes(1).first
     if number_of_bettors > 0
-      string = goal_maker_first_name + " won "
-      string += recent_goal_qty.to_s + " " + recent_goal_item
+      string = goal.user.first_name + " won "
+      string += goal.stake_qty.to_s + " " + goal.stake_item
       if number_of_bettors > 1
         string += " each " + "from "
       else
@@ -12,9 +13,9 @@ helpers do
       end
       string += bettors_first_names
     else
-      string = goal_maker_first_name + " wanted to "
-      string += @recent_goal.title + ". "
-      string += goal_maker_first_name + " achieved this goal!"
+      string = goal.user.first_name + " wanted to "
+      string += goal.title + ". "
+      string += goal.user.first_name + " achieved this goal!"
     end
     string
   end
@@ -46,32 +47,15 @@ helpers do
 
   #the bettors first name
   def bettors_first_names
+    # Gets all the bettors names
     @recent_goal.bets.collect {|b| b.user.first_name}.to_sentence
   end
 
 end
 
 get '/goals/?' do
-  # if session[:user]
-  #   @goal = Goal.new
-    #@recent = recent_bets
     erb :'goals/index'
-  # else
-  #   cookies[:]
-  #   redirect '/goals/'
-  # end
 end
-
-# get '/goals/new' do
-#   # if session[:user]
-#   #   @goal = Goal.new
-#     erb :'goals/new'
-#   # else
-#   #   cookies[:]
-#   #   redirect '/goals/'
-#   # end
-# end
-
 
 post '/goals' do
   @goal = Goal.new(
@@ -82,12 +66,8 @@ post '/goals' do
     user_id: session[:user].id
   )
   if @goal.save
-    # cookies[:success] = "Goal successfully created!"
-    # redirect back
-    return "Goal successfully created!"
+    json :data => { success: true, message:  "Goal successfully created!" }
   else 
-    # cookies[:failure] = "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
-    # redirect '/goals/#custom-goal'
-    return "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!"
+    json :data => { success: false, message: "Oops! " + @goal.errors.full_messages.join(" and ").downcase.capitalize + "!" }
   end
 end
