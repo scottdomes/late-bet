@@ -4,22 +4,52 @@ helpers do
   def stringify_recent_winners
     goal = Goal.most_recent_successes(1).first
     if number_of_bettors > 0
-      string = goal.user.first_name + " won "
-      string += goal.stake_qty.to_s + " " + goal.stake_item
-      if number_of_bettors > 1
-        string += " each " + "from "
-      else
-        string += " from "
-      end
+      string = ''
+      string += winner_name(goal.user.first_name)
+      string += winning_amount(goal.stake_qty, goal.stake_item)
+      string += winning_qty(number_of_bettors)
       string += bettors_first_names
     else
-      string = goal.user.first_name + " wanted to "
+      string =  goal.user.first_name + " wanted to "
       string += goal.title + ". "
       string += goal.user.first_name + " achieved this goal!"
     end
     string
   end
 
+  def winner_name(name)
+    name + " won "
+  end
+
+  def winning_amount(stake_qty, stake_item)
+    stake_qty.to_s + " " + stake_item
+  end
+
+  def winning_qty(number_of_bettors)
+    if number_of_bettors > 1
+      " each " + "from "
+    else
+      " from "
+    end
+  end
+
+  #the goal makers first name
+  def goal_maker_first_name
+    @recent_goal = Goal.most_recent_successes(1).first
+    @recent_goal.user.first_name
+  end
+
+  #the quantity of the goal
+  def recent_goal_qty
+    @recent_goal.stake_qty
+  end
+
+  # the recent item of the goal
+  def recent_goal_item
+    @recent_goal.stake_item
+  end
+
+  # counting the number of bettors
   def number_of_bettors
     if defined? @recent_goal.bets.count
       @recent_goal.bets.count
@@ -28,8 +58,8 @@ helpers do
     end 
   end
 
+  # Gets all the bettors names
   def bettors_first_names
-    # Gets all the bettors names
     @recent_goal.bets.collect {|b| b.user.first_name}.to_sentence
   end
 
