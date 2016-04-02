@@ -2,10 +2,10 @@ class Bet < ActiveRecord::Base
   belongs_to :goal
   belongs_to :user
 
-  # validate :user_cannot_bet_on_self 
-  # validate :user_cannot_make_same_bet_twice, :on => :create # validate uniqueness of
+  validate :user_cannot_bet_on_self 
+  validate :user_cannot_make_same_bet_twice, :on => :create # validate uniqueness of
 
-  # after_create :add_bet_notification
+  after_create :add_bet_notification
 
   def user_cannot_make_same_bet_twice
     unless goal.bets.where(user_id: user.id).empty?
